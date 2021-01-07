@@ -1,0 +1,94 @@
+project:
+  namespace: 'aaronApplicationPlatform'
+  directory: .\
+database:
+  provider: SqlServer
+  connectionString: 'Data Source=localhost;Initial Catalog=aap_demo;User ID=sa;Password=;'
+  tableNaming: Singular
+  tables: []
+  schemas: []
+  exclude: []
+data:
+  context:
+    name: 'MyDbContext'
+    baseClass: DbContext
+    propertyNaming: Plural
+    namespace: '{Project.Namespace}.Data'
+    directory: '{Project.Directory}\Data'
+    document: false
+  entity:
+    entityNaming: Singular
+    relationshipNaming: Plural
+    prefixWithSchemaName: false
+    namespace: '{Project.Namespace}.Data.Entity'
+    directory: '{Project.Directory}\Data\Entity'
+    document: false
+  mapping:
+    namespace: '{Project.Namespace}.Data.Mapping'
+    directory: '{Project.Directory}\Data\Mapping'
+    document: false
+  query:
+    generate: false
+    indexPrefix: By
+    uniquePrefix: GetBy
+    namespace: '{Project.Namespace}.Data.Queries'
+    directory: '{Project.Directory}\Data\Queries'
+    document: false
+model:
+  shared:
+    namespace: '{Project.Namespace}.Domain.Model'
+    directory: '{Project.Directory}\Domain\Model'
+    include:
+      entities: []
+      properties: []
+    exclude:
+      entities: []
+      properties: []
+  read:
+    generate: false
+    name: '{Entity.Name}ReadModel'
+    include:
+      entities: []
+      properties: []
+    exclude:
+      entities: []
+      properties: []
+    document: false
+  create:
+    generate: false
+    name: '{Entity.Name}CreateModel'
+    include:
+      entities: []
+      properties: []
+    exclude:
+      entities: []
+      properties: []
+    document: false
+  update:
+    generate: false
+    name: '{Entity.Name}UpdateModel'
+    include:
+      entities: []
+      properties: []
+    exclude:
+      entities: []
+      properties: []
+    document: false
+  mapper:
+    generate: false
+    name: '{Entity.Name}Profile'
+    baseClass: AutoMapper.Profile
+    namespace: '{Project.Namespace}.Domain.Mapping'
+    directory: '{Project.Directory}\Domain\Mapping'
+    document: false
+  validator:
+    generate: false
+    name: '{Model.Name}Validator'
+    baseClass: AbstractValidator<{Model.Name}>
+    namespace: '{Project.Namespace}.Domain.Validation'
+    directory: '{Project.Directory}\Domain\Validation'
+    document: false
+script:
+  context: []
+  entity: []
+  model: []
