@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 import { UserRepository } from "../../repository/aap/user.repository";
 
 @Injectable()
-export class EntityLoader {
+export class EntityLoaderService {
     
     constructor(public userRepo: UserRepository) {
     }

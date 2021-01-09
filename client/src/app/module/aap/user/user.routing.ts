@@ -1,6 +1,6 @@
-import { UserSelectionComponent } from './userSelection.component';
-import { UserDetailComponent } from './userDetail.component';
-import { UserListComponent } from './userList.component';
+import { UserSelectionComponent } from 'src/app/module/aap/user/userSelection.component';
+import { UserDetailComponent } from 'src/app/module/aap/user/userDetail.component';
+import { UserListComponent } from 'src/app/module/aap/user/userList.component';
 //import { AddressComponent } from 'src/app/module/address/address.component';
 
 export const userRoutes = [

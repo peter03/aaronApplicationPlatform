@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
+import { IRepository } from '../../interface/aap/irepository';
+import { IId } from '../../interface/aap/IId';
 
-import { IRepository } from '../repository/interface';
-import { IEntity } from '../model/interface';
-
-export abstract class BaseDetailComponent<R extends IRepository, T extends IEntity> {
+export abstract class BaseDetailComponent<R extends IRepository, T extends IId> {
 
     protected _entity: T;
 

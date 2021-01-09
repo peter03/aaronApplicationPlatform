@@ -20,6 +20,11 @@ dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
 dotnet add package AutoMapper (MIT License see https://github.com/AutoMapper/AutoMapper/blob/master/LICENSE.txt)
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 
+Client packages:
+
+ng add @angular/material
+
+
 
 Update model from database: (https://efg.loresoft.com)
 \server: efg generate

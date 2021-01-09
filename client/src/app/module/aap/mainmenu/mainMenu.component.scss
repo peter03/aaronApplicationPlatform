@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/bootstrap";
+
+.menubtn {
+    width: 100%;
+    @extend .btn;
+    @extend .btn-primary;
+    @extend .btn-lg;
+}

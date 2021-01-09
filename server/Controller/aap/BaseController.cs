@@ -14,7 +14,7 @@ using aaronApplicationPlatform.Authentication;
 
 namespace aaronApplicationPlatform.Controller
 {
-    [Authorize]
+    //[Authorize]
     public abstract class BaseController<L, T> : ControllerBase where L: BaseLogic<T>, new() where T: class, IId, new()
     {
 

@@ -1,34 +1,48 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+//import { RouterModule } from '@angular/router';
 
+import { MaterialModule } from './material-module';
+
+
+// import services
+//import { AuthenticationService } from 'src/app/service/aap/authentication.service';
+import { serviceList } from "src/app/service/aap/service.module";
+
+// import repositories
+import { repositoryList } from "src/app/repository/aap/repository.list";
+
+// import module components
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+//import { MainMenuComponent } from "src/app/module/aap/mainmenu/mainMenu.component";
+import { routingComponents, appRouting } from './app-routing.module';
+//import { userRoutes, userComponents } from "src/app/module/aap/user/user.routing";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
+    //MainMenuComponent
+    routingComponents
+    //userComponents
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
+    //RouterModule,
     FormsModule,
-    RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'counter', component: CounterComponent },
-    { path: 'fetch-data', component: FetchDataComponent },
-], { relativeLinkResolution: 'legacy' })
+    ReactiveFormsModule,
+    MaterialModule,
+    appRouting
+    //userRoutes
   ],
-  providers: [],
+  providers: [
+    //AuthenticationService,
+    ...serviceList,
+    ...repositoryList
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
