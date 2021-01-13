@@ -1,0 +1,17 @@
+<h4 class="border border-dark bg-info p-2">
+    Rolegroup Detail
+</h4>    
+
+<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
+
+  <div class="form-group">
+    <mat-form-field>
+      <label>Name:</label>
+      <input matInput type="text" class="form-control" name="name" [(ngModel)]="entity.name" required />
+    </mat-form-field>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!isValid">Save</button>
+  <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
+
+</form>

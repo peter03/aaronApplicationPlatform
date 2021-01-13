@@ -23,7 +23,6 @@ export class UserListComponent extends BaseListComponent<UserRepository, User> {
     public router: Router,
     public authService: AuthenticationService) {
     super(repo, router, authService)
-    repo.loadEntities();
   }
 
 }

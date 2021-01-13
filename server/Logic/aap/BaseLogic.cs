@@ -16,7 +16,7 @@ namespace aaronApplicationPlatform.Logic
 {
     public abstract class BaseLogic<T> where T : class, IId, new()
     {
-        private MyDbContext _dbContext;
+        protected MyDbContext _dbContext;
 
         public MyDbContext DbContext
         {

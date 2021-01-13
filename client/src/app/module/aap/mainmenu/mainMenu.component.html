@@ -1,7 +1,12 @@
 <h4 class="border border-dark bg-info p-2">
-  MyMM
+  Mainmenu
 </h4>
 
 <button class="menubtn" [routerLink]="['/user']">User admin</button>
 <br />
+
+<div *ngFor="let item of submenu">
+  <button class="menubtn" (click)="navigateTo(item.id)">{{item.name}}</button>
+  <br />
+</div>
 

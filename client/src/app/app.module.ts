@@ -1,14 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-//import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material-module';
 
+// import interceptors
+import { JwtInterceptor } from 'src/app/interceptor/aap';
 
 // import services
-//import { AuthenticationService } from 'src/app/service/aap/authentication.service';
 import { serviceList } from "src/app/service/aap/service.module";
 
 // import repositories
@@ -16,30 +17,24 @@ import { repositoryList } from "src/app/repository/aap/repository.list";
 
 // import module components
 import { AppComponent } from './app.component';
-//import { MainMenuComponent } from "src/app/module/aap/mainmenu/mainMenu.component";
 import { routingComponents, appRouting } from './app-routing.module';
-//import { userRoutes, userComponents } from "src/app/module/aap/user/user.routing";
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    //MainMenuComponent
     routingComponents
-    //userComponents
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    //RouterModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     appRouting
-    //userRoutes
   ],
   providers: [
-    //AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ...serviceList,
     ...repositoryList
   ],

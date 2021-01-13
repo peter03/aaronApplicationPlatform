@@ -23,6 +23,7 @@ dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 Client packages:
 
 ng add @angular/material
+npm install bootstrap
 
 
 

@@ -9,7 +9,7 @@ import { IRepository } from "../../interface/aap/irepository";
 import { AuthenticationService } from "../../service/aap/authentication.service";
 import { BaseComponent } from "./base.component";
 
-export abstract class BaseListComponent<R extends IRepository, T extends IId> extends BaseComponent {
+export abstract class BaseListComponent<R extends IRepository<T>, T extends IId> extends BaseComponent {
 
     constructor(
         //public dialog: MatDialog,

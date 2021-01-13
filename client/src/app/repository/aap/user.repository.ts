@@ -8,12 +8,12 @@ import { IRepository } from "../../interface/aap/irepository";
 const API_URL = "/api/user";
 
 @Injectable()
-export class UserRepository extends BaseRepository<User> implements IRepository {
+export class UserRepository extends BaseRepository<User> {
 
   //public user: Observable<User>;
 
-  constructor(public http: HttpClient) {
-    super(http, API_URL);
+  constructor(protected http: HttpClient) {
+    super(http, API_URL, User);
   }
 
   getList() {
@@ -28,7 +28,7 @@ export class UserRepository extends BaseRepository<User> implements IRepository 
     return this._cachedEntities;
   }
 
-  getNewEntity() {
+  getNewEntity() : any {
     return new User();
   }
 

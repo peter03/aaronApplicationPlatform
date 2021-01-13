@@ -8,6 +8,8 @@ namespace aaronApplicationPlatform.Data.Entity
         public User()
         {
             #region Generated Constructor
+            UserRoles = new HashSet<UserRole>();
+            UserRules = new HashSet<UserRule>();
             #endregion
         }
 
@@ -32,6 +34,10 @@ namespace aaronApplicationPlatform.Data.Entity
 
         #region Generated Relationships
         public virtual Language PreferredLanguage { get; set; }
+
+        public virtual ICollection<UserRole> UserRoles { get; set; }
+
+        public virtual ICollection<UserRule> UserRules { get; set; }
 
         #endregion
 

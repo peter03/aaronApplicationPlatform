@@ -1,10 +1,10 @@
-export interface IRepository {
+export interface IRepository<T> {
 
     getList();
 
     getCachedEntityById(id: number);
 
-    getNewEntity();
+    getNewEntity() : T;
 
     validateEntity(entity: any)
 

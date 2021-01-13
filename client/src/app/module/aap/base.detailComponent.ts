@@ -4,9 +4,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { IRepository } from '../../interface/aap/irepository';
 import { IId } from '../../interface/aap/IId';
 
-export abstract class BaseDetailComponent<R extends IRepository, T extends IId> {
+export abstract class BaseDetailComponent<R extends IRepository<T>, T extends IId> {
 
-    protected _entity: T;
+    public _entity: T;
 
     constructor(
         public repo: R,
@@ -19,7 +19,7 @@ export abstract class BaseDetailComponent<R extends IRepository, T extends IId> 
                 router.navigateByUrl("/");
             } else {
                 if (id === 0) {
-                    this._entity = this.repo.getNewEntity();
+                  this._entity = this.repo.getNewEntity();
                 }
                 else {
                     this._entity = Object.assign({}, this.repo.getCachedEntityById(id));    // clone object!

@@ -2,13 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
+import { BaseDetailComponent } from 'src/app/module/aap/base.detailComponent';
 import { UserRepository } from "src/app/repository/aap/user.repository";
 import { User } from "src/app/model/aap/user.model";
-//import { LookupRepository } from "src/app/repository/lookup.repository";
-//import { LookupDto } from 'src/app/model/lookup.model';
-import { BaseDetailComponent } from 'src/app/module/aap/base.detailComponent';
-//import { AddressRepository } from "src/app/repository/address.repository";
-//import { Address } from "src/app/model/address.model";
+import { LookupRepository } from "src/app/repository/aap/lookup.repository";
+import { Lookup } from "src/app/model/aap/lookup.model";
+
 
 @Component({
   selector: "aap-user-detail",
@@ -16,20 +15,16 @@ import { BaseDetailComponent } from 'src/app/module/aap/base.detailComponent';
 })
 export class UserDetailComponent extends BaseDetailComponent<UserRepository, User>  {
 
+  roleList: Lookup[];
+
   constructor(
     repo: UserRepository,
     router: Router,
     activeRoute: ActivatedRoute,
-    location: Location) {
-    super(repo, router, activeRoute, location)
+    location: Location,
+    private lookupRepo: LookupRepository) {
+      super(repo, router, activeRoute, location)
+      this.roleList = this.lookupRepo.getRoleList();
   }
-
-  //get roleList(): LookupDto[] {
-  //    return this.lookupRepo.getRoleList();
-  //}
-
-  //get addressList(): Address[] {
-  //    return this.addressRepo.getList();
-  //}
-
+    
 }

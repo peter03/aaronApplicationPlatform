@@ -58,10 +58,10 @@ namespace aaronApplicationPlatform.Authentication
 
         public IEnumerable<User> GetAll()
         {
-            //if (_users == null) --> todo: cache entities
-            //{
-                //_users = UserLogic.Value.GetListIncludeRoleId().ToList();
-            //}
+            if (_users == null)
+            {
+                _users = UserLogic.Value.GetList().ToList();
+            }
             return _users;
         }
 
