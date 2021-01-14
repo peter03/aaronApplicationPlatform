@@ -1,0 +1,52 @@
+{
+  "aap": {
+    "module": {
+      "mainmenu": {
+        "title": "Modulauswahl",
+        "systemadmin": "System verwalten",
+        "menu": "Hauptmenü verwalten"
+      },
+      "menu": {
+        "add": "Neuer Menüeintrag",
+        "route": "Route",
+        "detail": "Menüdaten",
+        "parentmenu": "Übergeordneter Menüpunkt"
+      },
+      "user": {
+        "loginname": "Anmeldename",
+        "password": "Passwort"
+      },
+      "role": {
+        "title": "Benutzerrollen verwalten"
+      }
+    },
+    "question": {
+      "deleterecord": "Möchten Sie den Datensatz {{p0}} wirklich unwiderruflich löschen?"
+    },
+    "dialog": {
+      "title": {
+        "pleaseconfirm": "Bitte bestätigen"
+      }
+    },
+    "button": {
+      "addrecord": "Datensatz hinzufügen",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "remove": "Entfernen",
+      "print": "Drucken",
+      "create": "Erstellen",
+      "refresh": "Aktualisieren"
+    },
+    "common": {
+      "date": "Datum",
+      "description": "Beschreibung",
+      "id": "Id",
+      "parentid": "Übergeordnete Id",
+      "sort": "Sortierung",
+      "uniquename": "Eindeutige Bezeichnung"
+    }
+  }
+
+}

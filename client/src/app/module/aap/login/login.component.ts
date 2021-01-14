@@ -40,7 +40,7 @@ export class LoginComponent {
                     this.entityLoader.init().subscribe(res => {
                         if (res === true) {
                             this.setupEnvironment();
-                            this.router.navigateByUrl("menu");  // mainmenu
+                            this.router.navigate(["mainmenu"]);
                         }
                     })
                 },

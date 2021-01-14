@@ -14,6 +14,8 @@ namespace aaronApplicationPlatform.Data
         #region Generated Properties
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Language> Languages { get; set; }
 
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.Menu> Menus { get; set; }
+
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Rolegroup> Rolegroups { get; set; }
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.RoleRule> RoleRules { get; set; }
@@ -38,6 +40,7 @@ namespace aaronApplicationPlatform.Data
         {
             #region Generated Configuration
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.LanguageMap());
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.MenuMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.RolegroupMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.RoleMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.RoleRuleMap());

@@ -8,7 +8,7 @@ import { moduleRoutes, moduleRoutingComponents } from "src/app/module/aap/module
 export const routes: Routes = [
   { path: "", component: LoginComponent },
   { path: "login", component: LoginComponent },
-  { path: "menu", component: MainMenuComponent },
+  { path: "mainmenu", component: MainMenuComponent },
   ...moduleRoutes
 ];
 export const appRouting = RouterModule.forRoot(routes);

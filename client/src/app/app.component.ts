@@ -18,7 +18,7 @@ export class AppComponent {
 
   navigateToRoot() {
     this.repo.buildSubmenu(null);
-    this.router.navigate(["menu"]);
+    this.router.navigate(["mainmenu"]);
   }
   
 }

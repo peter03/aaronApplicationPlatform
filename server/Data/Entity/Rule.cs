@@ -8,6 +8,7 @@ namespace aaronApplicationPlatform.Data.Entity
         public Rule()
         {
             #region Generated Constructor
+            Menus = new HashSet<Menu>();
             RoleRules = new HashSet<RoleRule>();
             UserRules = new HashSet<UserRule>();
             #endregion
@@ -25,6 +26,8 @@ namespace aaronApplicationPlatform.Data.Entity
         #endregion
 
         #region Generated Relationships
+        public virtual ICollection<Menu> Menus { get; set; }
+
         public virtual ICollection<RoleRule> RoleRules { get; set; }
 
         public virtual Rulegroup Rulegroup { get; set; }

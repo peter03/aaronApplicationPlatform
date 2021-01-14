@@ -1,0 +1,50 @@
+<h4 class="border border-dark bg-info p-2">
+  {{'aap.module.menu.detail' | translate}}
+</h4>
+
+<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
+
+  <div class="form-group">
+    <mat-form-field>
+      <label>{{'aap.common.uniquename' | translate}}:</label>
+      <input matInput type="text" class="form-control" name="name" [(ngModel)]="entity.name" required />
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+      <label>{{'aap.common.description' | translate}}:</label>
+      <input matInput type="text" class="form-control" name="description" [(ngModel)]="entity.description" />
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field style="width: 100%;" appearance="fill">
+      <mat-label>{{'aap.module.menu.parentmenu' | translate}}:</mat-label>
+      <mat-select name="parentId" [(ngModel)]="entity.parentId">
+        <mat-option *ngFor="let itm of listOfParents" [value]="itm.id">
+          {{itm.name | translate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+      <label>{{'aap.module.menu.route' | translate}}:</label>
+      <input matInput type="text" class="form-control" name="route" [(ngModel)]="entity.route" />
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+      <label>{{'aap.common.sort' | translate}}:</label>
+      <input matInput type="text" class="form-control" name="sort" [(ngModel)]="entity.sort" />
+    </mat-form-field>
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!isValid">Save</button>
+  <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
+
+</form>
+

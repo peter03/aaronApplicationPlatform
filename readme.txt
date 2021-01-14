@@ -24,6 +24,8 @@ Client packages:
 
 ng add @angular/material
 npm install bootstrap
+npm i @angular/localize
+npm install @ngx-translate/core @ngx-translate/http-loader rxjs --save
 
 
 

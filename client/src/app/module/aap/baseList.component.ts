@@ -13,9 +13,9 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
 
     constructor(
         //public dialog: MatDialog,
-        public repo: R,
-        public router: Router,
-        public authService: AuthenticationService) { 
+        protected repo: R,
+        protected router: Router,
+        protected authService: AuthenticationService) { 
             super(authService);
         }
 

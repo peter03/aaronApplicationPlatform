@@ -1,12 +1,9 @@
 <h4 class="border border-dark bg-info p-2">
-  Mainmenu
+  {{'aap.module.mainmenu.title' | translate}}
 </h4>
 
-<button class="menubtn" [routerLink]="['/user']">User admin</button>
-<br />
-
 <div *ngFor="let item of submenu">
-  <button class="menubtn" (click)="navigateTo(item.id)">{{item.name}}</button>
+  <button class="menubtn" (click)="navigateTo(item.id)">{{item.name | translate}}</button>
   <br />
 </div>
 

@@ -1,14 +1,13 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
+import { TranslateService } from "@ngx-translate/core";
+
 import { MenuRepository } from "src/app/repository/aap/menu.repository";
 import { Menu } from "src/app/model/aap/menu.model";
 
 import { AuthenticationService } from "../../../service/aap/authentication.service";
 import { BaseListComponent } from "src/app/module/aap/baseList.component";
-
-//import {TranslateService} from '@ngx-translate/core';
-
 
 @Component({
   selector: "aap-main-menu",
@@ -37,7 +36,7 @@ export class MainMenuComponent extends BaseListComponent<MenuRepository, Menu> {
     let entity = this.repo.getCachedEntityById(menuId);
     if (entity) {
 
-      if (entity.route === null) {
+      if (entity.route === null || entity.route === '') {
         this.repo.buildSubmenu(entity.id);
       }
       else {

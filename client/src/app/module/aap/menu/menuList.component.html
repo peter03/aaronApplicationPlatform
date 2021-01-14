@@ -1,0 +1,41 @@
+<h4 class="border border-dark bg-info p-2">
+  {{'aap.module.menu.title' | translate}}
+</h4>
+
+<table>
+  <tr style="width: 100%;">
+    <td style="width: 50%;">
+      <button class="btn btn-primary btn-sm" [routerLink]="['detail/0']">{{'aap.module.menu.add' | translate}}</button>
+    </td>
+    <td style="text-align: right;">
+    </td>
+  </tr>
+</table>
+
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th></th>
+      <th>{{'aap.common.id' | translate}}</th>
+      <th>{{'aap.common.parentid' | translate}}</th>
+      <th>{{'aap.common.uniquename' | translate}}</th>
+      <th>{{'aap.common.description' | translate}}</th>
+      <th>{{'aap.module.menu.route' | translate}}</th>
+      <th>{{'aap.common.sort' | translate}}</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let ent of entities">
+      <td></td>
+      <td>{{ent?.id}}</td>
+      <td>{{ent?.parentId}}</td>
+      <td>{{ent?.name}}</td>
+      <td>{{ent?.description}}</td>
+      <td>{{ent?.route}}</td>
+      <td>{{ent?.sort}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" [routerLink]="['./detail', ent.id]">Edit</button>
+        <button class="btn btn-sm btn-danger ml-1" (click)="delete(ent.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
