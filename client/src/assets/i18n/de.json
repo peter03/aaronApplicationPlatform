@@ -10,6 +10,7 @@
         "add": "Neuer Menüeintrag",
         "route": "Route",
         "detail": "Menüdaten",
+        "list":  "Menüeinträge",
         "parentmenu": "Übergeordneter Menüpunkt"
       },
       "user": {
@@ -42,6 +43,7 @@
     "common": {
       "date": "Datum",
       "description": "Beschreibung",
+      "filter":  "Filter",
       "id": "Id",
       "parentid": "Übergeordnete Id",
       "sort": "Sortierung",

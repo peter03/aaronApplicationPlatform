@@ -39,7 +39,6 @@ namespace aaronApplicationPlatform.Data.Mapping
                 .HasMaxLength(255);
 
             builder.Property(t => t.Route)
-                .IsRequired()
                 .HasColumnName("Route")
                 .HasColumnType("nvarchar(128)")
                 .HasMaxLength(128);
