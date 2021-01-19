@@ -33,5 +33,15 @@ export class LookupRepository {
     return res;
   }
 
+  getList(lookupName): Lookup[] {
+
+    switch (lookupName) {
+      case "rolelist":
+        return this.getRoleList();
+      default:
+        console.log(`Lookup ${lookupName} does not exists!`);
+        break;
+    }
+  }
     
 }

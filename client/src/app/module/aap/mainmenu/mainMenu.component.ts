@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { TranslateService } from "@ngx-translate/core";
@@ -22,8 +22,9 @@ export class MainMenuComponent extends BaseListComponent<MenuRepository, Menu> {
 
     public repo: MenuRepository,
     public router: Router,
-    public authService: AuthenticationService) {
-      super(repo, router, authService) 
+    public authService: AuthenticationService,
+    injector: Injector) {
+      super(repo, router, authService, injector) 
       repo.buildSubmenu(null);
   }
 

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ViewChild, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -21,13 +21,16 @@ export class MenuListComponent extends BaseListComponent<MenuRepository, Menu> i
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
+  // https://stackblitz.com/edit/angular-9-reactive-form-validation?file=app%2Fapp.component.html
+
   constructor(
     repo: MenuRepository,
     router: Router,
     authService: AuthenticationService,
-    private lookupRepo: LookupRepository) {
-    super(repo, router, authService)
+    private lookupRepo: LookupRepository,
+    injector: Injector) {
+    super(repo, router, authService, injector)
   }
 
   ngAfterViewInit() {

@@ -43,11 +43,13 @@
     "common": {
       "date": "Datum",
       "description": "Beschreibung",
-      "filter":  "Filter",
+      "filter": "Filter",
       "id": "Id",
+      "no":  "Nein",
       "parentid": "Übergeordnete Id",
       "sort": "Sortierung",
-      "uniquename": "Eindeutige Bezeichnung"
+      "uniquename": "Eindeutige Bezeichnung",
+      "yes":  "Ja"
     }
   }
 

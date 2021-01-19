@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { LookupRepository } from "src/app/repository/aap/lookup.repository";
@@ -18,8 +18,9 @@ export class RoleListComponent extends BaseListComponent<RoleRepository, Role> {
     public repo: RoleRepository,
     public router: Router,
     public authService: AuthenticationService,
-    private lookupRepo: LookupRepository) {
-      super(repo, router, authService)
+    private lookupRepo: LookupRepository,
+    injector: Injector) {
+      super(repo, router, authService, injector)
   }
 
 }

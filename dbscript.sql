@@ -269,7 +269,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aap].[Men
 			[ParentId] [int] NULL,
 			[Name] [nvarchar](128) NOT NULL,
 			[Description] [nvarchar](255) NULL,
-			[Route] [nvarchar](128) NOT NULL,
+			[Route] [nvarchar](128),
 			[RuleId] [int] NULL,
 			[SettingAsJson] [nvarchar](max) NULL,
 			[Sort] [int] NULL,
