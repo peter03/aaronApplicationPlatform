@@ -1,17 +1,11 @@
 <h4 class="border border-dark bg-info p-2">
-    Rolegroup Detail
-</h4>    
+  {{'aap.module.rolegroup.detail' | translate}}
+</h4>
 
-<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
+<aaap-detail-formbuilder [entity]="entity" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)"></aaap-detail-formbuilder>
 
-  <div class="form-group">
-    <mat-form-field>
-      <label>Name:</label>
-      <input matInput type="text" class="form-control" name="name" [(ngModel)]="entity.name" required />
-    </mat-form-field>
-  </div>
-
+<!--<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
+  <aaap-detail-formbuilder [entity]="entity" [template]="formMetadata"></aaap-detail-formbuilder>
   <button type="submit" class="btn btn-success" [disabled]="!isValid">Save</button>
   <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
-
-</form>
+</form>-->

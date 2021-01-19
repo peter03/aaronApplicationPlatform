@@ -1,17 +1,18 @@
 export class MatTableSetting {
 
-  actionList: MatTableAction[]
+  actionButtonList: MatTableActionButton[]
 
   constructor() {
-
-    this.actionList = [];
   }
 
 }
 
-export class MatTableAction {
-
-  label: string;
-  action: string;
-
+export class MatTableActionButton {
+  
+  constructor(
+    public label: string,
+    public color: string,
+    public action: string) { }
+ 
 }
+

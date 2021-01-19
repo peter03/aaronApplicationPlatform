@@ -13,6 +13,8 @@ export class DetailFormbuilderComponent implements OnInit{
 
   @Input() entity: IId;
   @Input() template: any[];
+  @Input() actionCallback: Function;
+
   //@Input() formGroup: FormGroup;
 
   myFormTemplate: any[];
@@ -24,7 +26,7 @@ export class DetailFormbuilderComponent implements OnInit{
   ngOnInit() {
 
     // extend form template by entity data
-    this.myFormTemplate = this.template;
+    this.myFormTemplate = this.template.filter(e => e.suppressInDetail !== true);
     this.myFormTemplate.forEach(ctl => {
 
       if (ctl.control === 'select' && ctl.lookup) {
@@ -38,6 +40,10 @@ export class DetailFormbuilderComponent implements OnInit{
 
   modelChanged(model, newObj) {
     this.entity[model] = newObj;
+  }
+
+  onActionButtonClicked(action: string) {
+    this.actionCallback(action);
   }
 
     //this.myFormGroup = this.formGroup;

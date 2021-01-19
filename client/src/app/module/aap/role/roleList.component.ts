@@ -7,6 +7,7 @@ import { BaseListComponent } from 'src/app/module/aap/baseList.component';
 import { AuthenticationService } from "src/app/service/aap/authentication.service";
 import { Role } from "src/app/model/aap/role.model";
 
+import { RoleMetadata } from './role.metadata';
 
 @Component({
   selector: "aap-role-list",
@@ -20,7 +21,7 @@ export class RoleListComponent extends BaseListComponent<RoleRepository, Role> {
     public authService: AuthenticationService,
     private lookupRepo: LookupRepository,
     injector: Injector) {
-      super(repo, router, authService, injector)
+    super(repo, router, authService, injector, RoleMetadata)
   }
 
 }

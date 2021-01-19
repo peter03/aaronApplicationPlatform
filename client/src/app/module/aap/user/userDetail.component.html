@@ -2,11 +2,13 @@
   {{'aap.module.user.detail' | translate}}
 </h4>
 
-<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
+<aaap-detail-formbuilder [entity]="entity" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)"></aaap-detail-formbuilder>
+
+<!--<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
   <aaap-detail-formbuilder [entity]="entity" [template]="formMetadata"></aaap-detail-formbuilder>
   <button type="submit" class="btn btn-success" [disabled]="!isValid">Save</button>
   <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
-</form>
+</form>-->
 
 <!--<form #form="ngForm" [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
   <div *ngFor="let ctl of myFormTemplate">

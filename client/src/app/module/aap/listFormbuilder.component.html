@@ -7,35 +7,52 @@
       <div [ngSwitch]="ctl.control">
 
         <div *ngSwitchCase="'text'">
-
           <ng-container matColumnDef="{{ctl.ngModel}}">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ctl.label | translate}}</th>
-            <td mat-cell *matCellDef="let element"> {{ctl.ngModel}} </td>
+            <td mat-cell *matCellDef="let element">{{element[ctl.ngModel]}}</td>
+            <!--<td mat-cell *matCellDef="let element"> {{element.id}} </td>-->
           </ng-container>
+        </div>
 
+        <div *ngSwitchCase="'number'">
+          <ng-container matColumnDef="{{ctl.ngModel}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ctl.label | translate}}</th>
+            <td mat-cell *matCellDef="let element">{{element[ctl.ngModel]}}</td>
+          </ng-container>
         </div>
 
         <!--<div *ngSwitchCase="'select'">
-          <mat-form-field>
-            <mat-label>{{ctl.label}}</mat-label>
-            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (ngModelChange)="modelChanged(ctl.ngModel, $event)">
-              <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
-                {{opt.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>-->
+        <mat-form-field>
+          <mat-label>{{ctl.label}}</mat-label>
+          <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (ngModelChange)="modelChanged(ctl.ngModel, $event)">
+            <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>-->
 
       </div>
     </div>
 
-    <ng-container matColumnDef="action">
+    <!--<ng-template [ngIf]="setting.actionButtonList">-->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngFor="let btn of setting.actionButtonList; trackBy: trackByIndex">
+            <button type="button" mat-button [color]="btn.color" (click)="onActionButtonClicked(btn.action, element.id)">{{ btn.label | translate}}</button>
+          </div>
+        </td>
+      </ng-container>
+    <!--</ng-template>-->
+
+    <!--<ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button type="button" mat-button color="warn" (click)="onActionButtonClicked('delete', element.id)">{{'aap.button.delete' | translate}}</button>
         <button type="button" mat-button color="primary" [routerLink]="['./detail', element.id]">{{'aap.button.edit' | translate}}</button>
       </td>
-    </ng-container>
+    </ng-container>-->
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

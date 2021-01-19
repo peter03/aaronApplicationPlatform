@@ -13,14 +13,12 @@ import { userFormMetadata } from './userFormMetadata';
 })
 export class UserListComponent extends BaseListComponent<UserRepository, User> {
 
-  formMetadata: any[] = userFormMetadata;
-
   constructor(
     public repo: UserRepository,
     public router: Router,
     public authService: AuthenticationService,
     injector: Injector) {
-      super(repo, router, authService, injector)
+    super(repo, router, authService, injector, userFormMetadata)
   }
 
 }

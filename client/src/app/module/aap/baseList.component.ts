@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, Injector, OnInit } from "@angular/core";
+import { AfterViewInit, Component, ViewChild, Injector, OnInit, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,23 +12,26 @@ import { IId } from "../../interface/aap/IId";
 import { IRepository } from "../../interface/aap/irepository";
 import { AuthenticationService } from "../../service/aap/authentication.service";
 import { BaseComponent } from "./base.component";
+import { MatTableSetting, MatTableActionButton } from "./matTable.setting";
 
+@Injectable()
 export abstract class BaseListComponent<R extends IRepository<T>, T extends IId> extends BaseComponent implements OnInit {
 
   dataSource: MatTableDataSource<T>;  // sortable datasource wrapper
+  formMetadata: any[];
 
   dialog: MatDialog;
 
   constructor(
-    //protected dialog: MatDialog,
     protected repo: R,
     protected router: Router,
     protected authService: AuthenticationService,
-    protected injector: Injector) {
+    protected injector: Injector,
+    private modelMetadata: any) {
     super(authService);
 
+    this.formMetadata = modelMetadata;
     this.dialog = injector.get(MatDialog);
-
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.repo.getList());
   }
@@ -76,6 +79,10 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
   public onActionButtonClicked(action: string, id: number) {
 
     switch (action) {
+      case "edit":
+        this.router.navigate([`${this.router.url}/detail`, id]);
+        break;
+
       case "delete":
         this.delete(id);
         break;
@@ -83,6 +90,21 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
         console.warn(`Action ${action} is not supported!`);
     }
 
+  }
+
+  get defaultMatTableSetting(): MatTableSetting {
+
+    let res: MatTableSetting = new MatTableSetting();
+    res.actionButtonList = this.defaultActionButtonList;
+    return res;
+  }
+
+  get defaultActionButtonList(): MatTableActionButton[] {
+
+    let res: MatTableActionButton[] = [];
+    res.push(new MatTableActionButton("aap.button.delete", "warn", "delete"));
+    res.push(new MatTableActionButton("aap.button.edit", "primary", "edit"));
+    return res;
   }
 
 }

@@ -14,14 +14,12 @@ import { userFormMetadata } from './userFormMetadata';
 })
 export class UserDetailComponent extends BaseDetailComponent<UserRepository, User>  {
 
-  formMetadata: any[] = userFormMetadata;
-
   constructor(
     repo: UserRepository,
     router: Router,
     activeRoute: ActivatedRoute,
     location: Location) {
-    super(repo, router, activeRoute, location)
+    super(repo, router, activeRoute, location, userFormMetadata)
   }
 
 

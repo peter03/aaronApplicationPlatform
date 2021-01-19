@@ -30,7 +30,7 @@ export class MenuListComponent extends BaseListComponent<MenuRepository, Menu> i
     authService: AuthenticationService,
     private lookupRepo: LookupRepository,
     injector: Injector) {
-    super(repo, router, authService, injector)
+    super(repo, router, authService, injector, null)
   }
 
   ngAfterViewInit() {

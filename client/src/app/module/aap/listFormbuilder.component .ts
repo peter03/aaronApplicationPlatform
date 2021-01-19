@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { LookupRepository } from "src/app/repository/aap/lookup.repository";
 import { IId } from '../../interface/aap/IId';
+import { MatTableSetting } from './matTable.setting';
 
 @Component({
   selector: "aaap-list-formbuilder",
@@ -15,6 +16,7 @@ export class ListFormbuilderComponent implements OnInit, AfterViewInit{
 
   @Input() entityList: any[];
   @Input() template: any[];
+  @Input() setting: MatTableSetting;
   @Input() actionCallback: Function;
   
   displayedColumns: string[]; // = ['loginName', 'passwordMD5', 'action'];
@@ -24,6 +26,7 @@ export class ListFormbuilderComponent implements OnInit, AfterViewInit{
 
   dataSource: MatTableDataSource<IId>;  // sortable datasource wrapper
   myFormTemplate: any[];
+  tableSetting: MatTableSetting
       
   constructor(private lookupRepo: LookupRepository) {
   }
@@ -33,6 +36,7 @@ export class ListFormbuilderComponent implements OnInit, AfterViewInit{
     // extend form template by entity data
     this.myFormTemplate = this.template.filter(e => e.supressInList !== true);
     this.dataSource = new MatTableDataSource(this.entityList);
+    //this.tableSetting = this.setting;
     this.displayedColumns = this.myFormTemplate.map(({ ngModel }) => ngModel);
     this.displayedColumns.push("action");
 
@@ -51,7 +55,11 @@ export class ListFormbuilderComponent implements OnInit, AfterViewInit{
   }
 
   onActionButtonClicked(action: string, id: number) {
-    this.actionCallback(action, id);
+      this.actionCallback(action, id);
+  }
+
+  trackByIndex(index, item) {
+    return index;
   }
 
 }

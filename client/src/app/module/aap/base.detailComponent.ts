@@ -7,12 +7,16 @@ import { IId } from '../../interface/aap/IId';
 export abstract class BaseDetailComponent<R extends IRepository<T>, T extends IId> {
 
   public _entity: T;
+  formMetadata: any[];
 
   constructor(
     protected repo: R,
     protected router: Router,
     protected activeRoute: ActivatedRoute,
-    protected location: Location) {
+    protected location: Location,
+    private modelMetadata: any) {
+
+    this.formMetadata = modelMetadata;
 
     let id = Number.parseInt(activeRoute.snapshot.params["id"]);
     if (isNaN(id)) {    // id param is missing
@@ -44,4 +48,21 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
   get isValid(): boolean {
     return this.repo.validateEntity(this._entity);
   }
+
+  public onActionButtonClicked(action: string) {
+
+    switch (action) {
+      case "submit":
+        this.onSubmit();
+        break;
+      case "cancel":
+        this.cancel();
+        break;
+      default:
+        console.warn(`Action ${action} is not supported!`);
+    }
+
+  }
+
+
 }

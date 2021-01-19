@@ -1,45 +1,23 @@
-<div *ngFor="let ctl of myFormTemplate">
-  <div [ngSwitch]="ctl.control">
+<!--<form novalidate (ngSubmit)="onActionButtonClicked('submit')" #form="ngForm">-->
+<form novalidate #form="ngForm">
 
-    <div *ngSwitchCase="'text'">
-      <mat-form-field>
-        <mat-label>{{ctl.label}}</mat-label>
-        <input matInput [type]="ctl.control" class="form-control" [name]="ctl.ngModel"
-               [(ngModel)]="ctl.value"
-               (ngModelChange)="modelChanged(ctl.ngModel, $event)"
-               [required]="ctl.required"/>
-      </mat-form-field>
-    </div>
-
-    <div *ngSwitchCase="'select'">
-      <mat-form-field>
-        <mat-label>{{ctl.label}}</mat-label>
-        <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (ngModelChange)="modelChanged(ctl.ngModel, $event)">
-          <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
-            {{opt.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-  </div>
-</div>
-
-<!--<form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <div *ngFor="let ctl of myFormTemplate">
     <div [ngSwitch]="ctl.control">
 
       <div *ngSwitchCase="'text'">
         <mat-form-field>
           <mat-label>{{ctl.label}}</mat-label>
-          <input matInput [type]="ctl.control" class="form-control" formControlName="{{ctl.ngModel}}" />
+          <input matInput [type]="ctl.control" class="form-control" [name]="ctl.ngModel"
+                 [(ngModel)]="ctl.value"
+                 (ngModelChange)="modelChanged(ctl.ngModel, $event)"
+                 [required]="ctl.required" />
         </mat-form-field>
       </div>
 
       <div *ngSwitchCase="'select'">
         <mat-form-field>
           <mat-label>{{ctl.label}}</mat-label>
-          <mat-select formControlName="{{ctl.ngModel}}">
+          <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (ngModelChange)="modelChanged(ctl.ngModel, $event)">
             <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
               {{opt.name}}
             </mat-option>
@@ -49,7 +27,36 @@
 
     </div>
   </div>
-  <button type="submit" class="btn btn-success" [disabled]="myFormGroup.invalid">Save</button>
-  <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
-</form>-->
 
+  <button class="btn btn-success" [disabled]="!form.valid" (click)="onActionButtonClicked('submit')">Save</button>
+  <button class="btn btn-primary" (click)="onActionButtonClicked('cancel')">Cancel</button>
+
+</form>
+
+  <!--<form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div *ngFor="let ctl of myFormTemplate">
+      <div [ngSwitch]="ctl.control">
+
+        <div *ngSwitchCase="'text'">
+          <mat-form-field>
+            <mat-label>{{ctl.label}}</mat-label>
+            <input matInput [type]="ctl.control" class="form-control" formControlName="{{ctl.ngModel}}" />
+          </mat-form-field>
+        </div>
+
+        <div *ngSwitchCase="'select'">
+          <mat-form-field>
+            <mat-label>{{ctl.label}}</mat-label>
+            <mat-select formControlName="{{ctl.ngModel}}">
+              <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
+                {{opt.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="myFormGroup.invalid">Save</button>
+    <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
+  </form>-->

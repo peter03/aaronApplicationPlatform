@@ -7,7 +7,8 @@ import { MenuRepository } from "src/app/repository/aap/menu.repository";
 import { Menu } from "src/app/model/aap/menu.model";
 
 import { AuthenticationService } from "../../../service/aap/authentication.service";
-import { BaseListComponent } from "src/app/module/aap/baseList.component";
+//import { BaseListComponent } from "src/app/module/aap/baseList.component";
+import { BaseComponent } from "src/app/module/aap/base.component";
 
 @Component({
   selector: "aap-main-menu",
@@ -15,8 +16,7 @@ import { BaseListComponent } from "src/app/module/aap/baseList.component";
   styleUrls: ["./mainMenu.component.scss"]
 
 })
-export class MainMenuComponent extends BaseListComponent<MenuRepository, Menu> {
-    
+export class MainMenuComponent extends BaseComponent {  // extends BaseListComponent<MenuRepository, Menu> {
 
   constructor(
 
@@ -24,8 +24,9 @@ export class MainMenuComponent extends BaseListComponent<MenuRepository, Menu> {
     public router: Router,
     public authService: AuthenticationService,
     injector: Injector) {
-      super(repo, router, authService, injector) 
-      repo.buildSubmenu(null);
+    // super(repo, router, authService, injector)
+    super(authService);
+    repo.buildSubmenu(null);
   }
 
   get submenu(): Menu[] {

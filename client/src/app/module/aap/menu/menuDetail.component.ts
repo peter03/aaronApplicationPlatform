@@ -23,7 +23,7 @@ export class MenuDetailComponent extends BaseDetailComponent<MenuRepository, Men
     activeRoute: ActivatedRoute,
     location: Location,
     private lookupRepo: LookupRepository) {
-      super(repo, router, activeRoute, location)
+      super(repo, router, activeRoute, location, null)
       this.listOfParents = this.repo.getListOfParents();
   }
 

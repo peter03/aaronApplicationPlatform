@@ -9,6 +9,8 @@ import { RoleRepository } from "src/app/repository/aap/role.repository";
 import { Role } from "src/app/model/aap/role.model";
 import { BaseDetailComponent } from 'src/app/module/aap/base.detailComponent';
 
+import { RoleMetadata } from './role.metadata';
+
 @Component({
   selector: "aap-role-detail",
   templateUrl: "roleDetail.component.html"
@@ -23,7 +25,7 @@ export class RoleDetailComponent extends BaseDetailComponent<RoleRepository, Rol
     activeRoute: ActivatedRoute,
     location: Location,
     private lookupRepo: LookupRepository) {
-      super(repo, router, activeRoute, location)
+      super(repo, router, activeRoute, location, RoleMetadata)
       this.rolegroupList = this.lookupRepo.getRolegroupList();
   }
 
