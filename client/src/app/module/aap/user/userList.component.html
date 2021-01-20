@@ -1,6 +1,4 @@
-<h4 class="border border-dark bg-info p-2">
-  User List
-</h4>
+<aaap-module-header [title]="'aap.module.user.list'"></aaap-module-header>
 
 <table>
   <tr style="width: 100%;">
@@ -12,7 +10,7 @@
   </tr>
 </table>
 
-<aaap-list-formbuilder [entityList]="entities" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)"[setting]="defaultMatTableSetting"></aaap-list-formbuilder>
+<aaap-list-formbuilder [entityList]="entities" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)"[setting]="myMatTableSetting"></aaap-list-formbuilder>
 
 <!--<table class="table table-striped">
     <tbody>

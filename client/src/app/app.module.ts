@@ -28,11 +28,13 @@ import { repositoryList } from "src/app/repository/aap/repository.list";
 // import module components
 import { AppComponent } from './app.component';
 import { ConfirmDialogComponent } from 'src/app/global/component/aap/confirmDialog.component';
+import { designComponentList } from 'src/app/design/aaap/design.component';
 import { routingComponents, appRouting } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    designComponentList,
     routingComponents
   ],
   imports: [

@@ -19,6 +19,40 @@ namespace aaronApplicationPlatform.Logic
         {
         }
 
+        public override void Upsert(User entity)
+        {
+            if (entity.IsAdmin)   // suppress changes of admin data
+            {
+                return;
+            }
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+
+                // PersonLogic.Upsert(entity.Person);
+
+                // 1st remove roles
+                if (entity.Id != 0)
+                {
+                    _dbContext.UserRoles.RemoveRange(_dbContext.UserRoles.Where(e => e.UserId == entity.Id));
+                }
+
+                base.Upsert(entity);
+
+                // 2nd upsert roles
+                if (entity.RoleId != null && entity.RoleId.Any())
+                {
+                    foreach (int roleId in entity.RoleId)
+                    {
+                        _dbContext.UserRoles.Add(new UserRole() { UserId = entity.Id, RoleId = roleId });
+                    }
+                    _dbContext.SaveChanges();
+                }
+
+                transaction.Commit();
+            }
+        }
+
         public IEnumerable<User> GetListIncludeRole()
         {
             return _dbContext.Users.AsNoTracking().Include(e => e.UserRoles);

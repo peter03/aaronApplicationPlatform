@@ -7,6 +7,8 @@ export class Role implements IId {
   name: string;
   description: string;
 
+  select?: boolean;
+
   constructor() {
     this.rolegroupId = 1;
   }
