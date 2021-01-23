@@ -36,8 +36,7 @@ namespace aaronApplicationPlatform.Controller
         [Route("list")]
         public override IEnumerable<User> GetList()
         {
-            //return Logic.GetListIncludeRoleId().Where(e => e.Id > 1);     // skip Admin!
-            return Logic.GetListIncludeRoleId();
+            return Logic.GetListIncludeRoleId().Where(e => e.Id > 1);     // skip Admin!
         }
 
     }

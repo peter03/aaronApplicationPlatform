@@ -1,33 +1,13 @@
-<h4 class="border border-dark bg-info p-2">
-  Role List
-</h4>
+<aaap-module-header [title]="'aap.module.role.list'"></aaap-module-header>
 
 <table>
   <tr style="width: 100%;">
     <td style="width: 50%;">
-      <button class="btn btn-primary btn-sm" [routerLink]="['detail/0']">Add Role</button>
+      <button class="btn btn-primary btn-sm" [routerLink]="['detail/0']">{{'aap.module.menu.add' | translate}}</button>
     </td>
     <td style="text-align: right;">
     </td>
   </tr>
 </table>
 
-<table class="table table-striped">
-  <tbody>
-    <tr>
-      <th></th>
-      <th>Id</th>
-      <th>Name</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let ent of entities">
-      <td></td>
-      <td>{{ent?.id}}</td>
-      <td>{{ent?.name}}</td>
-      <td>
-        <button class="btn btn-primary btn-sm" [routerLink]="['./detail', ent.id]">Edit</button>
-        <button class="btn btn-sm btn-danger ml-1" (click)="delete(ent.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<aaap-list-formbuilder [entityList]="entities" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)" [setting]="myMatTableSetting"></aaap-list-formbuilder>

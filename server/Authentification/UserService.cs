@@ -16,9 +16,11 @@ namespace aaronApplicationPlatform.Authentication
 {
     public interface IUserService
     {
-        AuthenticateResponse Authenticate(AuthenticateRequest model);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
+        AuthenticateResponse Login(AuthenticateRequest model);
+
+        void Logout(User user);
+                
+        User GetCachedUserById(int id);
 
         User LoggedinUser {get; set;}
     }
@@ -28,7 +30,8 @@ namespace aaronApplicationPlatform.Authentication
 
         private readonly Lazy<UserLogic> UserLogic;
 
-        private static List<User> _users; 
+        // cache for logged in users
+        private static Dictionary<int, User> _cachedUsers = new Dictionary<int, User>();
 
         private MyDbContext _dbContext;
         private readonly AppSetting _appSetting;
@@ -42,13 +45,22 @@ namespace aaronApplicationPlatform.Authentication
 
         public User LoggedinUser { get; set;}
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        public AuthenticateResponse Login(AuthenticateRequest model)
         {
 
-            var user = GetAll().SingleOrDefault(x => x.LoginName == model.LoginName); // todo: && x.PasswordMD5 == model.Password);
+            string md5Hash = model.Password.ToMd5Hash();
+            var user = UserLogic.Value.GetByLoginNameAndPwd(model.LoginName, md5Hash);
 
-            // return null if user not found
-            if (user == null) return null;
+            // return null if user not found or disabled
+            if (user == null || user.Disabled) return null;
+
+            // append users rules (white list only)
+            var ruleLogic = new UserRuleViewLogic(_dbContext);
+            var userRules = ruleLogic.GetList(new int[] { user.Id }).Where(e => e.Denied == false);
+            user.RuleId = userRules != null ? userRules.Select(s => s.RuleId).ToArray() : null;
+            user.UserRoles = null;
+            user.UserRules = null;
+            UpdateCachedUsers(user);
 
             // authentication successful so generate jwt token
             var token = generateJwtToken(user);
@@ -56,26 +68,37 @@ namespace aaronApplicationPlatform.Authentication
             return new AuthenticateResponse(user, token);
         }
 
-        public IEnumerable<User> GetAll()
+        public void Logout(User user)
         {
-            if (_users == null)
+            _cachedUsers.Remove(user.Id);
+        }
+
+        public User GetCachedUserById(int id)
+        {
+            try
             {
-                _users = UserLogic.Value.GetList().ToList();
+                return _cachedUsers[id];
             }
-            return _users;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public User GetById(int id)
+        // #region helper methods
+
+        private void UpdateCachedUsers(User user)
         {
-            var res = GetAll().FirstOrDefault(x => x.Id == id);
-            //if (res.ShopId == null)
-            //{
-            //    UserLogic.Value.AttachShopIds(res);
-            //}
-            return res;
+            User cachedUser = GetCachedUserById(user.Id);
+            if (cachedUser == null)
+            {
+                _cachedUsers.Add(user.Id, user);
+            }
+            else
+            {
+                cachedUser = user;
+            }
         }
-
-        // helper methods
 
         private string generateJwtToken(User user)
         {
@@ -91,6 +114,9 @@ namespace aaronApplicationPlatform.Authentication
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        // #endregion
+
     }
 }
 

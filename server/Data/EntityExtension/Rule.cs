@@ -7,12 +7,8 @@ using aaronApplicationPlatform.Interface;
 
 namespace aaronApplicationPlatform.Data.Entity
 {
-    public partial class Role : IId
+    public partial class Rule : IId
     {
-
-        [NotMapped]
-        public virtual IEnumerable<int> RuleId { get; set; }
-
     }
 
 }

@@ -9,8 +9,10 @@ import { MenuRepository } from "src/app/repository/aap/menu.repository";
 import { Menu } from "src/app/model/aap/menu.model";
 import { BaseDetailComponent } from 'src/app/module/aap/base.detailComponent';
 
+import { MenuMetadata } from './menu.metadata';
+
 @Component({
-  selector: "aap-menu-detail",
+  selector: "aaap-menu-detail",
   templateUrl: "menuDetail.component.html"
 })
 export class MenuDetailComponent extends BaseDetailComponent<MenuRepository, Menu>  {
@@ -23,7 +25,7 @@ export class MenuDetailComponent extends BaseDetailComponent<MenuRepository, Men
     activeRoute: ActivatedRoute,
     location: Location,
     private lookupRepo: LookupRepository) {
-      super(repo, router, activeRoute, location, null)
+      super(repo, router, activeRoute, location, MenuMetadata)
       this.listOfParents = this.repo.getListOfParents();
   }
 

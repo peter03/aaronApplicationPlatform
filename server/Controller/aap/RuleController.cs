@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 using aaronApplicationPlatform.Data;
 using aaronApplicationPlatform.Data.Entity;
@@ -12,20 +14,13 @@ using aaronApplicationPlatform.Logic;
 
 namespace aaronApplicationPlatform.Controller
 {
-    [Route("api/role")]
+    [Route("api/rule")]
     [ApiController]
-    public class RoleController : BaseController<RoleLogic, Role>
+    public class RuleController : BaseController<RuleLogic, Rule>
     {
-        public RoleController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
+        public RuleController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
         {
-        }
-
-        [HttpGet]
-        [Route("list")]
-        public override IEnumerable<Role> GetList()
-        {
-            return Logic.GetListIncludeRuleId();
         }
 
     }
-}
+  }

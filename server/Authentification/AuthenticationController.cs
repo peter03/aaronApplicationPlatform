@@ -22,25 +22,31 @@ namespace aaronApplicationPlatform.Authentication
     {
         private IUserService _userService;
 
-        public AuthenticationController(IUserService userService) 
+        public AuthenticationController(IUserService userService)
         {
             _userService = userService;
         }
 
         [AllowAnonymous]
         [HttpPost("login")]
-        //public IActionResult Authenticate([FromBody]AuthenticateRequest model)
-        public IActionResult Authenticate(AuthenticateRequest model)
+        public IActionResult Login(AuthenticateRequest model)
         {
-               var response = _userService.Authenticate(model);
+            var response = _userService.Login(model);
 
-                if (response == null)
-                    //return BadRequest(new { message = "Username or password is incorrect" });
-                    {
-                        throw new Exception("Username or password is incorrect");
-                    }
+            if (response == null)
+            {
+                throw new Exception(String.Format("Failed to login user {0}!", model.LoginName));
+            }
 
-                return Ok(response);
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("logout")]
+        public IActionResult Logout(User user)
+        {
+            _userService.Logout(user);
+            return Ok();
         }
 
     }

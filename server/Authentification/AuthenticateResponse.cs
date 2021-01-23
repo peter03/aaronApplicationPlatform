@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using aaronApplicationPlatform.Data.Entity;
 
 namespace aaronApplicationPlatform.Authentication
@@ -9,7 +10,7 @@ namespace aaronApplicationPlatform.Authentication
 
         public AuthenticateResponse(User user, string token)
         {
-            this.User = user;
+            User = user;
             Token = token;
         }
     }

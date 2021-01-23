@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+using aaronApplicationPlatform;
 using aaronApplicationPlatform.Data;
 using aaronApplicationPlatform.Data.Entity;
+using aaronApplicationPlatform.Interface;
+
 
 namespace aaronApplicationPlatform.Logic
 {
@@ -65,24 +68,25 @@ namespace aaronApplicationPlatform.Logic
             {
                 foreach (var user in result)
                 {
-                    TransformRoleList(user);
+                    var list = user.UserRoles.Cast<IMappingEntity>();
+                    user.RoleId = list.ToIntArray();
+                    // TransformRoleList(user);
+                    //user.RoleId = CollectTargetIds(user.UserRoles.Cast<IMappingEntity>());  // convert IEnumerable<IMappingEntity> to int[]
+                    user.UserRoles = null;    // remove navigation values
+
                 }
             };
             return result;
         }
-
-        private void TransformRoleList(User entity)
+        public User GetByLoginNameAndPwd(string loginName, string pwdHash, bool throwExIfNotFound = false)
         {
-
-            // return int[] with ids instead of IEnumerable<Shop>
-
-            if (entity.UserRoles != null && entity.UserRoles.Any())
+            User result = GetList().Where(e => e.LoginName.Equals(loginName, StringComparison.OrdinalIgnoreCase) && e.PasswordMD5 == pwdHash).FirstOrDefault();
+            if (result == null && throwExIfNotFound)
             {
-                entity.RoleId = entity.UserRoles.Select(s => s.RoleId).ToArray();
+                throw new Exception(String.Format("Record with LoginName = {0} not found!"));
             }
-            entity.UserRoles = null;    // remove navigation values
+            return result;
         }
-
 
     }
 }

@@ -24,9 +24,8 @@ export class MainMenuComponent extends BaseComponent {  // extends BaseListCompo
     public router: Router,
     public authService: AuthenticationService,
     injector: Injector) {
-    // super(repo, router, authService, injector)
-    super(authService);
-    repo.buildSubmenu(null);
+      super(authService);
+      repo.buildSubmenu(null);
   }
 
   get submenu(): Menu[] {

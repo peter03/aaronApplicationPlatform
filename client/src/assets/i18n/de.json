@@ -3,9 +3,11 @@
     "module": {
       "mainmenu": {
         "title": "Modulauswahl",
-        "systemadmin": "System verwalten",
-        "menu": "Hauptmenü verwalten",
-        "user": "Benutzer verwalten"
+        "systemmodule": "System Module",
+        "menuadmin": "Hauptmenü verwalten",
+        "useradmin": "Benutzer verwalten",
+        "rolegroupadmin": "Benutzerrollengruppen verwalten",
+        "roleadmin": "Benutzerrollen verwalten"
       },
       "menu": {
         "add": "Neuer Menüeintrag",
@@ -51,6 +53,7 @@
       "id": "Id",
       "no": "Nein",
       "parentid": "Übergeordnete Id",
+      "rule": "Regel",
       "sort": "Sortierung",
       "uniquename": "Eindeutige Bezeichnung",
       "yes": "Ja"

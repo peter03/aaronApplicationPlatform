@@ -15,13 +15,5 @@ export const userFormMetadata = [
     ngModel: 'passwordMD5',
     placeholder: '',
     required: false
-  },
-  {
-    label: 'Roles',
-    control: 'select',
-    ngModel: 'roleId',
-    required: true,
-    lookup: 'rolelist',
-    supressInList: true
   }
 ]

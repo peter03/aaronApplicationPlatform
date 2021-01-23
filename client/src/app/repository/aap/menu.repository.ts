@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import { Menu } from "src/app/model/aap/menu.model";
 import { BaseRepository } from './base.repository';
 import { Lookup } from "src/app/model/aap/lookup.model";
+import { User } from "src/app/model/aap/user.model";
+import { AuthenticationService } from 'src/app/service/aap/authentication.service';
 
 const API_URL = "/api/menu";
 
@@ -13,19 +15,25 @@ export class MenuRepository extends BaseRepository<Menu> {
 
     _submenu: Menu[] = [];
 
-  constructor(protected http: HttpClient,
-    protected router: Router) {
-    super(http, API_URL, Menu);
+  constructor(
+    http: HttpClient,
+    router: Router,
+    authService: AuthenticationService) {
+    super(http, API_URL, Menu, authService);
     
   }
 
   buildSubmenu(menuId?: number) {
 
     this._submenu = [];
-    this.getList().forEach(el => {
+    this.getList().forEach(e => {
 
-      if ((menuId === null && isNaN(el.parentId)) || menuId === el.parentId) {
-        this._submenu.push(el);
+      // skip unauthorized menu items
+      let skip: boolean = e.ruleId !== null && this.authService.hasPermission(e.ruleId) === false;
+      if (!skip) {
+        if ((menuId === null && isNaN(e.parentId)) || menuId === e.parentId) {
+          this._submenu.push(e);
+        }
       }
     })
 

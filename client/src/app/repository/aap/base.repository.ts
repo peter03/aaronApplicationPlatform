@@ -5,21 +5,28 @@ import { IId } from "../../interface/aap/IId";
 import { environment } from 'src/environments/environment';
 import { IRepository } from "../../interface/aap/irepository";
 
+import { AuthenticationService } from 'src/app/service/aap/authentication.service';
+import { User } from 'src/app/model/aap/user.model';
 
 export abstract class BaseRepository<T extends IId> implements IRepository<T> {
 
   _url: string;
   _cachedEntities: T[];    // todo: save them (encrypted) in web storage
   _selectedEntityId?: number = null;
-
-  constructor(protected http: HttpClient,
+  _user: User;
+    
+  constructor(
+    protected http: HttpClient,
     protected route: string,
-    private entityType: new () => T) {
+    private entityType: new () => T,
+    public authService: AuthenticationService) {
 
+    // this.authService.loginData.subscribe(x => this._user = x.user);
     this._url = environment.serverUrl + route;
     // this.loadEntities();    --> will be called in entityLoader.service after successfull login
 
   }
+    
 
   loadEntities(): Promise<any> {
 

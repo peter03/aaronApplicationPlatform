@@ -24,7 +24,7 @@ export class UserListComponent extends BaseListComponent<UserRepository, User> {
     super(repo, router, authService, injector, userFormMetadata)
 
     this.myMatTableSetting = this.defaultMatTableSetting;
-    this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aap.button.rols", "primary", "role"));
+    this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aap.button.roles", "primary", "role"));
   }
 
   public onActionButtonClicked(action: string, id: number) {

@@ -6,8 +6,7 @@ export class Role implements IId {
   rolegroupId: number;
   name: string;
   description: string;
-
-  select?: boolean;
+  ruleId?: number[];
 
   constructor() {
     this.rolegroupId = 1;

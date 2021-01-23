@@ -52,9 +52,9 @@ namespace aaronApplicationPlatform.Authentication
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
                 // attach user to context on successful jwt validation
-                var user = userService.GetById(userId);
+                var user = userService.GetCachedUserById(userId);
                 context.Items["User"] = user;
-                userService.LoggedinUser = userService.GetById(userId);
+                userService.LoggedinUser = user;    // userService.GetById(userId);
 
             }
             catch

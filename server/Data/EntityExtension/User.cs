@@ -9,8 +9,12 @@ namespace aaronApplicationPlatform.Data.Entity
 {
     public partial class User : IId
     {
+
         [NotMapped]
         public virtual IEnumerable<int> RoleId { get; set; }
+
+        [NotMapped]
+        public virtual IEnumerable<int> RuleId { get; set; }
 
         [NotMapped]
         public bool IsAdmin { 

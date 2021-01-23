@@ -3,17 +3,17 @@ import { HttpClient } from "@angular/common/http";
 
 import { User } from "src/app/model/aap/user.model";
 import { BaseRepository } from './base.repository';
-import { IRepository } from "../../interface/aap/irepository";
+import { AuthenticationService } from 'src/app/service/aap/authentication.service';
 
 const API_URL = "/api/user";
 
 @Injectable()
 export class UserRepository extends BaseRepository<User> {
 
-  //public user: Observable<User>;
-
-  constructor(protected http: HttpClient) {
-    super(http, API_URL, User);
+  constructor(
+    http: HttpClient,
+    authService: AuthenticationService) {
+    super(http, API_URL, User, authService);
   }
 
   getList() {
@@ -28,12 +28,5 @@ export class UserRepository extends BaseRepository<User> {
     return this._cachedEntities;
   }
 
-  getNewEntity() : any {
-    return new User();
-  }
-
-  validateEntity(entity: User) {
-    //return this.personRepo.validateEntity(entity.person);
-    return true;
-  }
+  
 }

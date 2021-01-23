@@ -44,7 +44,7 @@ namespace aaronApplicationPlatform.Logic
 
         public virtual IEnumerable<T> GetList()
         {
-            List<T> result = _dbContext.Set<T>().ToList();
+            IEnumerable<T> result = _dbContext.Set<T>();    //.ToList();
             return result;
         }
 

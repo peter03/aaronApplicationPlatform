@@ -10,26 +10,23 @@ import { User } from 'src/app/model/aap/user.model';
 
 export abstract class BaseComponent {
 
-    user: User;
+  user: User;
 
-    constructor(private authenticationService: AuthenticationService) {
-        this.authenticationService.loginData.subscribe(x => this.user = x.user);
-    }
+  constructor(private authenticationService: AuthenticationService) {
+    // this.authenticationService.loginData.subscribe(x => this.user = x.user);
+  }
 
-    get isAdmin() {
-        return this.user && this.user.isAdmin;
-    }
 
-    //get isShopOwner() {
-    //    return this.user && this.user.isShopOwner;
-    //}
+  //get isShopOwner() {
+  //    return this.user && this.user.isShopOwner;
+  //}
 
-    //get isShopAssistant() {
-    //    return this.user && this.user.isShopAssistant;
-    //}
+  //get isShopAssistant() {
+  //    return this.user && this.user.isShopAssistant;
+  //}
 
-    //get isSupplier() {
-    //    return this.user && this.user.isSupplier;
-    //}
+  //get isSupplier() {
+  //    return this.user && this.user.isSupplier;
+  //}
 
 }

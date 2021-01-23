@@ -19,6 +19,6 @@ export const RoleMetadata = [
     lookup: 'rolegrouplist',
     ngModel: 'rolegroupId',
     required: false,
-    supressInList: true
+    suppressInList: true
   }
 ]

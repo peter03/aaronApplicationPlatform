@@ -26,19 +26,17 @@ export class ListFormbuilderComponent implements OnInit, AfterViewInit{
 
   dataSource: MatTableDataSource<IId>;  // sortable datasource wrapper
   myFormTemplate: any[];
-  tableSetting: MatTableSetting
+  //tableSetting: MatTableSetting
       
   constructor(private lookupRepo: LookupRepository) {
   }
 
   ngOnInit() {
 
-    // extend form template by entity data
-    this.myFormTemplate = this.template.filter(e => e.supressInList !== true);
-    this.dataSource = new MatTableDataSource(this.entityList);
-    //this.tableSetting = this.setting;
+    this.myFormTemplate = this.template.filter(e => e.suppressInList !== true);
     this.displayedColumns = this.myFormTemplate.map(({ ngModel }) => ngModel);
     this.displayedColumns.push("action");
+    this.dataSource = new MatTableDataSource(this.entityList);
 
     //this.myFormTemplate.forEach(ctl => {
     //  if (ctl.control === 'select' && ctl.lookup) {
