@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder, Validator } from '@angular/forms';
 
@@ -14,8 +14,10 @@ export class DetailFormbuilderComponent implements OnInit{
   @Input() entity: IId;
   @Input() template: any[];
   @Input() actionCallback: Function;
-
-  //@Input() formGroup: FormGroup;
+  @Output() onCreateControl = new EventEmitter();
+  @Output() onModelChanged = new EventEmitter();
+  
+  @ViewChild('myForm') myForm: HTMLFormElement;
 
   myFormTemplate: any[];
   //myFormGroup: FormGroup;
@@ -26,7 +28,8 @@ export class DetailFormbuilderComponent implements OnInit{
   ngOnInit() {
 
     // extend form template by entity data
-    this.myFormTemplate = this.template.filter(e => e.suppressInDetail !== true);
+    //this.myFormTemplate = this.template.filter(e => e.suppressInDetail !== true);
+    this.myFormTemplate = Object.assign([], this.template); // clone object!
     this.myFormTemplate.forEach(ctl => {
 
       if (ctl.control === 'select' && ctl.lookup) {
@@ -38,12 +41,25 @@ export class DetailFormbuilderComponent implements OnInit{
     })
   }
 
-  modelChanged(model, newObj) {
-    this.entity[model] = newObj;
+  modelChangedEvent(model, newVal) {
+
+    let oldVal = this.entity[model];
+    this.entity[model] = newVal;
+
+    let myCtl = this.myForm.form.controls[model];
+    myCtl["ngModel"] = model;
+    //this.onModelChanged.emit({ model: model, oldVal: oldVal, newVal: newVal });
+    this.onModelChanged.emit(myCtl);
+
   }
 
-  onActionButtonClicked(action: string) {
+  actionButtonClickEvent(action: string) {
     this.actionCallback(action);
+  }
+
+  createControlEvent(ctlMetadata: any) {
+    this.onCreateControl.emit(ctlMetadata);
+    return ctlMetadata;
   }
 
     //this.myFormGroup = this.formGroup;
@@ -69,7 +85,4 @@ export class DetailFormbuilderComponent implements OnInit{
     //})
 
     // this.formGroup = new FormGroup(group);
-
-
-
 }

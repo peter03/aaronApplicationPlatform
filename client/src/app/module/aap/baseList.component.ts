@@ -32,22 +32,11 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
 
     this.formMetadata = modelMetadata;
     this.dialog = injector.get(MatDialog);
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.repo.getList());
   }
 
   ngOnInit() {
     //this.onActionButtonClicked = this.onActionButtonClicked.bind(this);
 
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   get entities(): T[] {

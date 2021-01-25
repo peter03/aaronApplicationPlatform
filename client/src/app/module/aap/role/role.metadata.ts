@@ -14,7 +14,7 @@ export const RoleMetadata = [
     maxLength: 80
   },
   {
-    label: 'aap.module.role.rolegroupid',
+    label: 'aap.common.group',
     control: 'select',
     lookup: 'rolegrouplist',
     ngModel: 'rolegroupId',

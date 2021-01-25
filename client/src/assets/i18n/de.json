@@ -1,30 +1,46 @@
 {
   "aap": {
     "module": {
+      "login": {
+        "loginname": "Benutzername",
+        "password": "Passwort",
+        "confirmpassword": "Passwort bestätigen:"
+      },
       "mainmenu": {
         "title": "Modulauswahl",
         "systemmodule": "System Module",
         "menuadmin": "Hauptmenü verwalten",
         "useradmin": "Benutzer verwalten",
-        "rolegroupadmin": "Benutzerrollengruppen verwalten",
+        "rolegroupadmin": "Rollengruppen verwalten",
         "roleadmin": "Benutzerrollen verwalten"
       },
       "menu": {
         "add": "Neuer Menüeintrag",
         "route": "Route",
         "detail": "Menüdaten",
-        "list":  "Menüeinträge",
+        "list": "Menüeinträge",
         "parentmenu": "Übergeordneter Menüpunkt"
       },
       "user": {
         "list": "Benutzerliste",
+        "detail": "Benutzer",
         "loginname": "Anmeldename",
         "password": "Passwort",
         "rolelist": "Benutzerrollen"
       },
       "role": {
-        "title": "Benutzerrollen verwalten"
+        "list": "Benutzerrollen",
+        "detail": "Benutzerrolle"
+      },
+      "rolegroup": {
+        "list": "Rollengruppen",
+        "detail": "Rollengruppe"
+      },
+
+      "rule": {
+        "list": "Regeln"
       }
+
     },
     "question": {
       "deleterecord": "Möchten Sie den Datensatz {{p0}} wirklich unwiderruflich löschen?"
@@ -49,6 +65,7 @@
       "date": "Datum",
       "description": "Beschreibung",
       "filter": "Filter",
+      "group": "Gruppe",
       "label": "Bezeichnung",
       "id": "Id",
       "no": "Nein",

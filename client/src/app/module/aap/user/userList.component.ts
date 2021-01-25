@@ -5,7 +5,7 @@ import { UserRepository } from "src/app/repository/aap/user.repository";
 import { User } from "src/app/model/aap/user.model";
 import { BaseListComponent } from '../baseList.component';
 import { AuthenticationService } from "../../../service/aap/authentication.service";
-import { userFormMetadata } from './userFormMetadata';
+import { UserMetadata } from './user.metadata';
 import { MatTableActionButton, MatTableSetting } from "../matTable.setting";
 
 @Component({
@@ -21,10 +21,10 @@ export class UserListComponent extends BaseListComponent<UserRepository, User> {
     public router: Router,
     public authService: AuthenticationService,
     injector: Injector) {
-    super(repo, router, authService, injector, userFormMetadata)
+    super(repo, router, authService, injector, UserMetadata)
 
     this.myMatTableSetting = this.defaultMatTableSetting;
-    this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aap.button.roles", "primary", "role"));
+    this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aap.module.role.list", "primary", "role"));
   }
 
   public onActionButtonClicked(action: string, id: number) {

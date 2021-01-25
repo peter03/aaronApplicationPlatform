@@ -3,13 +3,8 @@
 <table>
   <tr style="width: 100%;">
     <td style="width: 50%;">
-      <mat-form-field>
-        <mat-label>{{'aap.common.filter' | translate}}</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="search..." #input>
-      </mat-form-field>
-    </td>
+      <button class="btn btn-primary btn-sm" [routerLink]="['detail/0']">{{'aap.module.menu.add' | translate}}</button>    </td>
     <td style="text-align: right;">
-      <button class="btn btn-primary btn-sm" [routerLink]="['detail/0']">{{'aap.module.menu.add' | translate}}</button>
     </td>
   </tr>
 </table>

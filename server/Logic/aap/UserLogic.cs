@@ -40,6 +40,12 @@ namespace aaronApplicationPlatform.Logic
                     _dbContext.UserRoles.RemoveRange(_dbContext.UserRoles.Where(e => e.UserId == entity.Id));
                 }
 
+                // update password?
+                if (!String.IsNullOrEmpty(entity.Password))
+                {
+                    entity.PasswordMD5 = entity.Password.ToMd5Hash();
+                }
+
                 base.Upsert(entity);
 
                 // 2nd upsert roles
@@ -73,7 +79,6 @@ namespace aaronApplicationPlatform.Logic
                     // TransformRoleList(user);
                     //user.RoleId = CollectTargetIds(user.UserRoles.Cast<IMappingEntity>());  // convert IEnumerable<IMappingEntity> to int[]
                     user.UserRoles = null;    // remove navigation values
-
                 }
             };
             return result;

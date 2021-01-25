@@ -1,7 +1,10 @@
+<mat-form-field style="width: 100%;">
+  <mat-label>{{'aap.common.filter' | translate}}</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="search..." #input>
+</mat-form-field>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-
 
     <div *ngFor="let ctl of myFormTemplate">
       <div [ngSwitch]="ctl.control">
@@ -35,16 +38,15 @@
     </div>
 
     <!--<ng-template [ngIf]="setting.actionButtonList">-->
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <div *ngFor="let btn of setting.actionButtonList; trackBy: trackByIndex">
-            <button type="button" mat-button [color]="btn.color" (click)="onActionButtonClicked(btn.action, element.id)">{{ btn.label | translate}}</button>
-          </div>
-        </td>
-      </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngFor="let btn of setting.actionButtonList; trackBy: trackByIndex">
+          <button type="button" mat-button [color]="btn.color" (click)="onActionButtonClicked(btn.action, element.id)">{{ btn.label | translate}}</button>
+        </div>
+      </td>
+    </ng-container>
     <!--</ng-template>-->
-
     <!--<ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">

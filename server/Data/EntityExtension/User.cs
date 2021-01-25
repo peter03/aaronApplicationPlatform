@@ -16,6 +16,11 @@ namespace aaronApplicationPlatform.Data.Entity
         [NotMapped]
         public virtual IEnumerable<int> RuleId { get; set; }
 
+
+        [NotMapped]
+        public virtual string Password { get; set; }
+
+
         [NotMapped]
         public bool IsAdmin { 
             get 

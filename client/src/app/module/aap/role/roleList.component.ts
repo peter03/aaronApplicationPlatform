@@ -27,7 +27,7 @@ export class RoleListComponent extends BaseListComponent<RoleRepository, Role> {
     super(repo, router, authService, injector, RoleMetadata)
 
     this.myMatTableSetting = this.defaultMatTableSetting;
-    this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aap.button.rules", "primary", "rule"));
+    this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aap.module.rule.list", "primary", "rule"));
   }
 
   public onActionButtonClicked(action: string, id: number) {

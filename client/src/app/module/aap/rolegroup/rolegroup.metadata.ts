@@ -16,7 +16,7 @@ export const RolegroupMetadata = [
   },
   {
     label: 'aap.common.sort',
-    control: 'number',
+    control: 'text',
     ngModel: 'sort',
     required: false,
   }

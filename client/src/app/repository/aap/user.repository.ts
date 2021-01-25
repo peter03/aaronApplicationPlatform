@@ -28,5 +28,16 @@ export class UserRepository extends BaseRepository<User> {
     return this._cachedEntities;
   }
 
+  validateEntity(entity: User) {
+
+    if (!!entity.password) {
+      if (entity.password !== entity.confirmPassword) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   
 }
