@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from "src/app/module/aap/login/login.component";
-import { MainMenuComponent } from "src/app/module/aap/mainmenu/mainMenu.component";
-import { moduleRoutes, moduleRoutingComponents } from "src/app/module/aap/module.routing";
+import { LoginComponent } from "src/app/module/aaap/login/login.component";
+import { MainMenuComponent } from "src/app/module/aaap/mainmenu/mainMenu.component";
+import { moduleRoutes, moduleRoutingComponents } from "src/app/module/aaap/module.routing";
 
 
 export const routes: Routes = [

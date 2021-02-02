@@ -11,7 +11,7 @@ namespace aaronApplicationPlatform.Data.Mapping
         {
             #region Generated Configure
             // table
-            builder.ToTable("Language", "aap");
+            builder.ToTable("Language", "aaap");
 
             // key
             builder.HasKey(t => t.Id);
@@ -43,7 +43,7 @@ namespace aaronApplicationPlatform.Data.Mapping
         }
 
         #region Generated Constants
-        public const string TableSchema = "aap";
+        public const string TableSchema = "aaap";
         public const string TableName = "Language";
 
         public const string ColumnId = "Id";

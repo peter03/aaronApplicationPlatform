@@ -1,0 +1,7 @@
+<aaap-module-header [title]="'aaap.module.mainmenu.title'"></aaap-module-header>
+
+<div *ngFor="let item of submenu">
+  <button class="menubtn" (click)="navigateTo(item.id)">{{item.name | translate}}</button>
+  <br />
+</div>
+

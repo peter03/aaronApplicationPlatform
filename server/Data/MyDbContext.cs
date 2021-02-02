@@ -12,9 +12,15 @@ namespace aaronApplicationPlatform.Data
         }
 
         #region Generated Properties
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.Address> Addresses { get; set; }
+
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.Country> Countries { get; set; }
+
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Language> Languages { get; set; }
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Menu> Menus { get; set; }
+
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.Person> People { get; set; }
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Rolegroup> Rolegroups { get; set; }
 
@@ -39,8 +45,11 @@ namespace aaronApplicationPlatform.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Generated Configuration
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.AddressMap());
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.CountryMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.LanguageMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.MenuMap());
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.PersonMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.RolegroupMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.RoleMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.RoleRuleMap());

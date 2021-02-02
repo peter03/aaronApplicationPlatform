@@ -1,7 +1,8 @@
 {
-  "aap": {
+  "aaap": {
     "module": {
       "login": {
+        "title": "Anmeldung",
         "loginname": "Benutzername",
         "password": "Passwort",
         "confirmpassword": "Passwort bestätigen:"

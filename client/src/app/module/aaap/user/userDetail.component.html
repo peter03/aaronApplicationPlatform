@@ -1,0 +1,7 @@
+<aaap-module-header [title]="'aaap.module.user.detail'"></aaap-module-header>
+<aaap-detail-formbuilder [entity]="entity"
+                         [template]="formMetadata"
+                         [actionCallback]="onActionButtonClicked.bind(this)"
+                         (onCreateControl)="onCreateControl($event)"
+                         (onModelChanged)="onModelChanged($event)">
+</aaap-detail-formbuilder>

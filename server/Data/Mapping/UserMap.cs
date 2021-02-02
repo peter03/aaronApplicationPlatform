@@ -11,7 +11,7 @@ namespace aaronApplicationPlatform.Data.Mapping
         {
             #region Generated Configure
             // table
-            builder.ToTable("User", "aap");
+            builder.ToTable("User", "aaap");
 
             // key
             builder.HasKey(t => t.Id);
@@ -29,11 +29,15 @@ namespace aaronApplicationPlatform.Data.Mapping
                 .HasColumnType("nvarchar(40)")
                 .HasMaxLength(40);
 
-            builder.Property(t => t.PasswordMD5)
+            builder.Property(t => t.PasswordHash)
                 .IsRequired()
-                .HasColumnName("PasswordMD5")
+                .HasColumnName("PasswordHash")
                 .HasColumnType("nvarchar(128)")
                 .HasMaxLength(128);
+
+            builder.Property(t => t.PersonId)
+                .HasColumnName("PersonId")
+                .HasColumnType("int");
 
             builder.Property(t => t.ChangePwdOnNextLogin)
                 .IsRequired()
@@ -66,16 +70,22 @@ namespace aaronApplicationPlatform.Data.Mapping
                 .HasForeignKey(d => d.PreferredLanguageId)
                 .HasConstraintName("FK_User_Language");
 
+            builder.HasOne(t => t.Person)
+                .WithMany(t => t.Users)
+                .HasForeignKey(d => d.PersonId)
+                .HasConstraintName("FK_User_Person");
+
             #endregion
         }
 
         #region Generated Constants
-        public const string TableSchema = "aap";
+        public const string TableSchema = "aaap";
         public const string TableName = "User";
 
         public const string ColumnId = "Id";
         public const string ColumnLoginName = "LoginName";
-        public const string ColumnPasswordMD5 = "PasswordMD5";
+        public const string ColumnPasswordHash = "PasswordHash";
+        public const string ColumnPersonId = "PersonId";
         public const string ColumnChangePwdOnNextLogin = "ChangePwdOnNextLogin";
         public const string ColumnDisabled = "Disabled";
         public const string ColumnPreferredLanguageId = "PreferredLanguageId";

@@ -17,17 +17,17 @@ export function HttpLoaderFactory(handler: HttpBackend) {
 }
 
 // import interceptors
-import { JwtInterceptor } from 'src/app/interceptor/aap';
+import { JwtInterceptor } from 'src/app/interceptor/aaap';
 
 // import services
-import { serviceList } from "src/app/service/aap/service.module";
+import { serviceList } from "src/app/service/aaap/service.module";
 
 // import repositories
-import { repositoryList } from "src/app/repository/aap/repository.list";
+import { repositoryList } from "src/app/repository/aaap/repository.list";
 
 // import module components
 import { AppComponent } from './app.component';
-import { ConfirmDialogComponent } from 'src/app/global/component/aap/confirmDialog.component';
+import { ConfirmDialogComponent } from 'src/app/global/component/aaap/confirmDialog.component';
 import { designComponentList } from 'src/app/design/aaap/design.component';
 import { routingComponents, appRouting } from './app-routing.module';
 

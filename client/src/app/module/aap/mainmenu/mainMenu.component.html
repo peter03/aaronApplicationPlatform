@@ -1,9 +1,0 @@
-<h4 class="border border-dark bg-info p-2">
-  {{'aap.module.mainmenu.title' | translate}}
-</h4>
-
-<div *ngFor="let item of submenu">
-  <button class="menubtn" (click)="navigateTo(item.id)">{{item.name | translate}}</button>
-  <br />
-</div>
-

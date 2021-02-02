@@ -3,7 +3,7 @@ project:
   directory: .\
 database:
   provider: SqlServer
-  connectionString: 'Data Source=localhost;Initial Catalog=aap_demo;User ID=sa;Password=;'
+  connectionString: 'Data Source=localhost;Initial Catalog=aaap_demo;User ID=sa;Password=;'
   tableNaming: Singular
   tables: []
   schemas: []

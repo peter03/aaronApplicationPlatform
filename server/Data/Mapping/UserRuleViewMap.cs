@@ -11,7 +11,7 @@ namespace aaronApplicationPlatform.Data.Mapping
         {
             #region Generated Configure
             // table
-            builder.ToView("UserRuleView", "aap");
+            builder.ToView("UserRuleView", "aaap");
 
             // key
             builder.HasNoKey();
@@ -76,7 +76,7 @@ namespace aaronApplicationPlatform.Data.Mapping
         }
 
         #region Generated Constants
-        public const string TableSchema = "aap";
+        public const string TableSchema = "aaap";
         public const string TableName = "UserRuleView";
 
         public const string ColumnRoleId = "RoleId";

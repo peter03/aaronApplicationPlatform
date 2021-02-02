@@ -18,7 +18,9 @@ namespace aaronApplicationPlatform.Data.Entity
 
         public string LoginName { get; set; }
 
-        public string PasswordMD5 { get; set; }
+        public string PasswordHash { get; set; }
+
+        public int? PersonId { get; set; }
 
         public bool ChangePwdOnNextLogin { get; set; }
 
@@ -33,6 +35,8 @@ namespace aaronApplicationPlatform.Data.Entity
         #endregion
 
         #region Generated Relationships
+        public virtual Person Person { get; set; }
+
         public virtual Language PreferredLanguage { get; set; }
 
         public virtual ICollection<UserRole> UserRoles { get; set; }

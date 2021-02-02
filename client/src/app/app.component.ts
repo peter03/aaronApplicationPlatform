@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { BaseComponent } from "src/app/module/aap/base.component";
-import { MenuRepository } from "src/app/repository/aap/menu.repository";
-import { AuthenticationService } from 'src/app/service/aap/authentication.service';
+import { BaseComponent } from "src/app/module/aaap/base.component";
+import { MenuRepository } from "src/app/repository/aaap/menu.repository";
+import { AuthenticationService } from 'src/app/service/aaap/authentication.service';
 
 @Component({
   selector: 'app-root',
