@@ -8,7 +8,7 @@ using aaronApplicationPlatform.Data.Entity;
 
 namespace aaronApplicationPlatform.Logic
 {
-    public class AddressLogic : BaseLogic<Address> 
+    public partial class AddressLogic : BaseLogic<Address> 
     {
         public AddressLogic()
         {

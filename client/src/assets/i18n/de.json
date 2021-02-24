@@ -5,7 +5,10 @@
         "title": "Anmeldung",
         "loginname": "Benutzername",
         "password": "Passwort",
-        "confirmpassword": "Passwort bestätigen:"
+        "confirmpassword": "Passwort bestätigen:",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "email": "Email"
       },
       "mainmenu": {
         "title": "Modulauswahl",

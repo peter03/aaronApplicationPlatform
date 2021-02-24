@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +17,11 @@ export function HttpLoaderFactory(handler: HttpBackend) {
 }
 
 // import interceptors
-import { JwtInterceptor } from 'src/app/interceptor/aaap';
+import { JwtInterceptor, ErrorInterceptor } from 'src/app/interceptor/aaap';
+
+// import global components
+import { GlobalErrorHandler } from './global/aaap/error/global-error-handler';
+import { ConfirmDialogComponent } from 'src/app/global/aaap/component/confirmDialog.component';
 
 // import services
 import { serviceList } from "src/app/service/aaap/service.module";
@@ -27,7 +31,7 @@ import { repositoryList } from "src/app/repository/aaap/repository.list";
 
 // import module components
 import { AppComponent } from './app.component';
-import { ConfirmDialogComponent } from 'src/app/global/component/aaap/confirmDialog.component';
+
 import { designComponentList } from 'src/app/design/aaap/design.component';
 import { routingComponents, appRouting } from './app-routing.module';
 
@@ -56,6 +60,8 @@ import { routingComponents, appRouting } from './app-routing.module';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     ...serviceList,
     ...repositoryList
   ],

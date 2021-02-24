@@ -69,4 +69,18 @@ export class ListFormbuilderComponent implements OnInit, AfterViewInit{
     return index;
   }
 
+  getValue(obj, path) {
+    path = path.replace(/\[(\w+)\]/g, '.$1')
+    path = path.replace(/^\./, '')
+    var a = path.split('.')
+    var o = obj
+    while (a.length) {
+      var n = a.shift()
+      if (!(n in o)) return
+      o = o[n]
+    }
+    return o
+  }
+
+
 }

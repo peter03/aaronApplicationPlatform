@@ -22,7 +22,7 @@ namespace aaronApplicationPlatform.Data.Entity
 
         public int? PersonId { get; set; }
 
-        public bool ChangePwdOnNextLogin { get; set; }
+        public bool? ChangePwdOnNextLogin { get; set; }
 
         public bool Disabled { get; set; }
 

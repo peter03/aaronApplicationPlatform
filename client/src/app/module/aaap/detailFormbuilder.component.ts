@@ -36,7 +36,9 @@ export class DetailFormbuilderComponent implements OnInit{
         ctl['options'] = this.lookupRepo.getList(ctl.lookup);
       }
 
-      ctl['value'] = this.entity[ctl.ngModel];
+      // get object value by path (e.g. "Person.Surname")
+      let val = this.getValue(this.entity, ctl.ngModel);
+      ctl['value'] = val; //  this.entity[ctl.ngModel];
 
     })
   }
@@ -44,7 +46,9 @@ export class DetailFormbuilderComponent implements OnInit{
   modelChangedEvent(model, newVal) {
 
     let oldVal = this.entity[model];
-    this.entity[model] = newVal;
+
+    this.setValue(this.entity, model, newVal);
+    //this.entity[model] = newVal;
 
     let myCtl = this.myForm.form.controls[model];
     myCtl["ngModel"] = model;
@@ -60,6 +64,30 @@ export class DetailFormbuilderComponent implements OnInit{
   createControlEvent(ctlMetadata: any) {
     this.onCreateControl.emit(ctlMetadata);
     return ctlMetadata;
+  }
+
+  setValue(obj, path, value) {
+    var a = path.split('.')
+    var o = obj
+    while (a.length - 1) {
+      var n = a.shift()
+      if (!(n in o)) o[n] = {}
+      o = o[n]
+    }
+    o[a[0]] = value
+  }
+
+  getValue(obj, path) {
+    path = path.replace(/\[(\w+)\]/g, '.$1')
+    path = path.replace(/^\./, '')
+    var a = path.split('.')
+    var o = obj
+    while (a.length) {
+      var n = a.shift()
+      if (!(n in o)) return
+      o = o[n]
+    } 
+    return o
   }
 
     //this.myFormGroup = this.formGroup;

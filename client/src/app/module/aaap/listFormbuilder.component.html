@@ -9,18 +9,12 @@
     <div *ngFor="let ctl of myFormTemplate">
       <div [ngSwitch]="ctl.control">
 
-        <div *ngSwitchCase="'text'">
+        <div *ngSwitchCase="ctl.control === 'text' || ctl.control === 'email' || ctl.control === 'number' ? ctl.control : ''">
           <ng-container matColumnDef="{{ctl.ngModel}}">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ctl.label | translate}}</th>
-            <td mat-cell *matCellDef="let element">{{element[ctl.ngModel]}}</td>
-            <!--<td mat-cell *matCellDef="let element"> {{element.id}} </td>-->
-          </ng-container>
-        </div>
+            <!--<td mat-cell *matCellDef="let element">{{element[ctl.ngModel]}}</td>-->
+            <td mat-cell *matCellDef="let element">{{getValue(element, ctl.ngModel)}}</td>
 
-        <div *ngSwitchCase="'number'">
-          <ng-container matColumnDef="{{ctl.ngModel}}">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ctl.label | translate}}</th>
-            <td mat-cell *matCellDef="let element">{{element[ctl.ngModel]}}</td>
           </ng-container>
         </div>
 

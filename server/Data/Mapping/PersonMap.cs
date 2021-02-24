@@ -29,26 +29,23 @@ namespace aaronApplicationPlatform.Data.Mapping
                 .HasColumnType("int");
 
             builder.Property(t => t.FirstName)
-                .IsRequired()
                 .HasColumnName("FirstName")
                 .HasColumnType("nvarchar(50)")
                 .HasMaxLength(50);
 
             builder.Property(t => t.LastName)
-                .IsRequired()
                 .HasColumnName("LastName")
                 .HasColumnType("nvarchar(50)")
                 .HasMaxLength(50);
 
             builder.Property(t => t.AddressId)
-                .IsRequired()
                 .HasColumnName("AddressId")
                 .HasColumnType("int");
 
             builder.Property(t => t.Email)
                 .HasColumnName("Email")
-                .HasColumnType("nvarchar(128)")
-                .HasMaxLength(128);
+                .HasColumnType("nvarchar(255)")
+                .HasMaxLength(255);
 
             builder.Property(t => t.Gender)
                 .HasColumnName("Gender")

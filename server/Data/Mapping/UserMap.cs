@@ -40,7 +40,6 @@ namespace aaronApplicationPlatform.Data.Mapping
                 .HasColumnType("int");
 
             builder.Property(t => t.ChangePwdOnNextLogin)
-                .IsRequired()
                 .HasColumnName("ChangePwdOnNextLogin")
                 .HasColumnType("bit")
                 .HasDefaultValueSql("((1))");

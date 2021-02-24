@@ -1,11 +1,13 @@
 import { IId } from '../../interface/aaap/IId';
+import { Person } from '../aaap/person.model';
+
 
 export class User implements IId {
 
   id: number;
   loginName: string;
   personId: number;
-  //person: Person;
+  person: Person;
   isDisabled: boolean;
   roleId?: number[];
   ruleId?: number[];
@@ -18,7 +20,7 @@ export class User implements IId {
   //}
 
   constructor() {
-    //this.person = new Person()
+    this.person = new Person()
   }
 
 

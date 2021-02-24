@@ -23,10 +23,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client", "client\", "{7F78D
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "49918"
+		SlnRelativePath = "client\"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{167CC40E-7D6B-42D6-BED0-DA6BBB9C15F7}"
 	ProjectSection(SolutionItems) = preProject
+		dbscript_aaap.sql = dbscript_aaap.sql
 		readme.txt = readme.txt
 	EndProjectSection
 EndProject

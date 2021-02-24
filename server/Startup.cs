@@ -84,6 +84,9 @@ namespace aaronApplicationPlatform
 
             app.UseRouting();
 
+            // global error handler
+            app.UseMiddleware<ExceptionMiddleware>();
+
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();
 

@@ -21,7 +21,8 @@ export class UserListComponent extends BaseListComponent<UserRepository, User> {
     public router: Router,
     public authService: AuthenticationService,
     injector: Injector) {
-    super(repo, router, authService, injector, UserMetadata)
+
+    super(repo, router, authService, injector, UserMetadata);
 
     this.myMatTableSetting = this.defaultMatTableSetting;
     this.myMatTableSetting.actionButtonList.push(new MatTableActionButton("aaap.module.role.list", "primary", "role"));

@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogModel, ConfirmDialogComponent } from 'src/app/global/component/aaap/confirmDialog.component';
+import { ConfirmDialogModel, ConfirmDialogComponent } from 'src/app/global/aaap/component/confirmDialog.component';
 
 import { IId } from "../../interface/aaap/IId";
 import { IRepository } from "../../interface/aaap/irepository";

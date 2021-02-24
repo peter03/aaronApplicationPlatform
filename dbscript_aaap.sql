@@ -22,7 +22,6 @@ IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'aaap' )
 go
 
 -- [aaap].[Country]
-
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Country]'))
 	begin
 
@@ -314,6 +313,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[La
 		INSERT INTO [aaap].[Language] ([Id],[Shortcut],[Description]) VALUES  (3, 'zh', 'Chinese');
 		INSERT INTO [aaap].[Language] ([Id],[Shortcut],[Description]) VALUES  (4, 'fr', 'French');
 		INSERT INTO [aaap].[Language] ([Id],[Shortcut],[Description]) VALUES  (5, 'es', 'Spanish');
+		INSERT INTO [aaap].[Language] ([Id],[Shortcut],[Description]) VALUES  (6, 'it', 'Italian');
 		SET IDENTITY_INSERT [aaap].[Language] OFF
 
 	end
@@ -350,10 +350,10 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Pe
 		CREATE TABLE [aaap].[Person](
 			[Id] [int] IDENTITY(1,1) NOT NULL,
 			[Version] [int] default(0) NOT NULL,
-			[FirstName] [nvarchar](50) NOT NULL,
-			[LastName] [nvarchar](50) NOT NULL,
-			[AddressId] [int] NOT NULL,
-			[Email] [nvarchar](128) NULL,
+			[FirstName] [nvarchar](50) NULL,
+			[LastName] [nvarchar](50) NULL,
+			[AddressId] [int] NULL,
+			[Email] [nvarchar](255) NULL,
 			[Gender] [nvarchar](1) NULL,	-- (M)ale, (F)emale, NULL = unknown
 			CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
 			(
@@ -437,12 +437,13 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Ro
 			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 		) ON [PRIMARY]
 
-		ALTER TABLE [aaap].[Role]  WITH CHECK ADD  CONSTRAINT [FK_Role_RoleGroup] FOREIGN KEY([RoleGroupId])	REFERENCES [aaap].[RoleGroup] ([Id])
+		ALTER TABLE [aaap].[Role]  WITH CHECK ADD  CONSTRAINT [FK_Role_RoleGroup] FOREIGN KEY([RoleGroupId]) REFERENCES [aaap].[RoleGroup] ([Id])
 		ALTER TABLE [aaap].[Role] CHECK CONSTRAINT [FK_Role_RoleGroup]
 
 		SET IDENTITY_INSERT [aaap].[Role] ON
 		INSERT INTO [aaap].[Role] ([Id],[RolegroupId],[Name]) VALUES  (1, 1, 'Administrator');
 		SET IDENTITY_INSERT [aaap].[Role] OFF
+
 	end
 
 -- [aaap].[Rulegroup]
@@ -491,6 +492,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Ru
 		INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (4, 1, 'Show menu item Role');
 		--INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (5, 1, 'Show menu item Rulegroup');
 		--INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (6, 1, 'Show menu item Rule');
+		INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (8, 1, 'Show menu item Media');
 		SET IDENTITY_INSERT [aaap].[Rule] OFF
 
 	end
@@ -638,10 +640,53 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Me
 		--insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (5, 1, 'aap.module.mainmenu.rulegroupadmin', '/rulegroup'); 
 		--insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (6, 1, 'aap.module.mainmenu.ruleadmin', '/rule'); 
 		--insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (7, 1, 'aap.module.mainmenu.menu', '/menu'); 
+		insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (8, 1, 'aaap.module.mainmenu.mediaadmin', '/media'); 
 
 		SET IDENTITY_INSERT [aaap].[Menu] OFF
 
 	end
---
+
+-- [aaap].[Filetype]
+IF  NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Filetype]'))
+	begin
+		CREATE TABLE [aaap].[Filetype]
+		(
+			[Id] [int] NOT NULL,
+			[Name] nvarchar(80) not null,
+			CONSTRAINT [PK_Filetype] PRIMARY KEY CLUSTERED 
+			(
+				[Id] ASC
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY]
+
+		INSERT INTO [aaap].[Filetype] ([Id], [Name]) VALUES  (1,'Product Image');
+	end
+
+-- [dbo].[Filespec]
+IF  NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Filespec]'))
+	begin
+
+		CREATE TABLE [aaap].[Filespec](
+			[Id] [int] IDENTITY(1,1) NOT NULL,
+			[Filename] [nvarchar](1024) NOT NULL,
+			[Filecontent] [varbinary](max) NULL,
+			[FiletypeId] [int] NOT NULL,
+			[Description] [nvarchar](1024) NULL,
+			[Filesize] int null,
+			[Imagewidth] int null,
+			[Imageheight] int null,
+			[UserId] [int] NOT NULL,
+			CONSTRAINT [PK_File] PRIMARY KEY CLUSTERED 
+			(
+				[Id] ASC
+			)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+		) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+		ALTER TABLE [aaap].[Filespec]  WITH CHECK ADD  CONSTRAINT [FK_Filespec_Filetype] FOREIGN KEY([FiletypeId]) REFERENCES [aaap].[Filetype] ([Id])
+		ALTER TABLE [aaap].[Filespec] CHECK CONSTRAINT [FK_Filespec_Filetype]
+		ALTER TABLE [aaap].[Filespec]  WITH CHECK ADD  CONSTRAINT [FK_Filespec_User] FOREIGN KEY([UserId]) REFERENCES [aaap].[User] ([Id])
+		ALTER TABLE [aaap].[Filespec] CHECK CONSTRAINT [FK_Filespec_User]
+
+	end
 
 go	

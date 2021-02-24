@@ -12,10 +12,23 @@ using aaronApplicationPlatform.Interface;
 
 namespace aaronApplicationPlatform.Logic
 {
-    public class UserLogic : BaseLogic<User> 
+    public partial class UserLogic : BaseLogic<User> 
     {
         public UserLogic()
         {
+        }
+
+        private PersonLogic _PersonLogic;
+        private PersonLogic PersonLogic
+        {
+            get
+            {
+                if (_PersonLogic == null)
+                {
+                    _PersonLogic = new PersonLogic(_dbContext);
+                }
+                return _PersonLogic;
+            }
         }
 
         public UserLogic(MyDbContext dbContext) : base(dbContext)
@@ -32,7 +45,8 @@ namespace aaronApplicationPlatform.Logic
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
 
-                // PersonLogic.Upsert(entity.Person);
+                PersonLogic.Upsert(entity.Person);
+                entity.PersonId = entity.Person.Id;
 
                 // 1st remove roles
                 if (entity.Id != 0)

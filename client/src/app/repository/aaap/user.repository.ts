@@ -25,7 +25,18 @@ export class UserRepository extends BaseRepository<User> {
     //        ent.person = this.personRepo.getList().find(e => e.id === ent.personId);
     //    }
     //});
+    // return this._cachedEntities;
+
+    //let url = `${API_URL}/list`;
+
+    //if (!this._cachedEntities) {
+    //  this.http.get<User[]>(url).subscribe(res => {
+    //    this._cachedEntities = res;
+    //  })
+    //}
+
     return this._cachedEntities;
+
   }
 
   validateEntity(entity: User) {

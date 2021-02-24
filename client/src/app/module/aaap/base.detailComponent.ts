@@ -35,7 +35,8 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
 
     if (this.repo.validateEntity(this._entity)) {
       this.repo.upsertEntity(this._entity);
-      this.location.back();
+      // this.location.back();
+      this.router.navigate(['.'], { relativeTo: this.activeRoute.parent });
     }
 
   }

@@ -48,6 +48,8 @@ export class LookupRepository {
   getList(lookupName): Lookup[] {
 
     switch (lookupName) {
+      case "rolegrouplist":
+        return this.getRolegroupList();
       case "rolelist":
         return this.getRoleList();
       case "rulelist":
