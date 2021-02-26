@@ -1,4 +1,4 @@
-# aaronApplicationPlatform
+# aaronApplicationPlatform (triple A P)
 Serves an complete environment to develop large business applications using .NET Core (5.0.0) + Angular (11.0.5) + MS SQL Server (17).
 
 **This early realease of the Aaron Application Platform is not designed for commercial use!** 
