@@ -20,5 +20,5 @@ Include:
 Installation:
 
 - see readme.txt for requisites
-- download files (keep file structure!)
+- download files of the master branch (keep file structure!)
 - execute dbscript_aaap.sql in SQL Server MMS to create database
