@@ -672,3 +672,19 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
+
+VARIATIONS AND SUPPLEMENTS TO THE ABOVE NAMED LICENSE :
+
+IT IS NOT ALLOWED TO USE THIS CODE OR PARTS OF THIS CODE TO CREATE A NEW STANDALONE COMMERCIAL
+BUSINESS SOFTWARE PACKAGE!
+
+If you need a special license for your commercial project, please contact the initiator:
+aaap@webdevelop.de
+
+Please consider the licenses of integrated 3rd party libs:
+AutoMapper (MIT License see https://github.com/AutoMapper/AutoMapper/blob/master/LICENSE.txt)
+ngx-translate ((MIT License https://github.com/ngx-translate/core/blob/master/LICENSE)
+https://efg.loresoft.com (MIT License https://github.com/loresoft/EntityFrameworkCore.Generator/blob/master/LICENSE
+
+Copyright (c) 2021 by Peter Reimer, Software Developer (www.webdevelop.de)
+
