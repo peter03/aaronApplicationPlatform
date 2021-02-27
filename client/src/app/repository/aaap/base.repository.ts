@@ -48,6 +48,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   }
 
   reset() {
+    this._cachedEntities = null;
     this._selectedEntityId = null;
   }
 
@@ -83,6 +84,20 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
 
   getList() {
     return this._cachedEntities;
+  }
+
+  //getListAsync() {
+  //  this.reset();
+  //  let url = `${this._url}/list`;
+  //  return this.http.get<T[]>(url).subscribe(res =>
+  //    this._cachedEntities = res);
+  //}
+
+  loadEntitiesAsync() {
+    this.reset();
+    let url = `${this._url}/list`;
+    return this.http.get<T[]>(url).subscribe(res =>
+      this._cachedEntities = res);
   }
 
   getCachedEntityById(id: number) {

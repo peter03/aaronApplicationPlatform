@@ -7,6 +7,7 @@ import { MenuRepository } from "src/app/repository/aaap/menu.repository";
 import { RolegroupRepository } from "src/app/repository/aaap/rolegroup.repository";
 import { RoleRepository } from "src/app/repository/aaap/role.repository";
 import { RuleRepository } from "src/app/repository/aaap/rule.repository";
+import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
 
 @Injectable()
 export class EntityLoaderService {
@@ -15,7 +16,8 @@ export class EntityLoaderService {
     private menuRepo: MenuRepository,
     private rolegroupRepo: RolegroupRepository,
     private roleRepo: RoleRepository,
-    private ruleRepo: RuleRepository) {
+    private ruleRepo: RuleRepository,
+    private lookupRepo: LookupRepository) {
   }
 
   init(): Observable<any> {
@@ -28,6 +30,7 @@ export class EntityLoaderService {
       , this.rolegroupRepo.loadEntities()
       , this.roleRepo.loadEntities()
       , this.ruleRepo.loadEntities()
+      , this.lookupRepo.loadEntities()
     ]
 
     return forkJoin(...promises).pipe(map(res => {

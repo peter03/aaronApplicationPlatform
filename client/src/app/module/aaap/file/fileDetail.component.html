@@ -1,0 +1,47 @@
+<h4 class="border border-dark bg-info p-2">
+    {{'aaap.module.file.detail' | translate}}
+</h4>    
+
+<form novalidate (ngSubmit)="onSubmit()" #form="ngForm">
+
+
+  <!-- <div class="form-group">
+      <mat-form-field>
+          <mat-label>Shop:</mat-label>
+          <mat-select name="shopId" [(ngModel)]="entity.shopId" required>
+              <mat-option *ngFor="let shop of shopList" [value]="shop.id">
+                  {{shop.name}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+  </div> -->
+
+  <div class="form-group">
+    <input type='file' #fileControl (change)="onSelectFile($event.target.files)">
+    <br>
+    <div class="col-md-4">
+      <img [src]="imageUrl">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field>
+      <mat-label>{{'aaap.module.file.filetype' | translate}}:</mat-label>
+      <mat-select name="filetypeId" [(ngModel)]="entity.filetypeId" required>
+        <mat-option *ngFor="let itm of filetypeList" [value]="itm.id">
+          {{itm.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+   <div class="form-group">
+      <mat-form-field>
+        <mat-label>{{'aaap.common.description' | translate}}:</mat-label>
+        <input matInput type="text" class="form-control" name="description" [(ngModel)]="entity.description" required/>
+      </mat-form-field>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!isValid">{{'aaap.button.save' | translate}}</button>
+    <button type="submit" class="btn btn-primary" (click)="cancel()">{{'aaap.button.cancel' | translate}}</button>
+  </form>

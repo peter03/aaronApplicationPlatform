@@ -492,7 +492,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Ru
 		INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (4, 1, 'Show menu item Role');
 		--INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (5, 1, 'Show menu item Rulegroup');
 		--INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (6, 1, 'Show menu item Rule');
-		INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (8, 1, 'Show menu item Media');
+		INSERT INTO [aaap].[Rule] ([Id],[RulegroupId],[Name]) VALUES  (8, 1, 'Show menu item File');
 		SET IDENTITY_INSERT [aaap].[Rule] OFF
 
 	end
@@ -640,7 +640,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'[aaap].[Me
 		--insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (5, 1, 'aap.module.mainmenu.rulegroupadmin', '/rulegroup'); 
 		--insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (6, 1, 'aap.module.mainmenu.ruleadmin', '/rule'); 
 		--insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (7, 1, 'aap.module.mainmenu.menu', '/menu'); 
-		insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (8, 1, 'aaap.module.mainmenu.mediaadmin', '/media'); 
+		insert into [aaap].[Menu] ([Id], [ParentId], [Name], [Route]) values (8, 1, 'aaap.module.mainmenu.fileadmin', '/file'); 
 
 		SET IDENTITY_INSERT [aaap].[Menu] OFF
 

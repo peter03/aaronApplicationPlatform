@@ -16,6 +16,10 @@ namespace aaronApplicationPlatform.Data
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Country> Countries { get; set; }
 
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.Filespec> Filespecs { get; set; }
+
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.Filetype> Filetypes { get; set; }
+
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Language> Languages { get; set; }
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Menu> Menus { get; set; }
@@ -47,6 +51,8 @@ namespace aaronApplicationPlatform.Data
             #region Generated Configuration
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.AddressMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.CountryMap());
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.FilespecMap());
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.FiletypeMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.LanguageMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.MenuMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.PersonMap());

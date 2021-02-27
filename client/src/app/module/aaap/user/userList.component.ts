@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { UserRepository } from "src/app/repository/aaap/user.repository";
 import { User } from "src/app/model/aaap/user.model";
 import { BaseListComponent } from '../baseList.component';
-import { AuthenticationService } from "../../../service/aaap/authentication.service";
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { UserMetadata } from './user.metadata';
 import { MatTableActionButton, MatTableSetting } from "../matTable.setting";
 

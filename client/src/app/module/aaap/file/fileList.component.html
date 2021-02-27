@@ -1,0 +1,36 @@
+<h4 class="border border-dark bg-info p-2">
+    {{'aaap.module.mainmenu.fileadmin' | translate}}
+</h4>    
+
+<table>
+    <tr style="width: 100%;">
+        <td style="width: 50%;">
+          <button class="btn btn-primary btn-sm" [routerLink]="['/file/detail/0']">{{'aaap.button.addrecord' | translate}}</button>
+        </td>
+        <td style="text-align: right;">
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let ent of  entities">
+            <td><input type="checkbox" class="form-control-sm" style="width: 5em;" [(ngModel)]="ent._selected"></td>
+            <td>{{ent?.id}}</td>
+            <td>{{ent?.name}}</td>
+            <td><img [src]="getFileUrl(ent.id)" [width]="getFileWidthAndHeight(ent.id).width" [height]="getFileWidthAndHeight(ent.id).height" alt="{{ent?.filename}}"></td>
+            <td>
+              <button class="btn btn-sm btn-danger ml-1" (click)="delete(ent.id)">{{'aaap.button.delete' | translate}}</button>
+              <button class="btn btn-primary btn-sm" [routerLink]="['./detail', ent.id]">{{'aaap.button.edit' | translate}}</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- <product-pagination></product-pagination> -->

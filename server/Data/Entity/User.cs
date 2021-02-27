@@ -8,6 +8,7 @@ namespace aaronApplicationPlatform.Data.Entity
         public User()
         {
             #region Generated Constructor
+            Filespecs = new HashSet<Filespec>();
             UserRoles = new HashSet<UserRole>();
             UserRules = new HashSet<UserRule>();
             #endregion
@@ -35,6 +36,8 @@ namespace aaronApplicationPlatform.Data.Entity
         #endregion
 
         #region Generated Relationships
+        public virtual ICollection<Filespec> Filespecs { get; set; }
+
         public virtual Person Person { get; set; }
 
         public virtual Language PreferredLanguage { get; set; }

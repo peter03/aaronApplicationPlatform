@@ -1,6 +1,7 @@
 Needed Environment:
 - Visual Studio 2019
-- .NET SDK 3
+- .NET SDK 5.0.0
+- Angular 11.0.5
 - Node.js
 - Git
 - SQL Derver 2017 Developer Edition

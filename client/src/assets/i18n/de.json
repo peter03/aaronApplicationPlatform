@@ -16,7 +16,8 @@
         "menuadmin": "Hauptmenü verwalten",
         "useradmin": "Benutzer verwalten",
         "rolegroupadmin": "Rollengruppen verwalten",
-        "roleadmin": "Benutzerrollen verwalten"
+        "roleadmin": "Benutzerrollen verwalten",
+        "fileadmin": "Dateien verwalten"
       },
       "menu": {
         "add": "Neuer Menüeintrag",
@@ -40,9 +41,13 @@
         "list": "Rollengruppen",
         "detail": "Rollengruppe"
       },
-
       "rule": {
         "list": "Regeln"
+      },
+      "file": {
+        "list": "Dateiliste",
+        "detail": "Dateidetails",
+        "filetype": "Dateityp"
       }
 
     },

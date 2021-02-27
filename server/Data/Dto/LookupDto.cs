@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace aaronApplicationPlatform.Data.Dto
+namespace aaronApplicationPlatform.Data
 { 
     public partial class LookupDto
     {

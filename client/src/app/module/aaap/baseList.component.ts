@@ -42,10 +42,12 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
   get entities(): T[] {
 
     var entities = this.repo.getList();
-    if (entities != null && entities.length > 0) {
-    }
     return entities;
   }
+
+  //set entities(val: T[]) {
+//    this.repo.._selectedEntityId = val;
+//  }
 
   delete(id: number) {
 

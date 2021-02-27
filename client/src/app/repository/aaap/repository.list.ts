@@ -4,6 +4,7 @@ import { RoleRepository } from "src/app/repository/aaap/role.repository";
 import { RuleRepository } from "src/app/repository/aaap/rule.repository";
 import { MenuRepository } from "src/app/repository/aaap/menu.repository";
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
+import { FilespecRepository } from "src/app/repository/aaap/filespec.repository";
 
 export const repositoryList = [
   UserRepository
@@ -12,4 +13,5 @@ export const repositoryList = [
   , RoleRepository
   , MenuRepository
   , LookupRepository
+  , FilespecRepository
 ];
