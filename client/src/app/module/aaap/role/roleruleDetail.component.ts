@@ -20,7 +20,7 @@ export class RoleruleDetailComponent extends BaseDetailComponent<RoleRepository,
 
   dataSource: MatTableDataSource<Rule>;  // sortable datasource wrapper
   displayedColumns: string[] = ['select', 'id', 'name'];
-  selection: SelectionModel<Rule>;
+  selection: SelectionModel<Rule> = null;
 
   constructor(
     public repo: RoleRepository,
@@ -30,16 +30,22 @@ export class RoleruleDetailComponent extends BaseDetailComponent<RoleRepository,
     ruleRepo: RuleRepository) {
     super(repo, router, activeRoute, location, null)
 
-    // initialize selection
-    let selectedRules: Rule[] = [];
-    let ruleList: Rule[] = ruleRepo.getList();
-    ruleList.forEach(e => {
-      if (this._entity.ruleId && this._entity.ruleId.indexOf(e.id) !== -1) {
-        selectedRules.push(e);
-      }
+    this.dataSource = new MatTableDataSource<Rule>();
+
+    ruleRepo.getListAsObservable().subscribe(list => {
+
+      // initialize selection
+      let selectedRules: Rule[] = [];
+      let ruleList: Rule[] = ruleRepo.getList();
+      ruleList.forEach(e => {
+        if (this._entity.ruleId && this._entity.ruleId.indexOf(e.id) !== -1) {
+          selectedRules.push(e);
+        }
+      })
+      this.dataSource = new MatTableDataSource(ruleList);
+      this.selection = new SelectionModel<Rule>(true, selectedRules);
+
     })
-    this.dataSource = new MatTableDataSource(ruleList);
-    this.selection = new SelectionModel<Rule>(true, selectedRules);
 
   }
 

@@ -7,6 +7,8 @@ import { IRepository } from "../../interface/aaap/irepository";
 
 import { AuthenticationService } from 'src/app/service/aaap/authentication.service';
 import { User } from 'src/app/model/aaap/user.model';
+import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
 
 export abstract class BaseRepository<T extends IId> implements IRepository<T> {
 
@@ -21,24 +23,19 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
     private entityType: new () => T,
     public authService: AuthenticationService) {
 
-    // this.authService.loginData.subscribe(x => this._user = x.user);
+    this.reset();
     this._url = environment.serverUrl + route;
     // this.loadEntities();    --> will be called in entityLoader.service after successfull login
 
   }
-    
 
-  loadEntities(): Promise<any> {
+  loadEntities(): Promise<any> {  // returns a promise instead of an observable list!
 
     this.reset();
-    let url = `${this._url}/list`;
-
-    // we wan't a promise instead of an observable list as result
-    return this.http.get<T[]>(url)
+    
+    return this.getListAsObservable()
       .toPromise()
       .then(res => {
-        this._cachedEntities = res;
-        this._selectedEntityId = null;
         return Promise.resolve();
       })
       .catch(err => {
@@ -86,22 +83,17 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
     return this._cachedEntities;
   }
 
-  //getListAsync() {
-  //  this.reset();
-  //  let url = `${this._url}/list`;
-  //  return this.http.get<T[]>(url).subscribe(res =>
-  //    this._cachedEntities = res);
-  //}
+  getListAsObservable() : Observable<T[]> {
 
-  loadEntitiesAsync() {
-    this.reset();
-    let url = `${this._url}/list`;
-    return this.http.get<T[]>(url).subscribe(res =>
-      this._cachedEntities = res);
-  }
-
-  getCachedEntityById(id: number) {
-    return this.getEntityById(id);
+    if (this._cachedEntities) {
+      return of(this._cachedEntities);
+    }
+    else {
+      let url = `${this._url}/list`;
+      return this.http.get<T[]>(url).pipe(
+        map(res => this._cachedEntities = res)
+      );
+    }
   }
 
   getEntityById(id: number) {
@@ -110,7 +102,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
       return null;
     }
     else {
-      return this.getList().find(e => e.id === id);
+      return this._cachedEntities.find(e => e.id === id);
     }
   }
 
@@ -123,7 +115,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   }
 
   get selectedEntity(): T {
-    return this.getCachedEntityById(this.selectedEntityId);
+    return this.getEntityById(this.selectedEntityId);
   }
 
   //getNewEntity<T>(t: new () => T): T {

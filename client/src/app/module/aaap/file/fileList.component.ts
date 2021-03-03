@@ -21,9 +21,9 @@ export class FileListComponent extends BaseListComponent<FilespecRepository, Fil
       injector: Injector) {
       super(repo, router, authService, injector, FileMetadata)
 
-      if (this.repo._cachedEntities == null) {
-        this.repo.loadEntitiesAsync();
-      }
+      this.getListAsObservable().subscribe(res =>
+        this.entities = res
+      );
       
   }
 

@@ -34,7 +34,7 @@ export class MainMenuComponent extends BaseComponent {  // extends BaseListCompo
 
   navigateTo(menuId: number) {
 
-    let entity = this.repo.getCachedEntityById(menuId);
+    let entity = this.repo.getEntityById(menuId);
     if (entity) {
 
       if (entity.route === null || entity.route === '') {

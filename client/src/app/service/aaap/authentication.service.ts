@@ -56,7 +56,8 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('loginData');
     this.loginSubject.next(null);
-    this.router.navigate([""]);
+    // this.router.navigate([""]);
+    window.location.reload();
   }
 
   get isAdmin() {

@@ -16,7 +16,7 @@ export class UserRepository extends BaseRepository<User> {
     super(http, API_URL, User, authService);
   }
 
-  getList() {
+ // getList() {
 
     // extend entity by person
     //this._cachedEntities.forEach(ent => {
@@ -35,9 +35,11 @@ export class UserRepository extends BaseRepository<User> {
     //  })
     //}
 
-    return this._cachedEntities;
+    // return this._cachedEntities;
 
-  }
+   // return this.getList();
+
+  //}
 
   validateEntity(entity: User) {
 

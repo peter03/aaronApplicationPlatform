@@ -25,12 +25,12 @@ export class EntityLoaderService {
     console.log('Pre-Fetching data...');
 
     const promises = [
-      this.userRepo.loadEntities()
-      , this.menuRepo.loadEntities()
-      , this.rolegroupRepo.loadEntities()
-      , this.roleRepo.loadEntities()
-      , this.ruleRepo.loadEntities()
-      , this.lookupRepo.loadEntities()
+      //this.userRepo.loadEntities()
+      this.menuRepo.loadEntities(),
+      this.rolegroupRepo.loadEntities(),
+      //, this.roleRepo.loadEntities()
+      //, this.ruleRepo.loadEntities()
+      this.lookupRepo.loadEntities()
     ]
 
     return forkJoin(...promises).pipe(map(res => {

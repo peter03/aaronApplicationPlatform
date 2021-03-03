@@ -10,5 +10,5 @@
   </tr>
 </table>
 
-<aaap-list-formbuilder [entityList]="entities" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)" [setting]="defaultMatTableSetting"></aaap-list-formbuilder>
+<aaap-list-formbuilder [entityList]="getListAsObservable()" [template]="formMetadata" [actionCallback]="onActionButtonClicked.bind(this)" [setting]="defaultMatTableSetting"></aaap-list-formbuilder>
 

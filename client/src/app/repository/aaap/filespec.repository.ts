@@ -6,7 +6,10 @@ import { AuthenticationService } from 'src/app/service/aaap/authentication.servi
 
 const API_URL = "/api/file";
 
-@Injectable()
+@Injectable(
+  {
+    providedIn: 'root'  // global singleton
+  })
 export class FilespecRepository extends BaseRepository<Filespec> {
     
   constructor(public http: HttpClient,

@@ -26,7 +26,7 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
         this._entity = this.repo.getNewEntity();
       }
       else {
-        this._entity = Object.assign({}, this.repo.getCachedEntityById(id));    // clone object!
+        this._entity = Object.assign({}, this.repo.getEntityById(id));    // clone object!
       }
     }
   }
@@ -35,10 +35,9 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
 
     if (this.repo.validateEntity(this._entity)) {
       this.repo.upsertEntity(this._entity);
-      // this.location.back();
+      // this.location.back(); // does not reload page
       this.router.navigate(['.'], { relativeTo: this.activeRoute.parent });
     }
-
   }
 
   cancel() {
@@ -68,6 +67,5 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
     }
 
   }
-
 
 }

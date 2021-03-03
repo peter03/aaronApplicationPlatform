@@ -1,10 +1,8 @@
 import { AfterViewInit, Component, ViewChild, Injector, OnInit, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
 
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel, ConfirmDialogComponent } from 'src/app/global/aaap/component/confirmDialog.component';
 
@@ -19,6 +17,8 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
 
   dataSource: MatTableDataSource<T>;  // sortable datasource wrapper
   formMetadata: any[];
+
+  entities: T[];
 
   dialog: MatDialog;
 
@@ -35,19 +35,11 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
   }
 
   ngOnInit() {
-    //this.onActionButtonClicked = this.onActionButtonClicked.bind(this);
-
   }
 
-  get entities(): T[] {
-
-    var entities = this.repo.getList();
-    return entities;
+  getListAsObservable(): Observable<T[]> {
+    return this.repo.getListAsObservable();
   }
-
-  //set entities(val: T[]) {
-//    this.repo.._selectedEntityId = val;
-//  }
 
   delete(id: number) {
 

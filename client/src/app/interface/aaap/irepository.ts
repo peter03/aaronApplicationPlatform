@@ -1,15 +1,21 @@
 export interface IRepository<T> {
 
-    getList();
+  loadEntities();
 
-    getCachedEntityById(id: number);
+  getList();
 
-    getNewEntity() : T;
+  getListAsObservable();
 
-    validateEntity(entity: any)
+  getEntityById(id: number);
 
-    upsertEntity(entity: any)
+  getNewEntity(): T;
 
-    deleteEntity(id: number)
-    
+  validateEntity(entity: any)
+
+  upsertEntity(entity: any)
+
+  deleteEntity(id: number)
+
+  reset();
+
 }
