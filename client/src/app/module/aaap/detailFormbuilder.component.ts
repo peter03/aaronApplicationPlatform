@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder, Validator } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder, Validator, NgForm } from '@angular/forms';
 
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
 import { IId } from '../../interface/aaap/IId';
@@ -18,7 +17,7 @@ export class DetailFormbuilderComponent implements OnInit{
   @Output() onModelChanged = new EventEmitter();
   
   @ViewChild('myForm') myForm: HTMLFormElement;
-
+  
   myFormTemplate: any[];
   //myFormGroup: FormGroup;
     
@@ -41,6 +40,11 @@ export class DetailFormbuilderComponent implements OnInit{
       ctl['value'] = val; //  this.entity[ctl.ngModel];
 
     })
+
+    //setTimeout(() => {
+    //  console.log(this.myForm.controls);
+    //})
+
   }
 
   modelChangedEvent(model, newVal) {
@@ -50,10 +54,12 @@ export class DetailFormbuilderComponent implements OnInit{
     this.setValue(this.entity, model, newVal);
     //this.entity[model] = newVal;
 
-    let myCtl = this.myForm.form.controls[model];
-    myCtl["ngModel"] = model;
-    //this.onModelChanged.emit({ model: model, oldVal: oldVal, newVal: newVal });
-    this.onModelChanged.emit(myCtl);
+    let myCtl = this.myForm.form.controls[model]; 
+    if (myCtl) {  // todo: components will not be found (e.g. addressselect)?
+      myCtl["ngModel"] = model;
+      //this.onModelChanged.emit({ model: model, oldVal: oldVal, newVal: newVal });
+      this.onModelChanged.emit(myCtl);
+    }
 
   }
 

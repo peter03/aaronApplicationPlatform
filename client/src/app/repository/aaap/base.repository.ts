@@ -80,18 +80,39 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   }
 
   getList() {
+
     return this._cachedEntities;
   }
 
-  getListAsObservable() : Observable<T[]> {
+  getListAsObservable_org() : Observable<T[]> {
 
     if (this._cachedEntities) {
-      return of(this._cachedEntities);
+      return of(this.getList());
     }
     else {
       let url = `${this._url}/list`;
       return this.http.get<T[]>(url).pipe(
         map(res => this._cachedEntities = res)
+      );
+    }
+  }
+
+
+  getListAsObservable(callbackFn?): Observable<T[]> {
+
+    if (this._cachedEntities) {
+      return of(this.getList());
+    }
+    else {
+      let url = `${this._url}/list`;
+      return this.http.get<T[]>(url).pipe(
+        map(res => {
+          this._cachedEntities = res;
+          if (callbackFn) {
+            callbackFn()
+          }
+          return this._cachedEntities;
+        })
       );
     }
   }

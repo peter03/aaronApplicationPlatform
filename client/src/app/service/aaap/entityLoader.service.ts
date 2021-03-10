@@ -28,8 +28,8 @@ export class EntityLoaderService {
       //this.userRepo.loadEntities()
       this.menuRepo.loadEntities(),
       this.rolegroupRepo.loadEntities(),
-      //, this.roleRepo.loadEntities()
-      //, this.ruleRepo.loadEntities()
+      this.roleRepo.loadEntities(),
+      this.ruleRepo.loadEntities(),
       this.lookupRepo.loadEntities()
     ]
 

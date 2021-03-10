@@ -12,11 +12,11 @@ using aaronApplicationPlatform.Logic;
 
 namespace aaronApplicationPlatform.Controller
 {
-    [Route("api/person")]
+    [Route("api/address")]
     [ApiController]
-    public class PersonController : BaseController<PersonLogic, Person>
+    public class AddressController : BaseController<AddressLogic, Address>
     {
-        public PersonController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
+        public AddressController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
         {
         }
 

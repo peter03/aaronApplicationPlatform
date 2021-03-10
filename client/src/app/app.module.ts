@@ -22,23 +22,28 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/interceptor/aaap';
 // import global components
 import { GlobalErrorHandler } from './global/aaap/error/global-error-handler';
 import { ConfirmDialogComponent } from 'src/app/global/aaap/component/confirmDialog.component';
+//import { AddressSelectComponent } from 'src/app/global/aaap/component/addressSelect.component';
 
 // import services
 import { serviceList } from "src/app/service/aaap/service.module";
+import { myserviceList } from "src/app/service/myservice.list";
 
 // import repositories
 import { repositoryList } from "src/app/repository/aaap/repository.list";
+import { myrepositoryList } from "src/app/repository/myrepository.list";
 
 // import module components
 import { AppComponent } from './app.component';
 
 import { designComponentList } from 'src/app/design/aaap/design.component';
+import { globalComponentList } from 'src/app/global/aaap/component/global.component';
 import { routingComponents, appRouting } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     designComponentList,
+    globalComponentList,
     routingComponents
   ],
   imports: [
@@ -63,13 +68,16 @@ import { routingComponents, appRouting } from './app-routing.module';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     ...serviceList,
-    ...repositoryList
+    ...myserviceList,
+    ...repositoryList,
+    ...myrepositoryList
   ],
   bootstrap: [
     AppComponent
   ],
   entryComponents: [
     ConfirmDialogComponent
+    //AddressSelectComponent
   ]
 })
 export class AppModule { }

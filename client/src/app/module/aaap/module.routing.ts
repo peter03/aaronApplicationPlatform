@@ -1,4 +1,5 @@
 import { userRoutes, userComponents } from "src/app/module/aaap/user/user.routing";
+import { addressRoutes, addressComponents } from "src/app/module/aaap/address/address.routing";
 import { rolegroupRoutes, rolegroupComponents } from "src/app/module/aaap/rolegroup/rolegroup.routing";
 import { roleRoutes, roleComponents } from "src/app/module/aaap/role/role.routing";
 import { menuRoutes, menuComponents } from "src/app/module/aaap/menu/menu.routing";
@@ -8,6 +9,7 @@ import { ListFormbuilderComponent } from "src/app/module/aaap/listFormbuilder.co
 
 export const moduleRoutes = [
   ...userRoutes,
+  ...addressRoutes,
   ...rolegroupRoutes,
   ...roleRoutes,
   ...menuRoutes,
@@ -16,6 +18,7 @@ export const moduleRoutes = [
 
 export const moduleRoutingComponents = [
   ...userComponents,
+  ...addressComponents,
   ...rolegroupComponents,
   ...roleComponents,
   ...menuComponents,

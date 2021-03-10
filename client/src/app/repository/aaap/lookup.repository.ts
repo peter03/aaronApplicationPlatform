@@ -14,6 +14,7 @@ export class LookupRepository {
 
   _url: string;
   _cachedFiletype: Lookup[] = null;
+  _cachedCountry: Lookup[] = null;
 
   constructor(
     private http: HttpClient,
@@ -29,6 +30,7 @@ export class LookupRepository {
 
     const promises = [
       this.loadFiletypeList(),
+      this.loadCountryList()
     ]
 
     return forkJoin(...promises).pipe(map(res => {
@@ -81,6 +83,17 @@ export class LookupRepository {
     return this._cachedFiletype;
   }
 
+  loadCountryList(): Promise<any> {
+
+    return this.loadLookupData('country').then(data => {
+      this._cachedCountry = data;
+    })
+  }
+
+  getCountryList() {
+    return this._cachedCountry;
+  }
+
   loadLookupData(api: string): Promise<any> {
 
     let url = `${this._url}/${api}`;
@@ -103,6 +116,8 @@ export class LookupRepository {
         return this.getRoleList();
       case "rulelist":
         return this.getRuleList();
+      case "countrylist":
+        return this.getCountryList();
       default:
         console.log(`Lookup ${lookupName} does not exists!`);
         break;

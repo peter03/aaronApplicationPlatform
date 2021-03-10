@@ -6,7 +6,11 @@ export const environment = {
   production: false,
   serverUrl: 'https://localhost:5001',
   clientUrl: '',
-  reportServerUrl: 'https://localhost/pskreporting'
+  reportServerUrl: 'https://localhost/pskreporting',
+
+  appName: 'aaronApplicationPlatform (Demo)',
+  appVersion: '0.1.0'
+
 };
 
 /*

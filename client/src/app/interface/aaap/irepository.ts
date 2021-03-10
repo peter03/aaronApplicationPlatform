@@ -4,7 +4,7 @@ export interface IRepository<T> {
 
   getList();
 
-  getListAsObservable();
+  getListAsObservable(callbachFn?);
 
   getEntityById(id: number);
 

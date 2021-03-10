@@ -5,6 +5,8 @@ import { BaseComponent } from "src/app/module/aaap/base.component";
 import { MenuRepository } from "src/app/repository/aaap/menu.repository";
 import { AuthenticationService } from 'src/app/service/aaap/authentication.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,6 +24,10 @@ export class AppComponent extends BaseComponent {
   navigateToRoot() {
     this.repo.buildSubmenu(null);
     this.router.navigate(["mainmenu"]);
+  }
+
+  get appName() {
+    return environment.appName;
   }
 
   get userIsLoggedIn() {

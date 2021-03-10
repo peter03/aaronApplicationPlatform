@@ -43,5 +43,23 @@ namespace aaronApplicationPlatform.Controller
             return res;
         }
 
+        [HttpGet]
+        [Route("country")]
+        public IEnumerable<LookupDto> GetCountry()
+        {
+            List<LookupDto> res = null;
+            IEnumerable<Country> list = _dbContext.Countries.Where(e => e.Disabled == false).ToList();
+            if (list != null && list.Any())
+            {
+                res = new List<LookupDto>();
+                foreach (var itm in list)
+                {
+                    res.Add(new LookupDto(itm.Id, itm.Name));
+                }
+            };
+            return res;
+        }
+
+
     }
 }

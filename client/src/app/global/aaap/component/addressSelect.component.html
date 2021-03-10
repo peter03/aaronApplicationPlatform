@@ -1,0 +1,9 @@
+<mat-label>{{'aaap.common.address' | translate}}:</mat-label>
+<mat-form-field style="width: 100%;">
+  <mat-select [name]="addressId" [(ngModel)]="addressId" (selectionChange)="selectionChangedEvent($event)">
+    <mat-option *ngFor="let adr of addressList | async" [value]="adr.id">
+      {{adr.name1}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

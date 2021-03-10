@@ -24,12 +24,16 @@
         <div *ngSwitchCase="'select'">
           <mat-form-field style="width: 100%;">
             <mat-label>{{ctl.label | translate}}:</mat-label>
-            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (ngModelChangeEvent)="modelChanged(ctl.ngModel, $event)">
+            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)">
               <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
                 {{opt.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+
+        <div *ngSwitchCase="'addressselect'">
+            <aaap-address-select [name]="addressId" [id]="addressId" [addressId]="entity.addressId" (onModelChanged)="modelChangedEvent('addressId', $event.value)"></aaap-address-select>
         </div>
 
       </div>

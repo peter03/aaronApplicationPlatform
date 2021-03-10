@@ -62,6 +62,13 @@ namespace aaronApplicationPlatform.Authentication
             user.UserRules = null;
             UpdateCachedUsers(user);
 
+            // append person
+            if (user.PersonId.HasValue)
+            {
+                var personLogic = new PersonLogic(_dbContext);
+                user.Person = personLogic.GetById(user.PersonId.Value);
+            }
+
             // authentication successful so generate jwt token
             var token = generateJwtToken(user);
 
