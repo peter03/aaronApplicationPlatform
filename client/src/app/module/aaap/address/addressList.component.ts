@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { AddressRepository } from "src/app/repository/aaap/address.repository";
 import { BaseListComponent } from 'src/app/module/aaap/baseList.component';
 import { AuthenticationService } from "src/app/service/aaap/authentication.service";
-import { Address } from "src/app/model/aaap/address.model";
+import { Address } from "src/app/model/myaddress.model";
 import { AddressMetadata } from './address.metadata';
 
 @Component({

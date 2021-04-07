@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { Observable, of, forkJoin, } from "rxjs";
 import { map } from "rxjs/operators";
 
@@ -8,16 +8,19 @@ import { RolegroupRepository } from "src/app/repository/aaap/rolegroup.repositor
 import { RoleRepository } from "src/app/repository/aaap/role.repository";
 import { RuleRepository } from "src/app/repository/aaap/rule.repository";
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
+import { MyEntityLoaderService } from "src/app/service/myentityLoader.service";
 
 @Injectable()
-export class EntityLoaderService {
+export class EntityLoaderService extends MyEntityLoaderService {
 
   constructor(private userRepo: UserRepository,
     private menuRepo: MenuRepository,
     private rolegroupRepo: RolegroupRepository,
     private roleRepo: RoleRepository,
     private ruleRepo: RuleRepository,
-    private lookupRepo: LookupRepository) {
+    private lookupRepo: LookupRepository,
+    injector: Injector) {
+    super(injector);
   }
 
   init(): Observable<any> {
@@ -32,6 +35,7 @@ export class EntityLoaderService {
       this.ruleRepo.loadEntities(),
       this.lookupRepo.loadEntities()
     ]
+    promises.concat(super.promises);
 
     return forkJoin(...promises).pipe(map(res => {
       console.log('All data are loaded...');

@@ -18,7 +18,7 @@ namespace aaronApplicationPlatform.Authentication
     // [Authorize]
     [Route("auth")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public partial class AuthenticationController : ControllerBase
     {
         private IUserService _userService;
 

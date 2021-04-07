@@ -22,8 +22,16 @@ export class AppComponent extends BaseComponent {
   }
 
   navigateToRoot() {
-    this.repo.buildSubmenu(null);
-    this.router.navigate(["mainmenu"]);
+    this.repo.navigateTo(null);
+  }
+
+  navigateTo(menuId: number) {
+    this.repo.navigateTo(menuId);
+  }
+
+  get breadcrumbList(): any[] {
+    let res = this.repo.buildBreadcrumbList(this.repo.selectedEntityId);
+    return res;
   }
 
   get appName() {

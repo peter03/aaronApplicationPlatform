@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder, Validator, NgForm } from '@angular/forms';
+import { Observable } from "rxjs";
 
+import { Lookup } from 'src/app/model/aaap/lookup.model';
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
 import { IId } from '../../interface/aaap/IId';
 
@@ -20,7 +22,7 @@ export class DetailFormbuilderComponent implements OnInit{
   
   myFormTemplate: any[];
   //myFormGroup: FormGroup;
-    
+   
   constructor(private lookupRepo: LookupRepository) {
   }
 
@@ -31,8 +33,8 @@ export class DetailFormbuilderComponent implements OnInit{
     this.myFormTemplate = Object.assign([], this.template); // clone object!
     this.myFormTemplate.forEach(ctl => {
 
-      if (ctl.control === 'select' && ctl.lookup) {
-        ctl['options'] = this.lookupRepo.getList(ctl.lookup);
+      if ((ctl.control === 'select' || ctl.control === 'selectx') && ctl.lookup) {
+        ctl['options'] = this.lookupRepo.getListAsObservable(ctl.lookup); // todo: wait until data available
       }
 
       // get object value by path (e.g. "Person.Surname")
@@ -41,9 +43,9 @@ export class DetailFormbuilderComponent implements OnInit{
 
     })
 
-    //setTimeout(() => {
-    //  console.log(this.myForm.controls);
-    //})
+    setTimeout(() => {
+      console.log(this.myForm.controls);
+    })
 
   }
 

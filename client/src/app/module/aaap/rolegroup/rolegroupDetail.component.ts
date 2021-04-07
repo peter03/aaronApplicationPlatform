@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -14,12 +14,13 @@ import { RolegroupMetadata } from './rolegroup.metadata';
 })
 export class RolegroupDetailComponent extends BaseDetailComponent<RolegroupRepository, Rolegroup>  {
 
- constructor(
+  constructor(
     repo: RolegroupRepository,
     router: Router,
     activeRoute: ActivatedRoute,
-    location: Location) {
-    super(repo, router, activeRoute, location, RolegroupMetadata)
+    location: Location,
+    injector: Injector) {
+    super(repo, router, activeRoute, location, RolegroupMetadata, injector)
   }
 
 }

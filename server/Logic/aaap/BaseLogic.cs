@@ -44,14 +44,27 @@ namespace aaronApplicationPlatform.Logic
 
         public virtual IEnumerable<T> GetList()
         {
-            IEnumerable<T> result = _dbContext.Set<T>();    //.ToList();
-            return result;
+            List<T> res = _dbContext.Set<T>().ToList();
+            OnGetList(res);
+            return res;
         }
 
         public virtual IEnumerable<T> GetList(List<int> ids)
         {
-            var res = _dbContext.Set<T>().Where(e => ids.Contains(e.Id));
+            //var res = _dbContext.Set<T>().Where(e => ids.Contains(e.Id));
+            IQueryable<T> qry = _dbContext.Set<T>().Where(e => ids.Contains(e.Id));
+            var res = GetListByQuery(qry);
             return res;
+        }
+
+        public virtual List<T> GetListByQuery(IQueryable<T> query)
+        {
+            var res = query.ToList();
+            OnGetList(res);
+            return res;
+        }
+        public virtual void OnGetList(List<T> list)
+        {
         }
 
         public virtual void Upsert(T entity)
@@ -64,7 +77,15 @@ namespace aaronApplicationPlatform.Logic
             {
                 _dbContext.Entry(entity).State = EntityState.Modified;
             }
+            OnUpsert(entity);
             _dbContext.SaveChanges();
+            OnUpsertSaved(entity);
+        }
+        public virtual void OnUpsert(T entity)
+        {
+        }
+        public virtual void OnUpsertSaved(T entity)
+        {
         }
 
         public virtual void Delete(int id)

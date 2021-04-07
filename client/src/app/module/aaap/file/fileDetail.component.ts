@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import { Component, Input, ViewChild, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -12,57 +12,58 @@ import { Lookup } from 'src/app/model/aaap/lookup.model';
 import { FileMetadata } from './file.metadata';
 
 @Component({
-    selector: "psk-file-detail",
-    templateUrl: "fileDetail.component.html"
+  selector: "psk-file-detail",
+  templateUrl: "fileDetail.component.html"
 })
 export class FileDetailComponent extends BaseDetailComponent<FilespecRepository, Filespec>  {
 
-    filetypeList: Lookup[] = [];
- 
-    @ViewChild('fileControl', {static: true}) fileControl;  
+  filetypeList: Lookup[] = [];
 
-    imageUrl: string; 
-    fileToUpload: File = null;
+  @ViewChild('fileControl', { static: true }) fileControl;
 
-    constructor(
-        repo: FilespecRepository,
-        router: Router,
-        activeRoute: ActivatedRoute,
-        location: Location,
-        private lookupRepo: LookupRepository) {
-            super(repo, router, activeRoute, location, FileMetadata);
-            this.imageUrl = this.repo.getFileUrl(this.entity.id);
-            this.filetypeList = this.lookupRepo.getFiletypeList();
-        }
+  imageUrl: string;
+  fileToUpload: File = null;
 
-        onSelectFile(file: FileList) {  
+  constructor(
+    repo: FilespecRepository,
+    router: Router,
+    activeRoute: ActivatedRoute,
+    location: Location,
+    injector: Injector,
+    private lookupRepo: LookupRepository) {
+    super(repo, router, activeRoute, location, FileMetadata, injector);
+    this.imageUrl = this.repo.getFileUrl(this.entity.id);
+    this.filetypeList = this.lookupRepo.getFiletypeList();
+  }
 
-            //const allowed_types = ['image/png', 'image/jpeg'];
+  onSelectFile(file: FileList) {
 
-            this.fileToUpload = file.item(0);
-            this.entity.filename = this.fileToUpload.name;  
-            var reader = new FileReader();  
-            reader.onload = (event: any) => {  
-                this.imageUrl = event.target.result;
+    //const allowed_types = ['image/png', 'image/jpeg'];
 
-                // var img = new Image();
-                // img.onload = () => {
-                //     console.log(img.width + ", " + img.height);
-                // };
-                // img.src = this.imageUrl;
+    this.fileToUpload = file.item(0);
+    this.entity.filename = this.fileToUpload.name;
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
 
-            }  
-            reader.readAsDataURL(this.fileToUpload);  
-        }
-        
-        onSubmit() {
+      // var img = new Image();
+      // img.onload = () => {
+      //     console.log(img.width + ", " + img.height);
+      // };
+      // img.src = this.imageUrl;
 
-            let formData = new FormData();
-            formData.append('Filespec', JSON.stringify(this.entity));
-            formData.append('FileData', this.fileControl.nativeElement.files[0]);
-            this.repo.uploadFile(formData);
-            this.location.back();
-        }
-    
+    }
+    reader.readAsDataURL(this.fileToUpload);
+  }
+
+  onSubmit() {
+
+    let formData = new FormData();
+    formData.append('Filespec', JSON.stringify(this.entity));
+    formData.append('FileData', this.fileControl.nativeElement.files[0]);
+    this.repo.uploadFile(formData);
+    this.location.back();
+  }
+
 
 }

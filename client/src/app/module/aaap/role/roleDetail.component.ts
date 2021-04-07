@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -18,8 +18,9 @@ export class RoleDetailComponent extends BaseDetailComponent<RoleRepository, Rol
     repo: RoleRepository,
     router: Router,
     activeRoute: ActivatedRoute,
-    location: Location) {
-      super(repo, router, activeRoute, location, RoleMetadata)
+    location: Location,
+    injector: Injector) {
+    super(repo, router, activeRoute, location, RoleMetadata, injector)
   }
 
 }

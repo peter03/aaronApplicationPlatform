@@ -26,8 +26,9 @@ export class UserroleDetailComponent extends BaseDetailComponent<UserRepository,
     public router: Router,
     activeRoute: ActivatedRoute,
     location: Location,
-    roleRepo: RoleRepository) {
-    super(repo, router, activeRoute, location, null)
+    roleRepo: RoleRepository,
+    injector: Injector) {
+    super(repo, router, activeRoute, location, null, injector)
 
     // initialize selection
     let selectedRoles: Role[] = [];
@@ -75,8 +76,12 @@ export class UserroleDetailComponent extends BaseDetailComponent<UserRepository,
     //  e.select = this.selection.isSelected(e);
     //})
 
-    super.onSubmit();
+    // super.onSubmit();  --> must suppress validation!
+    this.repo.upsertEntity(this._entity).subscribe(
+      res => { this.router.navigate(['.'], { relativeTo: this.activeRoute.parent }); }
+    )
 
   }
+
 
 }

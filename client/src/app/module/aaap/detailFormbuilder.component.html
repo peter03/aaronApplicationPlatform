@@ -20,20 +20,41 @@
           </mat-form-field>
         </div>
 
+        <div *ngSwitchCase="'number'">
+          <mat-form-field>
+            <mat-label>{{ctl.label | translate}}:</mat-label>
+            <input matInput [type]="ctl.control" class="form-control" [name]="ctl.ngModel"
+                   [(ngModel)]="ctl.value"
+                   (ngModelChange)="modelChangedEvent(ctl.ngModel, $event)"
+                   [required]="ctl.required"/>
+          </mat-form-field>
+        </div>
 
         <div *ngSwitchCase="'select'">
           <mat-form-field style="width: 100%;">
             <mat-label>{{ctl.label | translate}}:</mat-label>
             <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)">
-              <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
+              <mat-option *ngFor="let opt of ctl.options | async" [value]="opt.id">
                 {{opt.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
 
+        <div *ngSwitchCase="'selectx'">
+          <mat-form-field style="width: 100%;">
+            <mat-label>{{ctl.label | translate}}:</mat-label>
+            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)" multiple>
+              <mat-option *ngFor="let opt of ctl.options | async" [value]="opt.id">
+                {{opt.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+
         <div *ngSwitchCase="'addressselect'">
-            <aaap-address-select [name]="addressId" [id]="addressId" [addressId]="entity.addressId" (onModelChanged)="modelChangedEvent('addressId', $event.value)"></aaap-address-select>
+          <aaap-address-select [name]="addressId" [id]="addressId" [addressId]="ctl.value" (onModelChanged)="modelChangedEvent(ctl.ngModel, $event.value)"></aaap-address-select>
         </div>
 
       </div>

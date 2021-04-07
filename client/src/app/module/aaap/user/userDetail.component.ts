@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -19,8 +19,9 @@ export class UserDetailComponent extends BaseDetailComponent<UserRepository, Use
     repo: UserRepository,
     router: Router,
     activeRoute: ActivatedRoute,
-    location: Location) {
-    super(repo, router, activeRoute, location, UserMetadata)
+    location: Location,
+    injector: Injector) {
+    super(repo, router, activeRoute, location, UserMetadata, injector)
   }
 
   onCreateControl(ctlMetadata: any) {

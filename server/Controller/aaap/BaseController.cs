@@ -41,7 +41,13 @@ namespace aaronApplicationPlatform.Controller
         [Route("list")]
         public virtual IEnumerable<T> GetList()
         {
-            return _Logic.GetList();
+            var res = _Logic.GetList();
+            OnGetList(res);
+            return res;
+        }
+
+        protected virtual void OnGetList(IEnumerable<T> list)
+        {
         }
 
         [HttpDelete("{id}")]
@@ -52,7 +58,6 @@ namespace aaronApplicationPlatform.Controller
 
         [HttpPost]
         [Route("upsert")]
-        //public virtual T Upsert([FromBody] T entity)
         public virtual T Upsert(T entity)
         {
             _Logic.Upsert(entity);

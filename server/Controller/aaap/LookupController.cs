@@ -16,7 +16,7 @@ namespace aaronApplicationPlatform.Controller
 {
     [Route("api/lookup")]
     [ApiController]
-    public class LookupController : ControllerBase
+    public partial class LookupController : ControllerBase
     {
 
         protected readonly MyDbContext _dbContext;
@@ -59,7 +59,6 @@ namespace aaronApplicationPlatform.Controller
             };
             return res;
         }
-
 
     }
 }

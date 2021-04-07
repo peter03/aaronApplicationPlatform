@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { IId } from "../../interface/aaap/IId";
@@ -16,12 +16,15 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   _cachedEntities: T[];    // todo: save them (encrypted) in web storage
   _selectedEntityId?: number = null;
   _user: User;
+
+  //UpsertSuccessEvent = new EventEmitter<T>();
     
   constructor(
     protected http: HttpClient,
     protected route: string,
     private entityType: new () => T,
-    public authService: AuthenticationService) {
+    public authService: AuthenticationService,
+    protected injector: Injector) {
 
     this.reset();
     this._url = environment.serverUrl + route;
@@ -36,6 +39,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
     return this.getListAsObservable()
       .toPromise()
       .then(res => {
+        this.onEntitiesLoaded();
         return Promise.resolve();
       })
       .catch(err => {
@@ -49,11 +53,25 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
     this._selectedEntityId = null;
   }
 
-  upsertEntity(entity: T) {
+  onEntitiesLoaded() {
+  }
 
-    this.http.post<T>(`${this._url}/upsert`, entity).subscribe(res => {
+  //upsertEntity(entity: T) {
+
+  //  this.http.post<T>(`${this._url}/upsert`, entity).subscribe(res => {
+  //    this.updateRepository(res);
+  //    this.UpsertSuccessEvent.emit(res);
+  //  });
+  //}
+
+  upsertEntity(entity: T) : Observable<any> {
+
+    return this.http.post<T>(`${this._url}/upsert`, entity).pipe(map(res => {
       this.updateRepository(res);
-    });
+    }));
+  }
+
+  onUpsertSuccess(entity: T) {
   }
 
   updateRepository(entity: T) {
@@ -84,20 +102,6 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
     return this._cachedEntities;
   }
 
-  getListAsObservable_org() : Observable<T[]> {
-
-    if (this._cachedEntities) {
-      return of(this.getList());
-    }
-    else {
-      let url = `${this._url}/list`;
-      return this.http.get<T[]>(url).pipe(
-        map(res => this._cachedEntities = res)
-      );
-    }
-  }
-
-
   getListAsObservable(callbackFn?): Observable<T[]> {
 
     if (this._cachedEntities) {
@@ -114,7 +118,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
           return this._cachedEntities;
         })
       );
-    }
+    };
   }
 
   getEntityById(id: number) {

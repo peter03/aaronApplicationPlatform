@@ -25,7 +25,7 @@ export class MainMenuComponent extends BaseComponent {  // extends BaseListCompo
     public authService: AuthenticationService,
     injector: Injector) {
       super(authService);
-      repo.buildSubmenu(null);
+      //repo.buildSubmenu(null);
   }
 
   get submenu(): Menu[] {
@@ -33,19 +33,11 @@ export class MainMenuComponent extends BaseComponent {  // extends BaseListCompo
   }
 
   navigateTo(menuId: number) {
-
-    let entity = this.repo.getEntityById(menuId);
-    if (entity) {
-
-      if (entity.route === null || entity.route === '') {
-        this.repo.buildSubmenu(entity.id);
-      }
-      else {
-        this.router.navigate([entity.route]);
-      }
-
-    }
+    this.repo.navigateTo(menuId);
   }
 
+  get userIsLoggedIn() {
+    return this.authService.currentUser;
+  }
 
 }

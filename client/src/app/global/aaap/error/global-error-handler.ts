@@ -1,7 +1,7 @@
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoggingService } from './logging.service';
-import { ErrorService } from './error.service';
+import { ErrorService } from 'src/app/global/aaap/error/error.service';
 import { NotificationService } from './notification.service';
 
 @Injectable()
@@ -32,6 +32,9 @@ export class GlobalErrorHandler implements ErrorHandler {
       // Always log errors
       //logger.logError(message, stackTrace);
       console.error(error);
+
+      errorService.fireOnError(error);
+
     }
   }
 }

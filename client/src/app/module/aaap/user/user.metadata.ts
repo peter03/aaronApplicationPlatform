@@ -1,3 +1,5 @@
+import { MyUserMetadata } from "src/app/model/myuser.metadata";
+
 export const UserMetadata = [
 
   {
@@ -25,6 +27,15 @@ export const UserMetadata = [
     maxLength: 50
   },
   {
+    label: 'aaap.module.user.selectaddress',
+    control: 'select',
+    lookup: 'addresslist',
+    ngModel: 'person.addressId',
+    placeholder: '',
+    required: true,
+    suppressInList: true
+  },
+  {
     label: 'aaap.module.login.password',
     control: 'text',
     ngModel: 'password',
@@ -47,6 +58,6 @@ export const UserMetadata = [
     placeholder: '',
     required: true,
     maxLength: 255
-  }
-
+  },
+  ...MyUserMetadata
 ]

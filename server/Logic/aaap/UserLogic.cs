@@ -78,7 +78,9 @@ namespace aaronApplicationPlatform.Logic
 
         public IEnumerable<User> GetListIncludeRole()
         {
-            return _dbContext.Users.AsNoTracking().Include(e => e.UserRoles);
+            // return _dbContext.Users.AsNoTracking().Include(e => e.UserRoles);
+            var qry = _dbContext.Users.AsNoTracking().Include(e => e.UserRoles);
+            return GetListByQuery(qry);
         }
 
         public IEnumerable<User> GetListIncludeRoleId()
@@ -99,7 +101,9 @@ namespace aaronApplicationPlatform.Logic
         }
         public User GetByLoginNameAndPwd(string loginName, string pwdHash, bool throwExIfNotFound = false)
         {
-            User result = GetList().Where(e => e.LoginName.Equals(loginName, StringComparison.OrdinalIgnoreCase) && e.PasswordHash == pwdHash).FirstOrDefault();
+            //User result = GetList().Where(e => e.LoginName.Equals(loginName, StringComparison.OrdinalIgnoreCase) && e.PasswordHash == pwdHash).FirstOrDefault();
+            IQueryable<User> qry = _dbContext.Users.Where(e => e.LoginName.Equals(loginName) && e.PasswordHash == pwdHash);
+            User result = GetListByQuery(qry).FirstOrDefault();
             if (result == null && throwExIfNotFound)
             {
                 throw new Exception(String.Format("Record with LoginName = {0} not found!"));

@@ -76,6 +76,8 @@ namespace aaronApplicationPlatform.Data
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.User> Users { get; set; }
 
+        public virtual DbSet<aaronApplicationPlatform.Data.Entity.UserShop> UserShops { get; set; }
+
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.Vat> Vats { get; set; }
 
         public virtual DbSet<aaronApplicationPlatform.Data.Entity.VatShop> VatShops { get; set; }
@@ -117,6 +119,7 @@ namespace aaronApplicationPlatform.Data
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.UserRoleMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.UserRuleMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.UserRuleViewMap());
+            modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.UserShopMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.VatMap());
             modelBuilder.ApplyConfiguration(new aaronApplicationPlatform.Data.Mapping.VatShopMap());
             #endregion

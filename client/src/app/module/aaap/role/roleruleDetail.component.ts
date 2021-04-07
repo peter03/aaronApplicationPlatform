@@ -27,8 +27,9 @@ export class RoleruleDetailComponent extends BaseDetailComponent<RoleRepository,
     public router: Router,
     activeRoute: ActivatedRoute,
     location: Location,
-    ruleRepo: RuleRepository) {
-    super(repo, router, activeRoute, location, null)
+    ruleRepo: RuleRepository,
+    injector: Injector) {
+    super(repo, router, activeRoute, location, null, injector)
 
     this.dataSource = new MatTableDataSource<Rule>();
 

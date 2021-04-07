@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { AddressRepository } from "src/app/repository/aaap/address.repository";
-import { Address } from "src/app/model/aaap/address.model";
+import { Address } from "src/app/model/myaddress.model";
 import { BaseDetailComponent } from 'src/app/module/aaap/base.detailComponent';
 
 import { AddressMetadata } from './address.metadata';
@@ -14,12 +14,13 @@ import { AddressMetadata } from './address.metadata';
 })
 export class AddressDetailComponent extends BaseDetailComponent<AddressRepository, Address>  {
 
- constructor(
+  constructor(
     repo: AddressRepository,
     router: Router,
     activeRoute: ActivatedRoute,
-    location: Location) {
-    super(repo, router, activeRoute, location, AddressMetadata)
+    location: Location,
+    injector: Injector) {
+    super(repo, router, activeRoute, location, AddressMetadata, injector)
   }
 
 }

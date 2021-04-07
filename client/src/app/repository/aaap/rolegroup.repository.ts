@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { Rolegroup } from "src/app/model/aaap/rolegroup.model";
@@ -12,8 +12,9 @@ export class RolegroupRepository extends BaseRepository<Rolegroup> {
 
   constructor(
     http: HttpClient,
-    authService: AuthenticationService) {
-    super(http, API_URL, Rolegroup, authService);
+    authService: AuthenticationService,
+    injector: Injector) {
+    super(http, API_URL, Rolegroup, authService, injector);
   }
 
 }

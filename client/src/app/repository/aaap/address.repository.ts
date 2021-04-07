@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { Address } from "src/app/model/aaap/address.model";
+import { Address } from "src/app/model/myaddress.model";
 import { BaseRepository } from 'src/app/repository/aaap/base.repository';
 import { AuthenticationService } from 'src/app/service/aaap/authentication.service';
 
@@ -12,8 +12,9 @@ export class AddressRepository extends BaseRepository<Address> {
 
   constructor(
     http: HttpClient,
-    authService: AuthenticationService) {
-    super(http, API_URL, Address, authService);
+    authService: AuthenticationService,
+    injector: Injector) {
+    super(http, API_URL, Address, authService, injector);
   }
 
 }

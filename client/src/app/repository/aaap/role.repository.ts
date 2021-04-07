@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { Role } from "src/app/model/aaap/role.model";
@@ -12,8 +12,9 @@ export class RoleRepository extends BaseRepository<Role> {
 
   constructor(
     http: HttpClient,
-    authService: AuthenticationService) {
-    super(http, API_URL, Role, authService);
+    authService: AuthenticationService,
+    injector: Injector) {
+    super(http, API_URL, Role, authService, injector);
   }
 
 }

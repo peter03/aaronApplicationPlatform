@@ -17,7 +17,7 @@ namespace aaronApplicationPlatform.Controller
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController : BaseController<UserLogic, User>
+    public partial class UserController : BaseController<UserLogic, User>
     {
         public UserController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
         {
@@ -36,8 +36,11 @@ namespace aaronApplicationPlatform.Controller
         [Route("list")]
         public override IEnumerable<User> GetList()
         {
-            return Logic.GetListIncludeRoleId().Where(e => e.Id > 1);     // skip Admin!
+            var res =  Logic.GetListIncludeRoleId().Where(e => e.Id > 1);     // skip Admin!
+            OnGetList(res);
+            return res;
         }
+
 
     }
   }

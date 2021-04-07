@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { Rule } from "src/app/model/aaap/rule.model";
@@ -12,8 +12,9 @@ export class RuleRepository extends BaseRepository<Rule> {
 
   constructor(
     http: HttpClient,
-    authService: AuthenticationService) {
-    super(http, API_URL, Rule, authService);
+    authService: AuthenticationService,
+    injector: Injector) {
+    super(http, API_URL, Rule, authService, injector);
   }
 
 }

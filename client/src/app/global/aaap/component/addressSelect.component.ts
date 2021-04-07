@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { MatInputModule } from '@angular/material/input';
 
 import { AddressRepository } from "src/app/repository/aaap/address.repository";
-import { Address } from "src/app/model/aaap/address.model";
+import { Address } from "src/app/model/myaddress.model";
 
 @Component({
   selector: "aaap-address-select",

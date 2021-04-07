@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { map, subscribeOn } from "rxjs/operators";
@@ -16,9 +16,9 @@ export class UserRepository extends BaseRepository<User> {
   constructor(
     http: HttpClient,
     authService: AuthenticationService,
-    public personRepo: PersonRepository
-  ) {
-    super(http, API_URL, User, authService);
+    public personRepo: PersonRepository,
+    injector: Injector) {
+    super(http, API_URL, User, authService, injector);
   }
 
   getListAsObservable(): Observable<User[]> {
@@ -37,7 +37,7 @@ export class UserRepository extends BaseRepository<User> {
       });
     });
 
- }
+  }
 
   validateEntity(entity: User) {
 
@@ -50,5 +50,5 @@ export class UserRepository extends BaseRepository<User> {
     return true;
   }
 
-  
+
 }

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of, forkJoin, } from "rxjs";
 
@@ -6,24 +6,26 @@ import { Lookup } from 'src/app/model/aaap/lookup.model';
 import { RolegroupRepository } from "./rolegroup.repository";
 import { RoleRepository } from "./role.repository";
 import { RuleRepository } from "./rule.repository";
+import { AddressRepository } from "./address.repository";
 import { environment } from 'src/environments/environment';
 import { map } from "rxjs/operators";
+import { MyLookupRepository } from "../mylookup.repository";
 
 @Injectable()
-export class LookupRepository {
+export class LookupRepository extends MyLookupRepository {
 
   _url: string;
   _cachedFiletype: Lookup[] = null;
   _cachedCountry: Lookup[] = null;
 
   constructor(
-    private http: HttpClient,
-    private rolegroupRep: RolegroupRepository,
-    private roleRepo: RoleRepository,
-    private ruleRepo: RuleRepository) {
-
-    this._url = environment.serverUrl + "/api/lookup";
-
+    public http: HttpClient,
+    public injector: Injector,
+    public rolegroupRep: RolegroupRepository,
+    public roleRepo: RoleRepository,
+    public ruleRepo: RuleRepository,
+    public addressRepo: AddressRepository) {
+      super(http, injector)
   }
 
   loadEntities(): Observable<any> {
@@ -32,7 +34,8 @@ export class LookupRepository {
       this.loadFiletypeList(),
       this.loadCountryList()
     ]
-
+    promises.concat(super.promises);
+   
     return forkJoin(...promises).pipe(map(res => {
       console.log('All lookup data are loaded...');
       return true;
@@ -107,21 +110,37 @@ export class LookupRepository {
       })
   }
 
-  getList(lookupName): Lookup[] {
+  getAddressLookupAsObservable(): Observable<Lookup[]> {
+
+    var res: Lookup[];
+
+    this.addressRepo.getListAsObservable().subscribe(list => {
+      res = [];
+      this.addressRepo.getList().forEach(ent => {
+        res.push(new Lookup(ent.id, ent.name1));
+      })
+      return res;
+    })
+
+    return of(res);
+  }
+
+  getListAsObservable(lookupName): Observable<Lookup[]> {
 
     switch (lookupName) {
       case "rolegrouplist":
-        return this.getRolegroupList();
+        return of (this.getRolegroupList());
       case "rolelist":
-        return this.getRoleList();
+        return of (this.getRoleList());
       case "rulelist":
-        return this.getRuleList();
+        return of (this.getRuleList());
       case "countrylist":
-        return this.getCountryList();
+        return of(this.getCountryList());
+      case "addresslist":
+        return this.getAddressLookupAsObservable();
       default:
-        console.log(`Lookup ${lookupName} does not exists!`);
-        break;
+        return super.getListAsObservable(lookupName);
     }
   }
-    
+  
 }

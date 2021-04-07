@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -24,8 +24,9 @@ export class MenuDetailComponent extends BaseDetailComponent<MenuRepository, Men
     router: Router,
     activeRoute: ActivatedRoute,
     location: Location,
+    injector: Injector,
     private lookupRepo: LookupRepository) {
-      super(repo, router, activeRoute, location, MenuMetadata)
+    super(repo, router, activeRoute, location, MenuMetadata, injector)
       this.listOfParents = this.repo.getListOfParents();
   }
 

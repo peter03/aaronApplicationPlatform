@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Filespec } from "src/app/model/aaap/filespec.model";
 import { BaseRepository } from './base.repository';
@@ -13,8 +13,9 @@ const API_URL = "/api/file";
 export class FilespecRepository extends BaseRepository<Filespec> {
     
   constructor(public http: HttpClient,
-              authService: AuthenticationService) {
-    super(http, API_URL, Filespec, authService);
+    authService: AuthenticationService,
+    injector: Injector) {
+    super(http, API_URL, Filespec, authService, injector);
   }
 
     getNewEntity() {

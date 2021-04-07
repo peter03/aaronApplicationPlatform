@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injector, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { Person } from "src/app/model/aaap/person.model";
@@ -12,8 +12,9 @@ export class PersonRepository extends BaseRepository<Person> {
 
   constructor(
     http: HttpClient,
-    authService: AuthenticationService) {
-    super(http, API_URL, Person, authService);
+    authService: AuthenticationService,
+    injector: Injector) {
+    super(http, API_URL, Person, authService, injector);
   }
 
 }
