@@ -4,6 +4,8 @@ Serves a complete environment to develop large business applications using .NET 
 **This early release of the Aaron Application Platform is not designed for commercial use!** 
 We publish this code to initiate a new open-source project. Suggestions, ideas and comments are welcome.
 
+Please select the master branch to view the source code!
+
 Include:
 
 - Authorization (Login, Logout, Forgot pwd, etc.)
