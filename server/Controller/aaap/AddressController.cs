@@ -14,7 +14,7 @@ namespace aaronApplicationPlatform.Controller
 {
     [Route("api/address")]
     [ApiController]
-    public class AddressController : BaseController<AddressLogic, Address>
+    public partial class AddressController : BaseController<AddressLogic, Address>
     {
         public AddressController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
         {

@@ -2,13 +2,12 @@ import { Component, Input, ViewChild, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { FilespecRepository } from "src/app/repository/aaap/filespec.repository";
 import { Filespec } from "src/app/model/aaap/filespec.model";
-import { BaseDetailComponent } from '../base.detailComponent';
-
+import { BaseDetailComponent } from 'src/app/module/aaap/base.detailComponent';
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
 import { Lookup } from 'src/app/model/aaap/lookup.model';
-
 import { FileMetadata } from './file.metadata';
 
 @Component({
@@ -30,8 +29,9 @@ export class FileDetailComponent extends BaseDetailComponent<FilespecRepository,
     activeRoute: ActivatedRoute,
     location: Location,
     injector: Injector,
-    private lookupRepo: LookupRepository) {
-    super(repo, router, activeRoute, location, FileMetadata, injector);
+    private lookupRepo: LookupRepository,
+    authService: AuthenticationService) {
+    super(repo, router, activeRoute, location, FileMetadata, authService, injector);
     this.imageUrl = this.repo.getFileUrl(this.entity.id);
     this.filetypeList = this.lookupRepo.getFiletypeList();
   }

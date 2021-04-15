@@ -2,13 +2,12 @@ import { Component, Input, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
 import { Lookup } from "src/app/model/aaap/lookup.model";
-
 import { MenuRepository } from "src/app/repository/aaap/menu.repository";
 import { Menu } from "src/app/model/aaap/menu.model";
 import { BaseDetailComponent } from 'src/app/module/aaap/base.detailComponent';
-
 import { MenuMetadata } from './menu.metadata';
 
 @Component({
@@ -24,9 +23,10 @@ export class MenuDetailComponent extends BaseDetailComponent<MenuRepository, Men
     router: Router,
     activeRoute: ActivatedRoute,
     location: Location,
+    authService: AuthenticationService,
     injector: Injector,
     private lookupRepo: LookupRepository) {
-    super(repo, router, activeRoute, location, MenuMetadata, injector)
+    super(repo, router, activeRoute, location, MenuMetadata, authService, injector)
       this.listOfParents = this.repo.getListOfParents();
   }
 

@@ -8,8 +8,8 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from 'src/app/global/aaap/
 
 import { IId } from "../../interface/aaap/IId";
 import { IRepository } from "../../interface/aaap/irepository";
-import { AuthenticationService } from "../../service/aaap/authentication.service";
-import { BaseComponent } from "./base.component";
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
+import { BaseComponent } from "src/app/module/aaap/base.component";
 import { MatTableSetting, MatTableActionButton } from "./matTable.setting";
 
 @Injectable()
@@ -26,9 +26,9 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
     protected repo: R,
     protected router: Router,
     protected authService: AuthenticationService,
-    protected injector: Injector,
+    injector: Injector,
     private modelMetadata: any) {
-    super(authService);
+    super(authService, injector);
 
     this.formMetadata = modelMetadata;
     this.dialog = injector.get(MatDialog);

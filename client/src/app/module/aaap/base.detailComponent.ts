@@ -1,14 +1,15 @@
 import { Component, Injectable, Injector, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Observable, throwError } from 'rxjs';
 
-import { IRepository } from 'src/app/ ../../interface/aaap/irepository';
-import { IId } from '../../interface/aaap/IId';
+import { IRepository } from 'src/app/interface/aaap/irepository';
+import { IId } from 'src/app/interface/aaap/IId';
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { ErrorService } from 'src/app/global/aaap/error/error.service';
+import { BaseComponent } from "src/app/module/aaap/base.component";
 
 @Injectable()
-export abstract class BaseDetailComponent<R extends IRepository<T>, T extends IId> implements OnDestroy  {
+export abstract class BaseDetailComponent<R extends IRepository<T>, T extends IId> extends BaseComponent  {
 
   public _entity: T;
   formMetadata: any[];
@@ -21,10 +22,13 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
     protected activeRoute: ActivatedRoute,
     protected location: Location,
     private modelMetadata: any,
-    protected injector: Injector) {
+    protected authService: AuthenticationService,
+    injector: Injector) {
+
+    super(authService, injector);
 
     this.formMetadata = modelMetadata;
-    this.errorService = this.injector.get(ErrorService);
+    this.errorService = injector.get(ErrorService);
 
     let id = Number.parseInt(activeRoute.snapshot.params["id"]);
     if (isNaN(id)) {    // id param is missing
@@ -42,9 +46,6 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
 
   }
 
-  ngOnDestroy() {
-  }
-
   onSubmit() {
 
     if (this.repo.validateEntity(this._entity)) {
@@ -55,8 +56,7 @@ export abstract class BaseDetailComponent<R extends IRepository<T>, T extends II
   }
 
   onError(err: Error) {
-
-    console.log("an error occured ...");
+    //console.log("an error occured ...");
   }
 
   cancel() {

@@ -33,7 +33,7 @@
         <div *ngSwitchCase="'select'">
           <mat-form-field style="width: 100%;">
             <mat-label>{{ctl.label | translate}}:</mat-label>
-            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)">
+            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)" [required]="ctl.required">
               <mat-option *ngFor="let opt of ctl.options | async" [value]="opt.id">
                 {{opt.name}}
               </mat-option>
@@ -44,7 +44,7 @@
         <div *ngSwitchCase="'selectx'">
           <mat-form-field style="width: 100%;">
             <mat-label>{{ctl.label | translate}}:</mat-label>
-            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)" multiple>
+            <mat-select [name]="ctl.ngModel" [(ngModel)]="ctl.value" (selectionChange)="modelChangedEvent(ctl.ngModel, $event.value)" [required]="ctl.required" multiple>
               <mat-option *ngFor="let opt of ctl.options | async" [value]="opt.id">
                 {{opt.name}}
               </mat-option>

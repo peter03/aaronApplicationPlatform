@@ -4,13 +4,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { RoleRepository } from "src/app/repository/aaap/role.repository";
 import { Role } from "src/app/model/aaap/role.model";
 import { RuleRepository } from "src/app/repository/aaap/rule.repository";
 import { Rule } from "src/app/model/aaap/rule.model";
-
 import { BaseDetailComponent } from 'src/app/module/aaap/base.detailComponent';
-import { AuthenticationService } from "../../../service/aaap/authentication.service";
 
 @Component({
   selector: "aaap-rolerule-detail",
@@ -28,8 +27,9 @@ export class RoleruleDetailComponent extends BaseDetailComponent<RoleRepository,
     activeRoute: ActivatedRoute,
     location: Location,
     ruleRepo: RuleRepository,
+    authService: AuthenticationService,
     injector: Injector) {
-    super(repo, router, activeRoute, location, null, injector)
+    super(repo, router, activeRoute, location, null, authService, injector)
 
     this.dataSource = new MatTableDataSource<Rule>();
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { Router } from "@angular/router";
 
 import { BaseComponent } from "src/app/module/aaap/base.component";
@@ -17,8 +17,9 @@ export class AppComponent extends BaseComponent {
   constructor(
     private repo: MenuRepository,
     private router: Router,
-    private authService: AuthenticationService) {
-    super(authService);
+    private authService: AuthenticationService,
+    injector: Injector) {
+    super(authService, injector);
   }
 
   navigateToRoot() {

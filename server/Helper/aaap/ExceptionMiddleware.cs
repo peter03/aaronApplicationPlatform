@@ -33,13 +33,14 @@ namespace aaronApplicationPlatform.Helper
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            //context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             return context.Response.WriteAsync(new ErrorDetails()
             {
-                statusCode = context.Response.StatusCode,
-                message = GetInnerMostException(exception).Message,
-                stackTrace = exception.StackTrace
+                StatusCode = context.Response.StatusCode,
+                Message = GetInnerMostException(exception).Message,
+                StackTrace = exception.StackTrace
             }.ToString());
         }
 
@@ -56,9 +57,9 @@ namespace aaronApplicationPlatform.Helper
     }
     public class ErrorDetails
     {
-        public int statusCode { get; set; }
-        public string message { get; set; }
-        public string stackTrace { get; set; }
+        public int StatusCode { get; set; }
+        public string Message { get; set; }
+        public string StackTrace { get; set; }
 
         public override string ToString()
         {

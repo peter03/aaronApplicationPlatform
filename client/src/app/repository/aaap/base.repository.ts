@@ -111,7 +111,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
       let url = `${this._url}/list`;
       return this.http.get<T[]>(url).pipe(
         map(res => {
-          this._cachedEntities = res;
+          this._cachedEntities = res || [];
           if (callbackFn) {
             callbackFn()
           }

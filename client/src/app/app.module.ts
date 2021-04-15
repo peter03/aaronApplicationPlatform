@@ -37,6 +37,10 @@ import { AppComponent } from './app.component';
 
 import { designComponentList } from 'src/app/design/aaap/design.component';
 import { globalComponentList } from 'src/app/global/aaap/component/global.component';
+
+// import directives
+import { globalDirectiveList } from 'src/app/global/aaap/directive/global.directive';
+
 import { routingComponents, appRouting } from './app-routing.module';
 
 @NgModule({
@@ -44,6 +48,7 @@ import { routingComponents, appRouting } from './app-routing.module';
     AppComponent,
     designComponentList,
     globalComponentList,
+    globalDirectiveList,
     routingComponents
   ],
   imports: [

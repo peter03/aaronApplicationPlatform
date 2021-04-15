@@ -24,6 +24,12 @@ namespace aaronApplicationPlatform.Controller
             get { return _Logic; }
         }
 
+        private readonly MyDbContext _dbContext;
+        protected MyDbContext DbContext
+        {
+            get { return _dbContext; }
+        }
+
         private IUserService _UserContext;
         protected IUserService UserContext
         {
@@ -35,6 +41,7 @@ namespace aaronApplicationPlatform.Controller
             _Logic = new L();
             _Logic.DbContext = dbContext;
             _UserContext = userContext;
+            _dbContext = dbContext;
         }
 
         [HttpGet]

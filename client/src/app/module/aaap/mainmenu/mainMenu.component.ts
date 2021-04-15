@@ -1,13 +1,9 @@
 import { Component, Injector } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { TranslateService } from "@ngx-translate/core";
-
 import { MenuRepository } from "src/app/repository/aaap/menu.repository";
 import { Menu } from "src/app/model/aaap/menu.model";
-
 import { AuthenticationService } from "../../../service/aaap/authentication.service";
-//import { BaseListComponent } from "src/app/module/aap/baseList.component";
 import { BaseComponent } from "src/app/module/aaap/base.component";
 
 @Component({
@@ -24,7 +20,7 @@ export class MainMenuComponent extends BaseComponent {  // extends BaseListCompo
     public router: Router,
     public authService: AuthenticationService,
     injector: Injector) {
-      super(authService);
+    super(authService, injector);
       //repo.buildSubmenu(null);
   }
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Injector } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from "@angular/router";
 
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { BaseDetailComponent } from 'src/app/module/aaap/base.detailComponent';
 import { UserRepository } from "src/app/repository/aaap/user.repository";
 import { User } from "src/app/model/aaap/user.model";
@@ -20,8 +21,9 @@ export class UserDetailComponent extends BaseDetailComponent<UserRepository, Use
     router: Router,
     activeRoute: ActivatedRoute,
     location: Location,
+    authService: AuthenticationService,
     injector: Injector) {
-    super(repo, router, activeRoute, location, UserMetadata, injector)
+    super(repo, router, activeRoute, location, UserMetadata, authService, injector)
   }
 
   onCreateControl(ctlMetadata: any) {

@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 
+import { AuthenticationService } from "src/app/service/aaap/authentication.service";
 import { UserRepository } from "src/app/repository/aaap/user.repository";
 import { User } from "src/app/model/aaap/user.model";
 import { RoleRepository } from "src/app/repository/aaap/role.repository";
 import { Role } from "src/app/model/aaap/role.model";
 import { BaseDetailComponent } from 'src/app/module/aaap/base.detailComponent';
-import { AuthenticationService } from "../../../service/aaap/authentication.service";
 
 @Component({
   selector: "aaap-userrole-detail",
@@ -27,8 +27,9 @@ export class UserroleDetailComponent extends BaseDetailComponent<UserRepository,
     activeRoute: ActivatedRoute,
     location: Location,
     roleRepo: RoleRepository,
+    authService: AuthenticationService,
     injector: Injector) {
-    super(repo, router, activeRoute, location, null, injector)
+    super(repo, router, activeRoute, location, null, authService, injector)
 
     // initialize selection
     let selectedRoles: Role[] = [];

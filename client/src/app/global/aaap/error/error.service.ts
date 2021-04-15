@@ -16,10 +16,14 @@ export class ErrorService {
 
   getServerErrorMessage(err: HttpErrorResponse): string {
 
-    let errDetail = `Server error ${err.status} while accessing ${err.url} :\n`
+    let errDetail = `Server error ${err.status} while accessing ${err.url}:\n`
     if (err.error) {
-      errDetail += err.error.title || err.error.message || '';
-      //errDetail += `\nStack: ${err.error.stackTrace}:`;
+      errDetail += err.error.title || err.error.Message || '';
+
+      if (err.error.errors) { // handle multiple errs
+      }
+      //errDetail += `\nStack: ${err.error.StackTrace}:`;
+      errDetail += `\nSee debug console for further details.`;
     }
 
     return navigator.onLine ?    

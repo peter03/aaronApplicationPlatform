@@ -36,8 +36,8 @@ export class MenuRepository extends BaseRepository<Menu> {
     this.getList().forEach(e => {
 
       // skip unauthorized menu items
-      //let skip: boolean = e.ruleId !== null && this.authService.hasPermission(e.ruleId) === false;
-      let skip: boolean = false;  // todo: reactivate
+      let skip: boolean = e.ruleId !== null && this.authService.hasPermission(e.ruleId) === false;
+      //let skip: boolean = false;  // todo: reactivate
 
       if (!skip) {
         if ((menuId === null && isNaN(e.parentId)) || menuId === e.parentId) {
