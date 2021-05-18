@@ -1,4 +1,7 @@
-export class BaseAddress {
+import { IId } from 'src/app/interface/aaap/IId';
+import { IDisplayName } from 'src/app/interface/aaap/IDisplayName';
+
+export class BaseAddress implements IDisplayName {
 
   id: number;
   name1: string;
@@ -7,6 +10,10 @@ export class BaseAddress {
   zip?: string;
   city?: string;
   countryId: number;
+
+  get displayName(): string {
+    return this.name1;
+  }
 
   constructor(
   ) { }

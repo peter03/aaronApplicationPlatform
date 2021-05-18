@@ -30,6 +30,8 @@
     "bootstrap": "^4.5.3",
     "core-js": "^3.3.3",
     "jquery": "3.4.1",
+    "material-design-icons-iconfont": "^6.1.0",
+    "ngx-mat-select-search": "^3.2.2",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "rxjs": "^6.6.3",

@@ -1,6 +1,5 @@
-import { IId } from '../../interface/aaap/IId';
-import { Person } from '../aaap/person.model';
-
+import { IId } from 'src/app/interface/aaap/IId';
+import { Person } from 'src/app/model/aaap/person.model';
 
 export class User implements IId {
 

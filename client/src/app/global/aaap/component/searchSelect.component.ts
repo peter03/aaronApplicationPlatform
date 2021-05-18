@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Injector, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Observable } from "rxjs";
 
 import { FormControl } from '@angular/forms';
@@ -6,18 +6,24 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { MatSelect } from '@angular/material/select';
 
+import { IRepository } from 'src/app/interface/aaap/IRepository';
+import { IId } from 'src/app/interface/aaap/IId';
+import { IDisplayName } from 'src/app/interface/aaap/IDisplayName';
+
 import { AddressRepository } from "src/app/repository/aaap/address.repository";
 import { Address } from "src/app/model/myaddress.model";
 
 @Component({
-  selector: "aaap-address-select",
-  templateUrl: "addressSelect.component.html"
+  selector: "aaap-search-select",
+  templateUrl: "searchSelect.component.html"
 })
-export class AddressSelectComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchSelectComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  protected entities: Address[];
+  protected entities: IDisplayName[];
+  protected repo: IRepository<IDisplayName>;
 
-  @Input() addressId?: number;
+  @Input() initialId?: number;
+  @Input() repository: IRepository<IDisplayName>;
   @Output() onModelChanged = new EventEmitter();
 
   /* control for the selected entity */
@@ -27,7 +33,7 @@ export class AddressSelectComponent implements OnInit, AfterViewInit, OnDestroy 
   public selectFilterCtrl: FormControl = new FormControl();
 
   /* list of entities filtered by search keyword */
-  public filteredEntities: ReplaySubject<Address[]> = new ReplaySubject<Address[]>(1);
+  public filteredEntities: ReplaySubject<IDisplayName[]> = new ReplaySubject<IDisplayName[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
@@ -35,13 +41,16 @@ export class AddressSelectComponent implements OnInit, AfterViewInit, OnDestroy 
   protected _onDestroy = new Subject<void>();
 
   constructor(
-    private repo: AddressRepository) {
+    //private repo: AddressRepository,
+    private injector: Injector) {
   }
 
   ngOnInit() {
 
+    this.repo = this.injector.get(this.repository);
+
     // set initial selection
-    this.selectCtrl.setValue(this.repo.getEntityById(this.addressId));
+    this.selectCtrl.setValue(this.repo.getEntityById(this.initialId));
 
     // load the initial entity list
     this.repo.getListAsObservable().subscribe(res => {
@@ -49,8 +58,6 @@ export class AddressSelectComponent implements OnInit, AfterViewInit, OnDestroy 
       this.filteredEntities.next(this.entities.slice());
     });
     
-    //this.bankCtrl.valueChanges()
-
     // listen for search field value changes
     this.selectFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -78,9 +85,9 @@ export class AddressSelectComponent implements OnInit, AfterViewInit, OnDestroy 
         // setting the compareWith property to a comparison function
         // triggers initializing the selection according to the initial value of
         // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
+        // this needs to be done after the filteredEntities are loaded initially
         // and after the mat-option elements are available
-        this.singleSelect.compareWith = (a: Address, b: Address) => a && b && a.id === b.id;
+        this.singleSelect.compareWith = (a: IDisplayName, b: IDisplayName) => a && b && a.id === b.id;
       });
   }
 
@@ -103,7 +110,7 @@ export class AddressSelectComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     // filter the entities
     this.filteredEntities.next(
-      this.entities.filter(e => e.name1.toLowerCase().indexOf(search) > -1)
+      this.entities.filter(e => e.displayName.toLowerCase().indexOf(search) > -1)
     );
   }
 

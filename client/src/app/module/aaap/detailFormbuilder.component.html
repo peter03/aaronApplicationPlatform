@@ -1,4 +1,16 @@
-<!--<form novalidate (ngSubmit)="onActionButtonClicked('submit')" #form="ngForm">-->
+<!--<form novalidate (ngSubmit)="onActionButtonClicked('submit')" #form="ngForm">
+
+<link rel="import" href="myHtml.html" />
+
+<ng-template #myTemplate>
+  <h1>MyTemplate</h1>
+  <link rel="import" href="myHtml.html" />
+</ng-template>
+
+<ng-container *ngTemplateOutlet="myTemplate"></ng-container>
+
+-->
+
 <form novalidate #myForm="ngForm">
 
   <div *ngFor="let ctl of myFormTemplate">
@@ -26,7 +38,7 @@
             <input matInput [type]="ctl.control" class="form-control" [name]="ctl.ngModel"
                    [(ngModel)]="ctl.value"
                    (ngModelChange)="modelChangedEvent(ctl.ngModel, $event)"
-                   [required]="ctl.required"/>
+                   [required]="ctl.required" />
           </mat-form-field>
         </div>
 
@@ -52,9 +64,12 @@
           </mat-form-field>
         </div>
 
-
-        <div *ngSwitchCase="'addressselect'">
+        <!--<div *ngSwitchCase="'addressselect'">
           <aaap-address-select [name]="addressId" [id]="addressId" [addressId]="ctl.value" (onModelChanged)="modelChangedEvent(ctl.ngModel, $event.value)"></aaap-address-select>
+        </div>-->
+
+        <div *ngSwitchCase="'searchselect'">
+          <aaap-search-select [name]="ctl.ngModel" [initialId]="ctl.value" [repository]="ctl.repository" (onModelChanged)="modelChangedEvent(ctl.ngModel, $event.value)"></aaap-search-select>
         </div>
 
       </div>
@@ -68,30 +83,30 @@
 
 </form>
 
-  <!--<form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div *ngFor="let ctl of myFormTemplate">
-      <div [ngSwitch]="ctl.control">
+<!--<form #form="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <div *ngFor="let ctl of myFormTemplate">
+    <div [ngSwitch]="ctl.control">
 
-        <div *ngSwitchCase="'text'">
-          <mat-form-field>
-            <mat-label>{{ctl.label}}</mat-label>
-            <input matInput [type]="ctl.control" class="form-control" formControlName="{{ctl.ngModel}}" />
-          </mat-form-field>
-        </div>
-
-        <div *ngSwitchCase="'select'">
-          <mat-form-field>
-            <mat-label>{{ctl.label}}</mat-label>
-            <mat-select formControlName="{{ctl.ngModel}}">
-              <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
-                {{opt.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
+      <div *ngSwitchCase="'text'">
+        <mat-form-field>
+          <mat-label>{{ctl.label}}</mat-label>
+          <input matInput [type]="ctl.control" class="form-control" formControlName="{{ctl.ngModel}}" />
+        </mat-form-field>
       </div>
+
+      <div *ngSwitchCase="'select'">
+        <mat-form-field>
+          <mat-label>{{ctl.label}}</mat-label>
+          <mat-select formControlName="{{ctl.ngModel}}">
+            <mat-option *ngFor="let opt of ctl.options" [value]="opt.id">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="myFormGroup.invalid">Save</button>
-    <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
-  </form>-->
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="myFormGroup.invalid">Save</button>
+  <button type="submit" class="btn btn-primary" (click)="cancel()">Cancel</button>
+</form>-->

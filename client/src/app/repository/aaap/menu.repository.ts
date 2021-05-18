@@ -20,11 +20,21 @@ export class MenuRepository extends BaseRepository<Menu> {
     private router: Router,
     authService: AuthenticationService,
     injector: Injector) {
-    super(http, API_URL, Menu, authService, injector);
+    super(http, API_URL, new Menu(), authService, injector);
+    let ent = new Menu();
     
   }
 
   onEntitiesLoaded() {
+
+    // convert setting json string to object
+    this.getList().forEach(e => {
+      if (e.settingAsJson) {
+        e.setting = JSON.parse(e.settingAsJson);
+      }
+      delete e["settingAsJson"];
+    });
+
     this.buildSubmenu(null);
   }
 
@@ -69,6 +79,8 @@ export class MenuRepository extends BaseRepository<Menu> {
       }
       else {  // leaf
         this.selectedEntityId = entity.id;
+        //this.router.navigate([entity.route, JSON.stringify(entity.settingAsJson)]);   // decided to load settings via selectedEntityId
+        //this.router.navigate([entity.route, { state: { data: { ReceiptType: 'IV' } } }]);
         this.router.navigate([entity.route]);
       }
     }
@@ -98,6 +110,10 @@ export class MenuRepository extends BaseRepository<Menu> {
     res.push({ id: null, name: 'aaap.module.mainmenu.title'});
     return res.reverse(); // reverse entries
     
+  }
+
+  get selectedMenuSetting(): object {
+    return this.selectedEntity?.setting;
   }
 
 }

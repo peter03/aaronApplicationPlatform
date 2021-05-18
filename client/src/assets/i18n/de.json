@@ -31,7 +31,8 @@
         "detail": "Benutzer",
         "loginname": "Anmeldename",
         "password": "Passwort",
-        "rolelist": "Benutzerrollen"
+        "rolelist": "Benutzerrollen",
+        "selectaddress": "Addresse"
       },
       "role": {
         "list": "Benutzerrollen",
@@ -48,8 +49,16 @@
         "list": "Dateiliste",
         "detail": "Dateidetails",
         "filetype": "Dateityp"
+      },
+      "address": {
+        "list": "Adressen",
+        "detail": "Adresse Details",
+        "street": "Straße",
+        "zip": "Plz",
+        "city": "Ort",
+        "name1": "Firma",
+        "name2": "Firma (Zusatz)"
       }
-
     },
     "question": {
       "deleterecord": "Möchten Sie den Datensatz {{p0}} wirklich unwiderruflich löschen?"
@@ -71,6 +80,8 @@
       "refresh": "Aktualisieren"
     },
     "common": {
+      "address": "Adresse",
+      "country": "Land",
       "date": "Datum",
       "description": "Beschreibung",
       "filter": "Filter",
@@ -81,9 +92,10 @@
       "parentid": "Übergeordnete Id",
       "rule": "Regel",
       "sort": "Sortierung",
+      "status": "Status",
+      "type": "Typ",
       "uniquename": "Eindeutige Bezeichnung",
       "yes": "Ja"
     }
   }
-
 }

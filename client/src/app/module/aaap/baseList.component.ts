@@ -9,18 +9,17 @@ import { ConfirmDialogModel, ConfirmDialogComponent } from 'src/app/global/aaap/
 import { IId } from "../../interface/aaap/IId";
 import { IRepository } from "../../interface/aaap/irepository";
 import { AuthenticationService } from "src/app/service/aaap/authentication.service";
-import { BaseComponent } from "src/app/module/aaap/base.component";
+import { BaseModuleComponent } from "src/app/module/aaap/baseModule.component";
 import { MatTableSetting, MatTableActionButton } from "./matTable.setting";
 
 @Injectable()
-export abstract class BaseListComponent<R extends IRepository<T>, T extends IId> extends BaseComponent implements OnInit {
+export abstract class BaseListComponent<R extends IRepository<T>, T extends IId> extends BaseModuleComponent implements OnInit {
 
   dataSource: MatTableDataSource<T>;  // sortable datasource wrapper
   formMetadata: any[];
-
   entities: T[];
-
   dialog: MatDialog;
+   
 
   constructor(
     protected repo: R,
@@ -29,7 +28,6 @@ export abstract class BaseListComponent<R extends IRepository<T>, T extends IId>
     injector: Injector,
     private modelMetadata: any) {
     super(authService, injector);
-
     this.formMetadata = modelMetadata;
     this.dialog = injector.get(MatDialog);
   }

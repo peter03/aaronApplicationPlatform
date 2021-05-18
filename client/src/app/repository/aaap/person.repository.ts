@@ -14,7 +14,7 @@ export class PersonRepository extends BaseRepository<Person> {
     http: HttpClient,
     authService: AuthenticationService,
     injector: Injector) {
-    super(http, API_URL, Person, authService, injector);
+    super(http, API_URL, new Person(), authService, injector);
   }
 
 }

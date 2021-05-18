@@ -1,4 +1,5 @@
 import { MyUserMetadata } from "src/app/model/myuser.metadata";
+import { AddressRepository } from "src/app/repository/aaap/address.repository";
 
 export const UserMetadata = [
 
@@ -28,12 +29,12 @@ export const UserMetadata = [
   },
   {
     label: 'aaap.module.user.selectaddress',
-    control: 'select',
-    lookup: 'addresslist',
+    control: 'searchselect',
     ngModel: 'person.addressId',
     placeholder: '',
     required: true,
-    suppressInList: true
+    suppressInList: true,
+    repository: AddressRepository
   },
   {
     label: 'aaap.module.login.password',

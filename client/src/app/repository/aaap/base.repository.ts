@@ -1,12 +1,11 @@
 import { Injector, Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { IId } from "../../interface/aaap/IId";
+import { IId } from 'src/app/interface/aaap/IId';
 import { environment } from 'src/environments/environment';
-import { IRepository } from "../../interface/aaap/irepository";
+import { IRepository } from "src/app/interface/aaap/irepository";
 
 import { AuthenticationService } from 'src/app/service/aaap/authentication.service';
-import { User } from 'src/app/model/aaap/user.model';
 import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 
@@ -15,14 +14,13 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   _url: string;
   _cachedEntities: T[];    // todo: save them (encrypted) in web storage
   _selectedEntityId?: number = null;
-  _user: User;
 
   //UpsertSuccessEvent = new EventEmitter<T>();
     
   constructor(
     protected http: HttpClient,
     protected route: string,
-    private entityType: new () => T,
+    private entityType: T, // new () => T,
     public authService: AuthenticationService,
     protected injector: Injector) {
 
@@ -76,12 +74,16 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
 
   updateRepository(entity: T) {
 
+    if (!this._cachedEntities) {
+      this._cachedEntities = [];
+    }
+
     var ix = this._cachedEntities.findIndex(e => e.id === entity.id);
     if (ix === -1) {
-      this._cachedEntities.push(entity);
+      this._cachedEntities.push(this.mapEntity(entity));
     }
     else {
-      this._cachedEntities[ix] = entity;
+      this._cachedEntities[ix] = this.mapEntity(entity);
     };
   }
 
@@ -102,16 +104,43 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
     return this._cachedEntities;
   }
 
+  //getListAsObservable(callbackFn?): Observable<T[]> {
+
+  //  if (this._cachedEntities) {
+  //    return of(this.getList());
+  //  }
+  //  else {
+  //    //let url = `${this._url}/list`;
+  //    let url = this._url + "/list";
+  //    return this.http.get<T[]>(url).pipe(
+  //      map(res => {
+  //        this._cachedEntities = res || [];
+  //        if (callbackFn) {
+  //          callbackFn()
+  //        }
+  //        return this._cachedEntities;
+  //      })
+  //    );
+  //  };
+  //}
+
   getListAsObservable(callbackFn?): Observable<T[]> {
 
     if (this._cachedEntities) {
       return of(this.getList());
     }
     else {
-      let url = `${this._url}/list`;
+      //let url = `${this._url}/list`;
+      let url = this._url + "/list";
       return this.http.get<T[]>(url).pipe(
         map(res => {
-          this._cachedEntities = res || [];
+          this._cachedEntities = [];
+          if (res) {
+            // populate cache
+            res.forEach(itm => {
+              this._cachedEntities.push(this.mapEntity(itm));
+            })
+          }
           if (callbackFn) {
             callbackFn()
           }
@@ -148,11 +177,18 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   //}
 
   getNewEntity(): T {
-    return new this.entityType();
+    //return new this.entityType();
+    return Object.assign({}, this.entityType);
   }
 
   validateEntity(entity: T) {
     return true;
+  }
+
+  private mapEntity(entity: any): T {
+    const newEntity = this.getNewEntity();
+    Object.assign(newEntity, entity); // keeps getter & setter!
+    return newEntity;
   }
 
 }

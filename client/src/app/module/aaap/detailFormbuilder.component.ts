@@ -1,10 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, Injector } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder, Validator, NgForm } from '@angular/forms';
 import { Observable } from "rxjs";
 
 import { Lookup } from 'src/app/model/aaap/lookup.model';
 import { LookupRepository } from "src/app/repository/aaap/lookup.repository";
-import { IId } from '../../interface/aaap/IId';
+import { IId } from 'src/app/interface/aaap/IId';
+import { IRepository } from 'src/app/interface/aaap/IRepository';
 
 @Component({
   selector: "aaap-detail-formbuilder",
@@ -22,8 +23,12 @@ export class DetailFormbuilderComponent implements OnInit{
   
   myFormTemplate: any[];
   //myFormGroup: FormGroup;
-   
-  constructor(private lookupRepo: LookupRepository) {
+
+  // https://stackblitz.com/edit/ngtemplateoutletcontext?file=src%2Fapp%2Fmy-selector%2Fmy-selector.component.ts
+
+  constructor(
+    private lookupRepo: LookupRepository,
+    private injector: Injector) {
   }
 
   ngOnInit() {

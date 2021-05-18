@@ -1,4 +1,4 @@
-import { IId } from '../../interface/aaap/IId';
+import { IId } from 'src/app/interface/aaap/IId';
 
 export class Person implements IId {
 

@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS, HttpBackend } from '@angular/common/http';
 
 import { MaterialModule } from './material-module';
+import { MatIconModule } from '@angular/material/icon';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -66,6 +68,8 @@ import { routingComponents, appRouting } from './app-routing.module';
       defaultLanguage: 'de'
     }),
     MaterialModule,
+    MatIconModule,
+    NgxMatSelectSearchModule,
     appRouting
   ],
   providers: [

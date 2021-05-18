@@ -1,9 +1,29 @@
 <mat-label>{{'aaap.common.address' | translate}}:</mat-label>
 <mat-form-field style="width: 100%;">
-  <mat-select [name]="addressId" [(ngModel)]="addressId" (selectionChange)="selectionChangedEvent($event)">
+  <!--<mat-select [name]="addressId" [(ngModel)]="addressId" (selectionChange)="selectionChangedEvent($event)">
+    <mat-option>
+      <ngx-mat-select-search ngModel (ngModelChange)="filterMyOptions($event)">
+    </mat-option>
     <mat-option *ngFor="let adr of addressList | async" [value]="adr.id">
       {{adr.name1}}
     </mat-option>
+  </mat-select>-->
+
+  <mat-select [formControl]="selectCtrl" placeholder="" #singleSelect (selectionChange)="selectionChangedEvent($event)">
+    <mat-option>
+      <ngx-mat-select-search [formControl]="selectFilterCtrl"></ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option *ngFor="let ent of filteredEntities | async" [value]="ent">
+      {{ent.name1}}
+    </mat-option>
   </mat-select>
+
 </mat-form-field>
+
+<!--
+<p>
+  Selected Entity: {{selectCtrl.value?.name1}}
+</p>
+-->
 

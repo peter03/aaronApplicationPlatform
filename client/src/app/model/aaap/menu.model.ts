@@ -9,6 +9,8 @@ export class Menu implements IId {
   route: string;
   ruleId?: number;
   sort?: number;
+  settingAsJson: string;
+  setting: object;
   
   constructor() {
   }
