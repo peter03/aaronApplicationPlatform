@@ -20,7 +20,7 @@ export class MenuRepository extends BaseRepository<Menu> {
     private router: Router,
     authService: AuthenticationService,
     injector: Injector) {
-    super(http, API_URL, new Menu(), authService, injector);
+    super(http, API_URL, Menu, authService, injector);
     let ent = new Menu();
     
   }

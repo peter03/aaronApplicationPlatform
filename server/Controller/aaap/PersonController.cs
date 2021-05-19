@@ -12,19 +12,20 @@ using aaronApplicationPlatform.Logic;
 
 namespace aaronApplicationPlatform.Controller
 {
-    [Route("api/role")]
+    [Route("api/person")]
     [ApiController]
-    public class RoleController : BaseController<RoleLogic, Role>
+    public class PersonController : BaseController<PersonLogic, Person>
     {
-        public RoleController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
+        public PersonController(MyDbContext dbContext, IUserService userContext) : base(dbContext, userContext)
         {
         }
 
         [HttpGet]
         [Route("list")]
-        public override IEnumerable<Role> GetList()
+        public override IEnumerable<Person> GetList()
         {
-            return Logic.GetListIncludeRuleId();
+            // include person address
+            return Logic.GetListIncludeAddress();
         }
 
     }

@@ -69,6 +69,7 @@
         </div>-->
 
         <div *ngSwitchCase="'searchselect'">
+          <mat-label>{{ctl.label | translate}}:</mat-label>
           <aaap-search-select [name]="ctl.ngModel" [initialId]="ctl.value" [repository]="ctl.repository" (onModelChanged)="modelChangedEvent(ctl.ngModel, $event.value)"></aaap-search-select>
         </div>
 

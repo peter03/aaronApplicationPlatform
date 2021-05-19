@@ -15,7 +15,7 @@ export class FilespecRepository extends BaseRepository<Filespec> {
   constructor(public http: HttpClient,
     authService: AuthenticationService,
     injector: Injector) {
-    super(http, API_URL, new Filespec(), authService, injector);
+    super(http, API_URL, Filespec, authService, injector);
   }
 
     getNewEntity() {

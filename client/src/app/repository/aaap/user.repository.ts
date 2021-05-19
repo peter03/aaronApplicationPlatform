@@ -18,7 +18,7 @@ export class UserRepository extends BaseRepository<User> {
     authService: AuthenticationService,
     public personRepo: PersonRepository,
     injector: Injector) {
-    super(http, API_URL, new User(), authService, injector);
+    super(http, API_URL, User, authService, injector);
   }
 
   getListAsObservable(): Observable<User[]> {

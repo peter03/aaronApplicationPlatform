@@ -15,7 +15,7 @@ export class AddressRepository extends BaseRepository<Address> {
     authService: AuthenticationService,
     injector: Injector) {
     let ent = new Address();
-    super(http, API_URL, new Address(), authService, injector);
+    super(http, API_URL, Address, authService, injector);
   }
 
 }

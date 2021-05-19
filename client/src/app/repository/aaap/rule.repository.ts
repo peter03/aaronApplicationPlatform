@@ -14,7 +14,7 @@ export class RuleRepository extends BaseRepository<Rule> {
     http: HttpClient,
     authService: AuthenticationService,
     injector: Injector) {
-    super(http, API_URL, new Rule(), authService, injector);
+    super(http, API_URL, Rule, authService, injector);
   }
 
 }

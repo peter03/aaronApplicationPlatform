@@ -20,7 +20,7 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   constructor(
     protected http: HttpClient,
     protected route: string,
-    private entityType: T, // new () => T,
+    private entityType: new () => T,
     public authService: AuthenticationService,
     protected injector: Injector) {
 
@@ -176,9 +176,8 @@ export abstract class BaseRepository<T extends IId> implements IRepository<T> {
   //  return new t();
   //}
 
-  getNewEntity(): T {
-    //return new this.entityType();
-    return Object.assign({}, this.entityType);
+  getNewEntity(): any {
+    return new this.entityType();
   }
 
   validateEntity(entity: T) {

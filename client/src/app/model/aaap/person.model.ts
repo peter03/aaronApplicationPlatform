@@ -1,4 +1,5 @@
 import { IId } from 'src/app/interface/aaap/IId';
+import { Address } from 'src/app/model/myaddress.model';
 
 export class Person implements IId {
 
@@ -7,11 +8,10 @@ export class Person implements IId {
   lastName: string;
   email: string;
   addressId: number;
-  //address: Address;
+  address: Address;
 
   constructor() {
     //this.person = new Person()
   }
-
 
 }

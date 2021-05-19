@@ -14,7 +14,7 @@ export class RolegroupRepository extends BaseRepository<Rolegroup> {
     http: HttpClient,
     authService: AuthenticationService,
     injector: Injector) {
-    super(http, API_URL, new Rolegroup(), authService, injector);
+    super(http, API_URL, Rolegroup, authService, injector);
   }
 
 }
