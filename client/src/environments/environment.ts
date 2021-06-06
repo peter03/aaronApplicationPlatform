@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://localhost:5001',
+  //serverUrl: 'https://localhost:5001',
+  serverUrl: '',
   clientUrl: '',
   reportServerUrl: 'https://localhost/pskreporting',
 
@@ -19,4 +20,4 @@ export const environment = {
  * import the following file, but please comment it out in production mode
  * because it will have performance impact when throw error
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
